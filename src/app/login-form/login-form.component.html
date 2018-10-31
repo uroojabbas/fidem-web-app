@@ -1,0 +1,23 @@
+<div>
+<form #userForm="ngForm" novalidate (ngSubmit)="loginUser()">
+  <div class="input">
+    <label>User Name</label>
+    <input name="userName" type="text" [(ngModel)]="userModel.name">
+  </div>
+  <div style="padding-top: 5%">
+  </div>
+  <div class="input">
+    <label>Password</label>
+    <input name="password" type="password" [(ngModel)]="userModel.password">
+  </div>
+
+  <div style="padding-top: 5%">
+  </div>
+  
+  <div class="input">
+    <input type="submit" value="Login">
+  </div>
+</form>
+
+</div>
+

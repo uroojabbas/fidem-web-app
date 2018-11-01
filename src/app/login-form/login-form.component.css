@@ -3,7 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 424px;
+  height: 100%;
+  padding-top: 50px;
 }
 
 div.input {

@@ -23,6 +23,9 @@ export class UserService {
     return this.isUserLoggedIn;
   }
 
+  getDashBoard(): string {
+    return "[routerLink]=\"['/']\"";
+  }
   private extractData(res: Response) {
     let body = res;
     console.log("Response ", res)

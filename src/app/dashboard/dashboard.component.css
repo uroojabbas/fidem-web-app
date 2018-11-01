@@ -36,6 +36,10 @@
   padding-top:30px;
 }
 
+.mat-expansion-panel-header.mat-expanded {
+  background: cornflowerblue;
+}
+
 .tool-bar-heading{
   color: aliceblue;
   margin: 0;

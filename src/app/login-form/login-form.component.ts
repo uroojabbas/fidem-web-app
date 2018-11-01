@@ -11,9 +11,8 @@ import {User} from '../user';
 })
 export class LoginFormComponent implements OnInit {
 
-  userModel = new User();
-  userData: User;
-  constructor(private router: Router, private userService: UserService) { }
+  userData = new User();
+  constructor(private userModel: User, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     console.log('hit');

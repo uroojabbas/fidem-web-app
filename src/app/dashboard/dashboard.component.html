@@ -1,3 +1,99 @@
-<p>
-  My Dashboard!
-</p>
+<mat-drawer-container class="dashboard-container">
+  <mat-drawer mode="side" opened style="width: 20%">
+    <mat-toolbar-row style="color: aliceblue; background-color: #283593">
+      <span class="tool-bar-text">Logged in as :</span> <h1 class="tool-bar-user-text">{{userData.name}}</h1>
+    </mat-toolbar-row>
+
+    <mat-accordion>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Procurement
+        </mat-expansion-panel-header>
+
+        This the expansion 1 content
+        This the expansion 2 content
+        This the expansion 3 content
+        This the expansion 4 content
+        This the expansion 5 content
+        This the expansion 6 content
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Sales
+        </mat-expansion-panel-header>
+
+        This the expansion 2 content
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Data Managment
+        </mat-expansion-panel-header>
+
+        This the expansion 2 content
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Reports
+        </mat-expansion-panel-header>
+
+        This the expansion 2 content
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Data Managment
+        </mat-expansion-panel-header>
+
+        This the expansion 2 content
+
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Accounts
+        </mat-expansion-panel-header>
+
+        This the expansion 2 content
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          User Managment
+        </mat-expansion-panel-header>
+
+        This the expansion 2 content
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar-row style="color: aliceblue; background-color: #283593">
+
+      <span class="tool-bar-spacer"></span>
+      <button mat-icon-button class="tool-bar-button" matTooltip="Home">
+        <mat-icon class="tool-bar-icon">home</mat-icon>
+      </button>
+
+      <button mat-icon-button class="tool-bar-button" matTooltip="Messages">
+        <mat-icon class="tool-bar-icon">email</mat-icon>
+      </button>
+
+      <button mat-icon-button class="tool-bar-button" matTooltip="Personal Info">
+        <mat-icon class="tool-bar-icon">person</mat-icon>
+      </button>
+
+      <button mat-icon-button class="tool-bar-button" matTooltip="Sign out">
+        <mat-icon class="tool-bar-icon">power_settings_new</mat-icon>
+      </button>
+
+    </mat-toolbar-row>
+  </mat-drawer-content>
+</mat-drawer-container>

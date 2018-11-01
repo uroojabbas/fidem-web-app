@@ -5,7 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
-import { MatToolbarModule, MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule } from '@angular/material';
+import { MatExpansionModule
+        , MatSidenavModule
+        , MatToolbarModule
+        , MatCardModule
+        , MatIconModule
+        , MatButtonModule
+        , MatTooltipModule } from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -15,6 +21,7 @@ import { HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes } from '@angular/router';
 import {UserService} from './user.service';
 import {DatePipe} from "@angular/common";
+import {User} from './user';
 
 const appRoutes: Routes = [
   {
@@ -45,11 +52,13 @@ const appRoutes: Routes = [
     MatTooltipModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatExpansionModule,
+    MatSidenavModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService, AuthguardGuard, DatePipe],
+  providers: [User, UserService, AuthguardGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

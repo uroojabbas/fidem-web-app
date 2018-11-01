@@ -1,0 +1,63 @@
+.dashboard-container {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 495px;
+}
+
+.tool-bar-spacer{
+  flex: 1 1 auto;
+}
+.tool-bar-icon{
+  align-content: center;
+  font-size: 45px;
+}
+
+.tool-bar-button{
+  padding: 0px 30px;
+  cursor: pointer;
+}
+
+.tool-bar-text{
+  padding: 0px;
+  font-size: 12px;
+  align-content: left;
+  vertical-align: bottom;
+  padding-top:30px;
+}
+
+.tool-bar-user-text{
+  padding-left: 3px;
+  font-size: 12px;
+  align-content: left;
+  vertical-align: bottom;
+  padding-top:30px;
+}
+
+.tool-bar-heading{
+  color: aliceblue;
+  margin: 0;
+  padding: 0px 0px 6px 0px;
+  padding-right: 1%;
+  font-size: 51px;
+  line-height: 44px;
+  letter-spacing: -2px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+.tool-bar-small-heading{
+  color: aliceblue;
+  margin: 0;
+  padding: 0px 0px 6px 0px;
+  padding-right: 1%;
+  font-size: 15px;
+  line-height: 44px;
+  letter-spacing: -2px;
+  font-weight: bold;
+  padding-top:26px;
+  letter-spacing: 2px;
+}
+

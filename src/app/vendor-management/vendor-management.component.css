@@ -1,0 +1,9 @@
+.full-width-table {
+  width: 100%;
+  }
+.data-table{
+  width: 95%;
+  height: 355px;
+  margin: 10px auto;
+  overflow:auto;
+}

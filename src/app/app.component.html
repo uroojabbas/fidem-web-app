@@ -1,14 +1,11 @@
-<div>
-  <body>
-<header>
-  <app-header></app-header>
-</header>
 
-<section>
+
+  <app-header></app-header>
+
   <mat-drawer-container class="dashboard-container">
       <mat-drawer *ngIf="user.getUserLoggedIn()" mode="side" opened style="width: 20%">
         <mat-toolbar-row style="color: aliceblue; background-color: #283593">
-          <span class="tool-bar-text">Logged in as :</span> <h1 class="tool-bar-user-text">{{userData.name}}</h1>
+          <span class="tool-bar-text">Logged in as :</span> <h1 class="tool-bar-user-text">{{user.getUserName()}}</h1>
         </mat-toolbar-row>
 
         <mat-accordion>
@@ -42,13 +39,16 @@
             This the expansion 2 content
 
           </mat-expansion-panel>
-
           <mat-expansion-panel>
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
               Data Managment
             </mat-expansion-panel-header>
 
-            This the expansion 2 content
+            <mat-action-row style="align-content: left">
+              <a [routerLink]="['/vendor']">Vendor Management
+
+              </a>
+            </mat-action-row>
 
           </mat-expansion-panel>
 
@@ -63,14 +63,6 @@
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              Data Managment
-            </mat-expansion-panel-header>
-
-            This the expansion 2 content
-
-          </mat-expansion-panel>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
               Accounts
             </mat-expansion-panel-header>
 
@@ -79,20 +71,24 @@
           </mat-expansion-panel>
 
           <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              User Managment
+            <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
+              Admin
             </mat-expansion-panel-header>
+            <mat-action-row style="alignment: center">
+            <a [routerLink]="['/user-management']"> User Management
 
-            This the expansion 2 content
-
+            </a>
+            </mat-action-row>
           </mat-expansion-panel>
         </mat-accordion>
       </mat-drawer>
 
     <mat-drawer-content>
-      <div *ngIf="user.getUserLoggedIn()">
+      <div *ngIf="user.getUserLoggedIn()" style="width: 100%">
         <mat-toolbar-row  style="color: aliceblue; background-color: #283593">
-
+          <span>
+            <h1 class="tool-bar-user-text">{{user.getComponentName()}}</h1>
+          </span>
           <span class="tool-bar-spacer"></span>
           <button mat-icon-button class="tool-bar-button" matTooltip="Home">
             <mat-icon class="tool-bar-icon">home</mat-icon>
@@ -113,20 +109,8 @@
         </mat-toolbar-row>
       </div>
       <div>
-      <mat-card style="align-content: center">
-        <mat-card-content style="align-content: center">
+
           <router-outlet></router-outlet>
-        </mat-card-content>
-      </mat-card>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>
-
-</section>
-
-<footer>
-  <app-footer></app-footer>
-</footer>
-
-</body>
-</div>

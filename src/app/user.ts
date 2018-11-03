@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 export class User {
   public id: number;
   public name: string = '';
+  public username: string;
   public password: string;
-  public isLoggedIn: boolean = false;
   constructor(){ }
 }

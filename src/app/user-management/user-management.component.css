@@ -1,0 +1,28 @@
+.full-width-table {
+  width: 100%;
+}
+
+.data-table{
+  width: 98%;
+  height: 385px;
+  margin: 2px auto;
+  overflow:auto;
+}
+
+.data-table-footer{
+  width: 100%;
+  height: 25px;
+  }
+
+.tool-bar-icon{
+  align-content: center;
+  font-size: 45px;
+}
+
+.tool-bar-button{
+  padding: 0px 25px;
+  cursor: pointer;
+}
+.tool-bar-spacer{
+  flex: 1 1 auto;
+}

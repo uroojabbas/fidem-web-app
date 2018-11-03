@@ -11,7 +11,7 @@ import { MatExpansionModule
         , MatCardModule
         , MatIconModule
         , MatButtonModule
-        , MatTooltipModule } from '@angular/material';
+        , MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,6 +22,8 @@ import {RouterModule, Routes } from '@angular/router';
 import {UserService} from './user.service';
 import {DatePipe} from "@angular/common";
 import {User} from './user';
+import { VendorManagementComponent } from './vendor-management/vendor-management.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 const appRoutes: Routes = [
   {
@@ -32,6 +34,16 @@ const appRoutes: Routes = [
     path: 'dashboard',
     canActivate: [AuthguardGuard],
     component: DashboardComponent
+  },
+  {
+    path: 'vendor',
+    canActivate: [AuthguardGuard],
+    component: VendorManagementComponent
+  },
+  {
+    path: 'user-management',
+    canActivate: [AuthguardGuard],
+    component: UserManagementComponent
   }
 ]
 
@@ -41,7 +53,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     LoginFormComponent,
-    DashboardComponent
+    DashboardComponent,
+    VendorManagementComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +70,10 @@ const appRoutes: Routes = [
     MatSidenavModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [User, UserService, AuthguardGuard, DatePipe],
   bootstrap: [AppComponent]

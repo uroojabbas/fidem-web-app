@@ -11,7 +11,6 @@ import {User} from '../user';
 })
 export class LoginFormComponent implements OnInit {
 
-  userData = new User();
   constructor(private userModel: User, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
@@ -21,23 +20,23 @@ export class LoginFormComponent implements OnInit {
   loginUser() {
     event.preventDefault();
     console.log(this.userModel);
-    this.userService.loginUser(this.userModel).subscribe(data => { console.log('Rest Api data',data);
-    this.validateUser(data)
+    this.userService.loginUser(this.userModel).subscribe(data => { console.log('Rest Api data', data);
+    this.validateUser(data);
       },error => console.log('Error!', error));
   }
 
-  private validateUser(data: any){
+  private validateUser(data: any) {
 
-    this.userData = Object.assign(new User,data[0]);
+    this.userModel = Object.assign(new User, data);
 
-    console.log("Pass !!", this.userData);
+    console.log("Pass !!", this.userModel);
 
-    console.log("Pass 2 !!", this.userData.id);
-    if (this.userData.id > 0) {
-      console.log(this.userData.name);
+    console.log("Pass 2 !!", this.userModel.username);
+    if (this.userModel.id > 0) {
+      console.log(this.userModel.name);
       // if (this.userModel.name === 'Ali') {
       this.userService.setUserLoggedIn();
-      this.userData.isLoggedIn=true;
+      this.userService.setUserName(this.userModel.name);
       this.router.navigate(['dashboard']);
       // }
     } else {

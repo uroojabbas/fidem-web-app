@@ -12,14 +12,16 @@ html, body {
   height: 100%;
 }
 
-
+.mat-expansion-panel-header-height{
+  height: 14px
+}
 .dashboard-container {
   position: relative;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 495px;
+  height: 520px;
 }
 
 .tool-bar-spacer{
@@ -86,4 +88,20 @@ html, body {
 }
 .mat-action-row{
   height: 20px;
+}
+
+a:link, a:visited {
+  background-color: #283593;
+  color: white;
+  text-align: center;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+
+a:hover, a:active {
+  background-color: blueviolet;
 }

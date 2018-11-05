@@ -5,10 +5,7 @@ import {UserManagementDataSource, UserManagementItem} from './user-management-da
 })
 export class UsermanagementService {
 
-  datasource: UserManagementDataSource;
-  userRecord: UserManagementItem;
-
-  constructor( ) { }
+  constructor( private dateSource: UserManagementDataSource) { }
 
   addUser(userRec: UserManagementItem): void {
 

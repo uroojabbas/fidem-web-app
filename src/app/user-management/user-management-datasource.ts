@@ -5,11 +5,18 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface UserManagementItem {
+
   id: number;
   name: string;
   email: string;
-  phone: number;
-  address: number;
+  phone: string;
+  address: string;
+  departmentid: number;
+  cityid: number;
+  regionid: number;
+  gender: number;
+  permanent: boolean;
+  hiredate: Date;
   username: string;
 }
 
@@ -19,33 +26,57 @@ const EXAMPLE_DATA: UserManagementItem[] = [
     id: 1,
     name: 'Ali Jaffar',
     email: 'contact@jeejava.com',
-    phone: 1234567890,
-    address: 1,
-    username: 'sjaffar'
-  },
+    phone: '1234567890',
+    address: 'Test',
+    username: 'sjaffar',
+    departmentid: 1,
+    cityid: 1,
+    regionid: 1,
+    gender: 1,
+    permanent: true,
+    hiredate: new Date()
+  } ,
   {
     id: 2,
     name: 'Abdul Rafay',
     email: 'contact@jeejava.com',
-    phone: 1234567891,
-    address: 2,
-    username: 'arafay'
+    phone: '1234567891',
+    address: '2',
+    username: 'arafay',
+    departmentid: 1,
+    cityid: 1,
+    regionid: 1,
+    gender: 1,
+    permanent: true,
+    hiredate: new Date()
   },
   {
     id: 3,
     name: 'Muhammad Mujtaba',
     email: 'contact@jeejava.com',
-    phone: 1234567891,
-    address: 2,
-    username: 'mmujtaba'
+    phone: '1234567891',
+    address: '2',
+    username: 'mmujtaba',
+    departmentid: 1,
+    cityid: 1,
+    regionid: 1,
+    gender: 1,
+    permanent: true,
+    hiredate: new Date()
   },
   {
     id: 4,
     name: 'Urooj Abbas',
     email: 'contact@jeejava.com',
-    phone: 1234567891,
-    address: 2,
-    username: 'uabbas'
+    phone: '1234567891',
+    address: '2',
+    username: 'uabbas',
+    departmentid: 1,
+    cityid: 1,
+    regionid: 1,
+    gender: 1,
+    permanent: true,
+    hiredate: new Date()
   }
 ];
 

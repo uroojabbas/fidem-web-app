@@ -16,10 +16,13 @@ export class UserService {
 
   constructor(private _http: HttpClient, private router: Router ) {
     this.isUserLoggedIn = false;
-    this._url = 'http://localhost:8080/users';
+    this._url = 'http://localhost:8080';
     // this._url = 'http://google.com'
   }
 
+  public getrestURL(): string {
+    return this._url;
+  }
   getComponentName(): string {
    return this.componentName;
   }

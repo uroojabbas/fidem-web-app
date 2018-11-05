@@ -1,0 +1,87 @@
+<form #employeeForm="ngForm" [formGroup]="employeeservice.employeeForm" class="employee-form" (submit)="onSubmit()">
+<div class="row">
+  <div class="column middle">
+      <div class="controls-container">
+        <input hidden formControlName="id">
+        <mat-form-field>
+          <input formControlName="name" placeholder="Full Name*" matInput="">
+          <mat-error>Full Name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="username" placeholder="Login Id*" matInput="">
+          <mat-error>Login Id is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="email" placeholder="Email" matInput="">
+          <mat-error>Invalid email address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="phone" placeholder="Contact #" matInput="">
+          <mat-error>Invalid phone number.</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <mat-select formControlName="departmentid" placeholder="Department*">
+            <mat-option>None</mat-option>
+            <ng-container *ngFor="let department of departments">
+              <mat-option value="{{department.id}}">{{department.value}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Department is required.</mat-error>
+        </mat-form-field>
+
+      </div>
+  </div>
+  <div class="column middle">
+    <div class="controls-container">
+
+      <mat-form-field>
+        <input formControlName="address" placeholder="Address" matInput="">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="cityid" placeholder="City">
+          <ng-container *ngFor="let city of cityList">
+            <mat-option value="{{city.id}}">{{city.cityname}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="regionid" placeholder="Region*">
+          <ng-container *ngFor="let region of regionList">
+            <mat-option value="{{region.id}}">{{region.regionname}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error>Region is required.</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input matInput formControlName="hiredate" [matDatepicker]="picker" placeholder="Hired Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="bottom-padding; top-padding">
+        <mat-radio-group formControlName="gender" style="font-size: 12px">
+          <mat-radio-button value="1">Male</mat-radio-button>
+          <mat-radio-button value="2">Female</mat-radio-button>
+          <mat-radio-button value="3">Others</mat-radio-button>
+        </mat-radio-group>
+        <mat-checkbox style="font-size: 12px" class="left-padding" formControlName="ispermanent">Permanent Employee</mat-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="header">
+  <div class="button-row">
+    <button mat-raised-button color="primary" type="submit" [disabled]="employeeservice.employeeForm.invalid">Save</button>
+    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+  </div>
+</div>
+</form>

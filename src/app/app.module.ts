@@ -5,18 +5,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
-import { MatExpansionModule
-        , MatSidenavModule
-        , MatToolbarModule
-        , MatCardModule
-        , MatIconModule
-        , MatButtonModule
-        , MatTooltipModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatExpansionModule
+  , MatSidenavModule
+  , MatToolbarModule
+  , MatCardModule
+  , MatIconModule
+  , MatButtonModule
+  , MatTooltipModule
+  , MatTableModule
+  , MatPaginatorModule
+  , MatSortModule
+  , MatGridListModule
+  , MatInputModule
+  , MatRadioModule
+  , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule
+} from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AuthguardGuard} from './authguard.guard';
 import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes } from '@angular/router';
 import {UserService} from './user.service';
@@ -24,6 +34,9 @@ import {DatePipe} from "@angular/common";
 import {User} from './user';
 import { VendorManagementComponent } from './vendor-management/vendor-management.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { EmployeeManagementComponent } from './employee/employee-management/employee-management.component';
+import {EmployeeserviceService} from './employee/employeeservice.service';
+import {RefdataService} from './common/refdata.service';
 
 const appRoutes: Routes = [
   {
@@ -55,7 +68,8 @@ const appRoutes: Routes = [
     LoginFormComponent,
     DashboardComponent,
     VendorManagementComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    EmployeeManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -68,14 +82,25 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatExpansionModule,
     MatSidenavModule,
+    MatGridListModule,
+    MatCheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDialogModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     MatTableModule,
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [User, UserService, AuthguardGuard, DatePipe],
-  bootstrap: [AppComponent]
+  providers: [RefdataService,  User, UserService, AuthguardGuard, DatePipe],
+  bootstrap: [AppComponent],
+  entryComponents: [ EmployeeManagementComponent ]
 })
 export class AppModule { }

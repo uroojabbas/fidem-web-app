@@ -81,7 +81,11 @@
 <div class="header">
   <div class="button-row">
     <button mat-raised-button color="primary" type="submit" [disabled]="employeeservice.employeeForm.invalid">Save</button>
-    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+    <button mat-raised-button color="warn" type="reset" (click)="onClear()">Clear</button>
+    <span class="fill-remaining-space"></span>
+    <button mat-raised-button color="accent" type="button" (click)="closeForm()">Close</button>
+
   </div>
+
 </div>
 </form>

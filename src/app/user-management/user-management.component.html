@@ -24,14 +24,24 @@
       <td mat-cell *matCellDef="let row">{{row.phone}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef='let row'>
+        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+
+    </table>
 
 
 </div>
 <div>
-  <mat-toolbar-row  style="background-color: whitesmoke;">
+  <mat-toolbar-row style="background-color: whitesmoke;">
 <div style="padding-right: 5px">
     <button mat-raised-button class="tool-bar-button" (click)="addEmployee()" style="color: darkgreen" matTooltip="Add User">
       Add User

@@ -35,50 +35,7 @@ const EXAMPLE_DATA: UserManagementItem[] = [
     gender: 1,
     permanent: true,
     hiredate: new Date()
-  } ,
-  {
-    id: 2,
-    name: 'Abdul Rafay',
-    email: 'contact@jeejava.com',
-    phone: '1234567891',
-    address: '2',
-    username: 'arafay',
-    departmentid: 1,
-    cityid: 1,
-    regionid: 1,
-    gender: 1,
-    permanent: true,
-    hiredate: new Date()
-  },
-  {
-    id: 3,
-    name: 'Muhammad Mujtaba',
-    email: 'contact@jeejava.com',
-    phone: '1234567891',
-    address: '2',
-    username: 'mmujtaba',
-    departmentid: 1,
-    cityid: 1,
-    regionid: 1,
-    gender: 1,
-    permanent: true,
-    hiredate: new Date()
-  },
-  {
-    id: 4,
-    name: 'Urooj Abbas',
-    email: 'contact@jeejava.com',
-    phone: '1234567891',
-    address: '2',
-    username: 'uabbas',
-    departmentid: 1,
-    cityid: 1,
-    regionid: 1,
-    gender: 1,
-    permanent: true,
-    hiredate: new Date()
-  }
-];
+  }];
 
 /**
  * Data source for the UserManagement view. This class should
@@ -86,7 +43,7 @@ const EXAMPLE_DATA: UserManagementItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class UserManagementDataSource extends DataSource<UserManagementItem> {
-  private data: UserManagementItem[] = EXAMPLE_DATA;
+  public data: UserManagementItem[] = [];
 
   public setData(data: UserManagementItem[]): void {
     this.data = data;

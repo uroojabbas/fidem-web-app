@@ -18,3 +18,20 @@ div.container{
 .button-row button{
   margin: 5px;
 }
+.hide{
+  display: none;
+}
+snack-bar-container.success{
+  background-color: #5bc85c;
+  color: #fff;
+}
+
+snack-bar-container.failure{
+  background-color: darkred;
+  color: #fff;
+}
+
+snack-bar-container.notificatin simple-snack-bar{
+  font-size: 18px !important;
+  font-weight: bold;
+}

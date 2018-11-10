@@ -17,6 +17,7 @@ import {
   , MatPaginatorModule
   , MatSortModule
   , MatGridListModule
+, MatSnackBarModule
   , MatInputModule
   , MatRadioModule
   , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatGridListModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,

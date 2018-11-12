@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {EmployeeserviceService} from '../employeeservice.service';
 import {RefdataService} from '../../common/refdata.service';
 import {UserService} from '../../user.service';
-import {User} from '../../user';
+import {MatDialogRef} from '@angular/material';
 import {HttpErrorResponse} from '@angular/common/http';
+import {NotificationService} from '../../common/notification.service';
 
 @Component({
   selector: 'app-employee-management',
@@ -25,7 +26,9 @@ export class EmployeeManagementComponent implements OnInit {
   public regionList: any[];
 
   constructor(private employeeservice: EmployeeserviceService,
-              private refDataService: RefdataService, private userService: UserService) {
+              private refDataService: RefdataService, private userService: UserService,
+  private formDialog: MatDialogRef<EmployeeManagementComponent>,
+              private notificationService: NotificationService) {
 
 
 
@@ -34,6 +37,10 @@ export class EmployeeManagementComponent implements OnInit {
   private setCityList(data: any) {
     this.cityList = data;
     console.log(this.cityList);
+  }
+
+  closeForm() {
+    this.formDialog.close();
   }
 
   private setRegionList(data: any) {
@@ -52,6 +59,17 @@ export class EmployeeManagementComponent implements OnInit {
 
   onSubmit() {
     // this.employeeservice.addEmployee();
-     this.employeeservice.addEmployee().subscribe(data => console.log(data));
+     this.employeeservice.addEmployee().subscribe(data => this.showSuccessMessage(data),
+       error => this.handleError(error));
+  }
+
+  showSuccessMessage(data: any) {
+
+    this.notificationService.showSuccess(':: Employee Record Successfully Added.');
+  }
+
+  handleError(httpErrorResponse: HttpErrorResponse) {
+    console.log('Error', httpErrorResponse.message);
+    this.notificationService.showError(':: Error:' + httpErrorResponse.message);
   }
 }

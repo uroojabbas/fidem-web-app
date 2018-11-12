@@ -53,4 +53,22 @@ export class EmployeeserviceService {
        return this._http.post<User>(this.userService.getrestURL() + '/user/add', this.employeeForm.value);
     }
   }
+
+  populateForm(employee) {
+    console.log('Edit User' + employee.username);
+    this.employeeForm.setValue({
+      id: employee.id,
+      name: employee.name,
+      email: employee.email,
+      phone: employee.phone,
+      address: employee.address,
+      cityid: employee.cityid,
+      regionid: employee.regionid,
+      departmentid: employee.departmentid,
+      hiredate: employee.hiredate,
+      ispermanent: true,
+      gender: employee.gender,
+      username: employee.username
+    });
+  }
 }

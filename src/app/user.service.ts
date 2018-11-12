@@ -51,11 +51,22 @@ export class UserService {
     return body || { };
   }
 
-  loginUser(user: User): Observable<any>  {
+  public loginUser(user: User): Observable<any>  {
     console.log('User service', user);
     // return this._http.get('http://localhost:8080/users/' + user.name).pipe(map(this.extractData));
     return this._http.post<User>('http://localhost:8080/user/login', user);
   }
+
+  public deleteUser(id: number): Observable<any>  {
+    console.log('User service', id);
+    // return this._http.get('http://localhost:8080/users/' + user.name).pipe(map(this.extractData));
+    return this._http.post<User>('http://localhost:8080/user/delete', id);
+  }
+
+  public getUserById(id: number): Observable<any>  {
+    console.log('User service', id);
+      return this._http.get('http://localhost:8080/user/' + id).pipe(map(this.extractData));
+    }
 
   public navigate(url: string) {
     this.router.navigate([url]);

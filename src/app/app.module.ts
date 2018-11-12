@@ -38,6 +38,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { EmployeeManagementComponent } from './employee/employee-management/employee-management.component';
 import {EmployeeserviceService} from './employee/employeeservice.service';
 import {RefdataService} from './common/refdata.service';
+import { DialogComponent } from './dialog/dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     VendorManagementComponent,
     UserManagementComponent,
-    EmployeeManagementComponent
+    EmployeeManagementComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +105,6 @@ const appRoutes: Routes = [
   ],
   providers: [RefdataService,  User, UserService, AuthguardGuard, DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [ EmployeeManagementComponent ]
+  entryComponents: [ EmployeeManagementComponent, DialogComponent ]
 })
 export class AppModule { }

@@ -1,0 +1,84 @@
+<form #vendorForm="ngForm" [formGroup]="vendorService.vendorForm" class="vendor-form" (submit)="onSubmit()">
+  <div class="row">
+    <div class="column middle">
+      <div class="controls-container">
+        <input hidden formControlName="id">
+        <mat-form-field>
+          <input formControlName="name" placeholder="Vendor Name*" matInput="">
+          <mat-error>Vendor Name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="email" placeholder="Email" matInput="">
+          <mat-error>Invalid email address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="contactperson" placeholder="Contact Person" matInput="">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="contactone" placeholder="Contact #" matInput="">
+          <mat-error>Invalid phone number.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="contactpersontwo" placeholder="Contact Person 2" matInput="">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="contacttwo" placeholder="Contact #" matInput="">
+          <mat-error>Invalid phone number.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="column middle">
+      <div class="controls-container">
+        <mat-form-field>
+          <input formControlName="address" placeholder="Address" matInput="">
+          <mat-error>Address is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="ntn" placeholder="NTN #" matInput="">
+          <mat-error>NTN is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="strn" placeholder="STRN #" matInput="">
+          <mat-error>STRN is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="type" placeholder="Vendor Type*">
+            <ng-container *ngFor="let vendortype of vendorService.vendorTypeList">
+              <mat-option [value]="vendortype.type">{{vendortype.type}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Region is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="discount" placeholder="Discount %" matInput="">
+          <mat-error>Discount is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="paymentterms" placeholder="Payment Terms (Days)" matInput="">
+          <mat-error>Payment terms are required.</mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+  </div>
+  <div class="header">
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit" [disabled]="vendorService.vendorForm.invalid">Save</button>
+      <button mat-raised-button color="warn" type="reset" (click)="onClear()">Clear</button>
+      <span class="fill-remaining-space"></span>
+      <button mat-raised-button color="accent" type="button" (click)="closeForm()">Close</button>
+
+    </div>
+
+  </div>
+</form>

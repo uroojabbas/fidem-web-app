@@ -28,7 +28,7 @@
           <mat-select formControlName="departmentid" placeholder="Department*">
             <mat-option>None</mat-option>
             <ng-container *ngFor="let department of departments">
-              <mat-option value="{{department.id}}">{{department.value}}</mat-option>
+              <mat-option [value]="department.id">{{department.value}}</mat-option>
             </ng-container>
           </mat-select>
           <mat-error>Department is required.</mat-error>
@@ -46,7 +46,7 @@
       <mat-form-field>
         <mat-select formControlName="cityid" placeholder="City">
           <ng-container *ngFor="let city of cityList">
-            <mat-option value="{{city.id}}">{{city.cityname}}</mat-option>
+            <mat-option [value]="city.id">{{city.cityname}}</mat-option>
           </ng-container>
         </mat-select>
       </mat-form-field>
@@ -54,7 +54,7 @@
       <mat-form-field>
         <mat-select formControlName="regionid" placeholder="Region*">
           <ng-container *ngFor="let region of regionList">
-            <mat-option value="{{region.id}}">{{region.regionname}}</mat-option>
+            <mat-option [value]="region.id">{{region.regionname}}</mat-option>
           </ng-container>
         </mat-select>
         <mat-error>Region is required.</mat-error>
@@ -69,9 +69,9 @@
 
       <div class="bottom-padding; top-padding">
         <mat-radio-group formControlName="gender" style="font-size: 12px">
-          <mat-radio-button value="1">Male</mat-radio-button>
-          <mat-radio-button value="2">Female</mat-radio-button>
-          <mat-radio-button value="3">Others</mat-radio-button>
+          <mat-radio-button class="example-radio-button" *ngFor="let gender of genderlist" [value]="gender.id">
+            {{gender.value}}
+          </mat-radio-button>
         </mat-radio-group>
         <mat-checkbox style="font-size: 12px" class="left-padding" formControlName="ispermanent">Permanent Employee</mat-checkbox>
       </div>

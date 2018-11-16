@@ -8,10 +8,13 @@ import {Observable} from 'rxjs';
 })
 export class RefdataService {
 
-  constructor(private _http: HttpClient, private userSevice: UserService) { }
+  constructor(private _http: HttpClient, private userSevice: UserService) {
+    this.initVendorTypeList();
+  }
 
   private cityList: any[];
   private regionList: any[];
+  private vendorTypeList: any[];
 
   getCityList(): any[] {
     return this.cityList;
@@ -38,4 +41,22 @@ export class RefdataService {
     initRegionList(): Observable<any> {
       return this._http.get(this.userSevice.getrestURL() + '/reigonlist');
     }
+
+    initVendorTypeList(): void {
+      this._http.get(this.userSevice.getrestURL() + '/vendortypes').subscribe(data => this.setVendorTypeList(data));
+    }
+
+    getVendorTypeList(): any[] {
+      return this.vendorTypeList;
+    }
+
+  setVendorTypeList(data: any[]) {
+    this.vendorTypeList = data;
+  }
+
+  public extractData(res: Response) {
+    let body = res;
+    console.log("Response ", res)
+    return body || { };
+  }
 }

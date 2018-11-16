@@ -39,6 +39,8 @@ import { EmployeeManagementComponent } from './employee/employee-management/empl
 import {EmployeeserviceService} from './employee/employeeservice.service';
 import {RefdataService} from './common/refdata.service';
 import { DialogComponent } from './dialog/dialog.component';
+import {Vendor} from './vendor-management/vendor';
+import { VendorComponent } from './vendor-management/vendor/vendor.component';
 
 const appRoutes: Routes = [
   {
@@ -72,7 +74,9 @@ const appRoutes: Routes = [
     VendorManagementComponent,
     UserManagementComponent,
     EmployeeManagementComponent,
-    DialogComponent
+    VendorComponent,
+    DialogComponent,
+    VendorComponent
   ],
   imports: [
     BrowserModule,
@@ -103,8 +107,8 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [RefdataService,  User, UserService, AuthguardGuard, DatePipe],
+  providers: [Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [ EmployeeManagementComponent, DialogComponent ]
+  entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ]
 })
 export class AppModule { }

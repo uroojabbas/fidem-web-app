@@ -20,8 +20,13 @@ export class EmployeeManagementComponent implements OnInit {
     {id: 4, value: 'Procurement'}
   ];
 
-  public cityList: any[];
+  public genderlist = [
+    {id: 1, value: 'Male'},
+    {id: 2, value: 'Female'},
+    {id: 3, value: 'Other'}
+    ];
 
+  public cityList: any[];
 
   public regionList: any[];
 
@@ -36,8 +41,7 @@ export class EmployeeManagementComponent implements OnInit {
 
   private setCityList(data: any) {
     this.cityList = data;
-    console.log(this.cityList);
-  }
+    }
 
   closeForm() {
     this.formDialog.close();
@@ -45,8 +49,8 @@ export class EmployeeManagementComponent implements OnInit {
 
   private setRegionList(data: any) {
     this.regionList = data;
-    console.log(data);
   }
+
   ngOnInit() {
     this.refDataService.initCityList().subscribe(data => this.setCityList(data));
     this.refDataService.initRegionList().subscribe(data => this.setRegionList(data));
@@ -58,7 +62,6 @@ export class EmployeeManagementComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.employeeservice.addEmployee();
      this.employeeservice.addEmployee().subscribe(data => this.showSuccessMessage(data),
        error => this.handleError(error));
   }

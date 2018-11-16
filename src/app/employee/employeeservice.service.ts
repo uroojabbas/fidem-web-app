@@ -4,7 +4,6 @@ import {HttpClient} from '@angular/common/http';
 import {UserService} from '../user.service';
 import {Observable} from 'rxjs';
 import {User} from '../user';
-import {Employee} from './employee';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +54,6 @@ export class EmployeeserviceService {
   }
 
   populateForm(employee) {
-    console.log('Edit User' + employee.username);
     this.employeeForm.setValue({
       id: employee.id,
       name: employee.name,
@@ -70,5 +68,6 @@ export class EmployeeserviceService {
       gender: employee.gender,
       username: employee.username
     });
-  }
+
+   }
 }

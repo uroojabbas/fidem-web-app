@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,13 @@ export class NotificationService {
 
   }
 
-  showError(msg) {
+  showErrorMsg(msg): void {
     this.config['panelClass'] = ['notification', 'failure'];
     this.matSnackBar.open(msg,'', this.config);
 
+  }
+
+  showError(httpErrorResponse: HttpErrorResponse): void {
+    this.showErrorMsg(':: Error:' + httpErrorResponse.message);
   }
 }

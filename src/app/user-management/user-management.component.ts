@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {UserManagementDataSource, UserManagementItem} from './user-management-datasource';
 import {UserService} from '../user.service';
@@ -30,7 +30,8 @@ export class UserManagementComponent implements OnInit {
               private _http: HttpClient,
               private notificationService: NotificationService,
               private dialogService: DialogService,
-              private employeeService: EmployeeserviceService) {
+              private employeeService: EmployeeserviceService,
+              private changeDetectorRef: ChangeDetectorRef) {
     this.user.setComponentName('User Management');
   }
 
@@ -40,7 +41,10 @@ export class UserManagementComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '75%';
-    this.dialog.open(EmployeeManagementComponent, dialogConfig);
+    this.dialog.open(EmployeeManagementComponent, dialogConfig).afterClosed().subscribe(result => {
+      console.log('refresh page');
+      this.getEmployeeList();
+    });
   }
 
   onEdit(id: number) {
@@ -53,7 +57,10 @@ export class UserManagementComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '75%';
-    this.dialog.open(EmployeeManagementComponent, dialogConfig);
+    this.dialog.open(EmployeeManagementComponent, dialogConfig).afterClosed().subscribe(result => {
+      console.log('refresh page');
+      this.getEmployeeList();
+    });
   }
 
   ngOnInit() {
@@ -62,13 +69,14 @@ export class UserManagementComponent implements OnInit {
   }
 
   init() {
+    this.getEmployeeList();
+  }
+
+  getEmployeeList() {
     this._http.get(this.user.getrestURL() + '/users').subscribe(data => this.setEmployeeList(data),
       error => this.notificationService.showError(error));
   }
-
   setEmployeeList(data: any) {
-    this.dataSource = new UserManagementDataSource(this.paginator, this.sort);
-    this.dataSource.setData(data);
 
     this.listData = new MatTableDataSource(data);
 
@@ -80,6 +88,7 @@ export class UserManagementComponent implements OnInit {
       });
     };
     console.log("User list" + this.listData);
+    this.changeDetectorRef.detectChanges();
     this.notificationService.showSuccess(':: Employee List Loaded.');
     this.showPaging = true;
    }
@@ -100,12 +109,15 @@ export class UserManagementComponent implements OnInit {
   onDelete(id: number) {
     console.log('Delete : ' + id);
     this.dialogService.openConfirmDialog('Are you sure to delete this records?')
-      .afterClosed().subscribe(res => this.remove(res, id));
+      .afterClosed().subscribe(res => {
+      this.remove(res, id);
+      });
   }
 
   remove(isDelete: boolean, id: number) {
       if( isDelete ) {
-        this.user.deleteUser(id).subscribe(data => this.notificationService.showSuccess(this.DELETE_SUCCESS_MESSAGE),
+        this.user.deleteUser(id).subscribe(data => { this.notificationService.showSuccess(this.DELETE_SUCCESS_MESSAGE);
+            this.getEmployeeList(); },
           error => this.notificationService.showError(error));
       }
   }

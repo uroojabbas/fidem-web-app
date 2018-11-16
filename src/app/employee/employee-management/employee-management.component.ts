@@ -73,6 +73,6 @@ export class EmployeeManagementComponent implements OnInit {
 
   handleError(httpErrorResponse: HttpErrorResponse) {
     console.log('Error', httpErrorResponse.message);
-    this.notificationService.showError(':: Error:' + httpErrorResponse.message);
+    this.notificationService.showErrorMsg(':: Error:' + httpErrorResponse.message);
   }
 }

@@ -50,7 +50,7 @@ export class RefdataService {
       return this.vendorTypeList;
     }
 
-  setVendorTypeList(data: any[]) {
+  setVendorTypeList(data: any) {
     this.vendorTypeList = data;
   }
 

@@ -4,21 +4,23 @@
       <div class="controls-container">
         <input hidden formControlName="id">
         <mat-form-field>
-          <input formControlName="name" placeholder="Vendor Name*" matInput="">
+          <input formControlName="name" placeholder="Vendor Name" matInput="" required>
           <mat-error>Vendor Name is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="email" placeholder="Email" matInput="">
+          <input formControlName="email" placeholder="Email" matInput="" required>
           <mat-error>Invalid email address.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="contactperson" placeholder="Contact Person" matInput="">
+          <input formControlName="contactperson" placeholder="Contact Person" matInput="" required>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="contactone" placeholder="Contact #" matInput="">
+          <input formControlName="contactone" placeholder="Contact #" matInput="" required>
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-hint>Enter 9 digit number including area code</mat-hint>
           <mat-error>Invalid phone number.</mat-error>
         </mat-form-field>
 
@@ -35,22 +37,22 @@
     <div class="column middle">
       <div class="controls-container">
         <mat-form-field>
-          <input formControlName="address" placeholder="Address" matInput="">
+          <input formControlName="address" placeholder="Address" matInput="" required>
           <mat-error>Address is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="ntn" placeholder="NTN #" matInput="">
+          <input formControlName="ntn" placeholder="NTN #" matInput="" required>
           <mat-error>NTN is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="strn" placeholder="STRN #" matInput="">
+          <input formControlName="strn" placeholder="STRN #" matInput="" required>
           <mat-error>STRN is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="type" placeholder="Vendor Type*">
+          <mat-select formControlName="type" placeholder="Vendor Type" required>
             <ng-container *ngFor="let vendortype of vendorService.vendorTypeList">
               <mat-option [value]="vendortype.type">{{vendortype.type}}</mat-option>
             </ng-container>
@@ -64,7 +66,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="paymentterms" placeholder="Payment Terms (Days)" matInput="">
+          <input formControlName="paymentterms" placeholder="Payment Terms (Days)" matInput="" required>
           <mat-error>Payment terms are required.</mat-error>
         </mat-form-field>
 

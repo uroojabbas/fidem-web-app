@@ -41,6 +41,9 @@ import {RefdataService} from './common/refdata.service';
 import { DialogComponent } from './dialog/dialog.component';
 import {Vendor} from './vendor-management/vendor';
 import { VendorComponent } from './vendor-management/vendor/vendor.component';
+import { ClientManagementComponent } from './client-management/client-management.component';
+import { ClientComponent } from './client-management/client/client.component';
+import {ClientService} from './client-management/client.service';
 
 const appRoutes: Routes = [
   {
@@ -56,6 +59,11 @@ const appRoutes: Routes = [
     path: 'vendor',
     canActivate: [AuthguardGuard],
     component: VendorManagementComponent
+  },
+  {
+    path: 'client',
+    canActivate: [AuthguardGuard],
+    component: ClientManagementComponent
   },
   {
     path: 'user-management',
@@ -76,7 +84,9 @@ const appRoutes: Routes = [
     EmployeeManagementComponent,
     VendorComponent,
     DialogComponent,
-    VendorComponent
+    VendorComponent,
+    ClientManagementComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
@@ -107,8 +117,9 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe],
+  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ]
+  entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
+  ClientComponent]
 })
 export class AppModule { }

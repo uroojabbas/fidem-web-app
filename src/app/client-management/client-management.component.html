@@ -2,7 +2,7 @@
   <mat-table [dataSource]="listData"  matSort>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Client Name</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
     </ng-container>
 
@@ -11,15 +11,21 @@
       <mat-cell *matCellDef="let element">{{element.address}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="type">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Type</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
+    <ng-container matColumnDef="clienttypename">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Client Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.clienttypename}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="contactperson">
+    <ng-container matColumnDef="principlename">
       <mat-header-cell *matHeaderCellDef  mat-sort-header>Contact Person</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.contactperson}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.principlename}}</mat-cell>
     </ng-container>
+
+    <ng-container matColumnDef="institutetypename">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Institute Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.institutetypename}}</mat-cell>
+    </ng-container>
+
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -51,8 +57,8 @@
 <div>
   <mat-toolbar-row style="background-color: whitesmoke;">
     <div style="padding-right: 5px">
-      <button mat-raised-button class="tool-bar-button" (click)="onCreate()" style="color: darkgreen" matTooltip="Add Vendor">
-        Add Vendor
+      <button mat-raised-button class="tool-bar-button" (click)="onCreate()" style="color: darkgreen" matTooltip="Add Client">
+        Add Client
       </button>
     </div>
 

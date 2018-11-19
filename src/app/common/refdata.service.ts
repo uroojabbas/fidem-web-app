@@ -10,11 +10,18 @@ export class RefdataService {
 
   constructor(private _http: HttpClient, private userSevice: UserService) {
     this.initVendorTypeList();
+    this.initInstitutionTypeList();
+    this.initClientTypeList();
+    this.initCityList();
+    this.initRegionList();
+
   }
 
   private cityList: any[];
   private regionList: any[];
   private vendorTypeList: any[];
+  private clientTypeList: any[];
+  private institutionTypeList: any[];
 
   getCityList(): any[] {
     return this.cityList;
@@ -29,17 +36,16 @@ export class RefdataService {
     return this.regionList;
   }
   setRegionList(data: any): void {
-    console.log(data);
     this.regionList = data;
   }
 
 
-  initCityList(): Observable<any>  {
-    return this._http.get(this.userSevice.getrestURL() + '/citylist');
+  initCityList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/citylist').subscribe(data => this.setCityList(data));
     }
 
-    initRegionList(): Observable<any> {
-      return this._http.get(this.userSevice.getrestURL() + '/reigonlist');
+    initRegionList(): void {
+       this._http.get(this.userSevice.getrestURL() + '/reigonlist').subscribe(data => this.setRegionList(data));
     }
 
     initVendorTypeList(): void {
@@ -55,8 +61,33 @@ export class RefdataService {
   }
 
   public extractData(res: Response) {
-    let body = res;
-    console.log("Response ", res)
+    const body = res;
+    console.log('Response ', res);
     return body || { };
+  }
+
+  initClientTypeList(): void {
+    this._http.get(this.userSevice.getrestURL() + '/clienttypelist').subscribe(data => this.setClientTypeList(data));
+  }
+
+  setClientTypeList(data: any): void {
+    this.clientTypeList = data;
+  }
+
+  getClientTypeList(): any[] {
+    return this.clientTypeList;
+  }
+
+
+  initInstitutionTypeList(): void {
+    this._http.get(this.userSevice.getrestURL() + '/institutetypelist').subscribe(data => this.setInstitutionTypeList(data));
+  }
+
+  setInstitutionTypeList(data: any): void {
+    this.institutionTypeList = data;
+  }
+
+  getInstitutionTypeList(): any[] {
+    return this.institutionTypeList;
   }
 }

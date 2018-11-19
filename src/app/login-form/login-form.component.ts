@@ -37,6 +37,7 @@ export class LoginFormComponent implements OnInit {
       // if (this.userModel.name === 'Ali') {
       this.userService.setUserLoggedIn();
       this.userService.setUserName(this.userModel.name);
+      this.userService.setUserId(this.userModel.id);
       this.router.navigate(['dashboard']);
       // }
     } else {

@@ -1,3 +1,130 @@
-<p>
-  client works!
-</p>
+<form #clientForm="ngForm" [formGroup]="clientService.clientForm" class="client-form" (submit)="onSubmit()">
+  <div class="row">
+    <div class="column middle">
+      <div class="controls-container">
+        <input hidden formControlName="id">
+        <mat-form-field>
+          <input formControlName="name" placeholder="Client Name" matInput="" required>
+          <mat-error>Client Name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="principlename" placeholder="Principle Name" matInput="" required>
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="email" placeholder="Email" matInput="" required>
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error>Invalid email address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="contact" placeholder="Contact #" matInput="" required>
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-hint>Enter 9 digit number including area code</mat-hint>
+          <mat-error>Invalid phone number.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="contactpersontwo" placeholder="Contact Person 2" matInput="">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="contacttwo" placeholder="Contact # 2" matInput="">
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-hint>Enter 9 digit number including area code</mat-hint>
+          <mat-error>Invalid phone number.</mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <div class="column middle">
+      <div class="controls-container">
+
+        <mat-form-field>
+          <input formControlName="address" placeholder="Address" matInput="" required>
+          <mat-error>Address is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="totalbranches" placeholder="Total No. of Branches" matInput="" required>
+          <mat-error>Total No. of Branches are required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="strenght" placeholder="Total No. of Students" matInput="" required>
+          <mat-error>Total No. of Students are required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="discount" placeholder="Discount %" matInput="">
+          <mat-error>Discount is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="paymentterms" placeholder="Payment Terms (Days)" matInput="" required>
+          <mat-error>Payment terms are required.</mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <div class="column middle">
+      <div class="controls-container">
+
+        <mat-form-field>
+          <mat-select formControlName="clienttypename" placeholder="Client Type" required>
+            <ng-container *ngFor="let client of clientService.clientTypeList">
+              <mat-option [value]="client.type">{{client.type}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Client Type is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="institutetypename" placeholder="Institution Type" required>
+            <ng-container *ngFor="let institution of clientService.institutionTypeList">
+              <mat-option [value]="institution.type">{{institution.type}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Client Type is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="cityname" placeholder="City" required>
+            <ng-container *ngFor="let city of clientService.cityList">
+              <mat-option [value]="city.cityname">{{city.cityname}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Client Type is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="regionname" placeholder="Region" required>
+            <ng-container *ngFor="let region of clientService.regionList">
+              <mat-option [value]="region.regionname">{{region.regionname}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Client Type is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="area" placeholder="Area" matInput="">
+          <mat-icon matSuffix>area</mat-icon>
+        </mat-form-field>
+
+      </div>
+    </div>
+  </div>
+  <div class="header">
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit" [disabled]="clientService.clientForm.invalid">Save</button>
+      <button mat-raised-button color="warn" type="reset" (click)="onClear()">Clear</button>
+      <span class="fill-remaining-space"></span>
+      <button mat-raised-button color="accent" type="button" (click)="closeForm()">Close</button>
+
+    </div>
+
+  </div>
+</form>

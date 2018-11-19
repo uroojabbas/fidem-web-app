@@ -36,3 +36,7 @@ snack-bar-container.notificatin simple-snack-bar{
   font-weight: bold;
 }
 
+.vertical-line {
+  border-left: 2px #fc7169;
+  height: 100%;
+}

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ClientService} from '../client.service';
+import {DialogService} from '../../common/dialog.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-client',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientComponent implements OnInit {
 
-  constructor() { }
+  constructor(private clientService: ClientService,
+              private dialogService: DialogService,
+              private formDialog: MatDialogRef<ClientComponent>) { }
 
   ngOnInit() {
+  }
+
+  closeForm() {
+    this.formDialog.close();
+  }
+
+  onSubmit(): void {
+    this.clientService.save();
+  }
+
+  onClear(): void {
+    this.clientService.clearForm();
   }
 
 }

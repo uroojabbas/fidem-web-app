@@ -52,8 +52,8 @@ export class EmployeeManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refDataService.initCityList().subscribe(data => this.setCityList(data));
-    this.refDataService.initRegionList().subscribe(data => this.setRegionList(data));
+    this.cityList = this.refDataService.getCityList();
+    this.regionList = this.refDataService.getRegionList();
   }
 
   onClear() {

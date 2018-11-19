@@ -11,6 +11,7 @@ export class UserService {
 
   private isUserLoggedIn: boolean;
   private userName: string;
+  private userId: number;
   private _url: string;
   private componentName: string;
 
@@ -45,6 +46,13 @@ export class UserService {
     return this.isUserLoggedIn;
   }
 
+  setUserId(id: number): void {
+    this.userId = id;
+  }
+
+  getUserId(): number {
+    return this.userId;
+  }
   private extractData(res: Response) {
     let body = res;
     console.log("Response ", res)

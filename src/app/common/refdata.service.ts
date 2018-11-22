@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from '../user.service';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RefdataService {
+
 
   constructor(private _http: HttpClient, private userSevice: UserService) {
     this.initVendorTypeList();
@@ -14,29 +16,38 @@ export class RefdataService {
     this.initClientTypeList();
     this.initCityList();
     this.initRegionList();
-
+    this.initCountyList();
+    this.initLanguageList();
+    this.initPaperQualityList();
+    this.initMarketSegmentList();
+    this.initProductCategoryList();
   }
 
-  private cityList: any[];
-  private regionList: any[];
-  private vendorTypeList: any[];
-  private clientTypeList: any[];
-  private institutionTypeList: any[];
+  private _cityList: any[];
+  private _regionList: any[];
+  private _vendorTypeList: any[];
+  private _clientTypeList: any[];
+  private _institutionTypeList: any[];
+  private _countryList: any[];
+  private _languageList: any[];
+  private _paperQualityList: any[];
+  private _marketSegmentList: any[];
+  private _productCategoryList: any[];
 
   getCityList(): any[] {
-    return this.cityList;
+    return this._cityList;
   }
 
   setCityList(data: any): void {
     console.log(data);
-    this.cityList = data;
+    this._cityList = data;
   }
 
   getRegionList(): any[] {
-    return this.regionList;
+    return this._regionList;
   }
   setRegionList(data: any): void {
-    this.regionList = data;
+    this._regionList = data;
   }
 
 
@@ -53,11 +64,11 @@ export class RefdataService {
     }
 
     getVendorTypeList(): any[] {
-      return this.vendorTypeList;
+      return this._vendorTypeList;
     }
 
   setVendorTypeList(data: any) {
-    this.vendorTypeList = data;
+    this._vendorTypeList = data;
   }
 
   public extractData(res: Response) {
@@ -71,11 +82,11 @@ export class RefdataService {
   }
 
   setClientTypeList(data: any): void {
-    this.clientTypeList = data;
+    this._clientTypeList = data;
   }
 
   getClientTypeList(): any[] {
-    return this.clientTypeList;
+    return this._clientTypeList;
   }
 
 
@@ -84,10 +95,72 @@ export class RefdataService {
   }
 
   setInstitutionTypeList(data: any): void {
-    this.institutionTypeList = data;
+    this._institutionTypeList = data;
   }
 
   getInstitutionTypeList(): any[] {
-    return this.institutionTypeList;
+    return this._institutionTypeList;
+  }
+
+  initCountyList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/countrylist').subscribe(data => this.setCountryList(data));
+  }
+
+  getCountryList(): any[] {
+    return this._countryList;
+  }
+
+  setCountryList(value: any) {
+    this._countryList = value;
+  }
+
+  initLanguageList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/languagelist').subscribe(data => this.setLanguageList(data));
+  }
+
+
+  getLanguageList(): any[] {
+    return this._languageList;
+  }
+
+  setLanguageList(value: any) {
+    this._languageList = value;
+  }
+
+  initPaperQualityList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/paperqualitylist').subscribe(data => this.setPaperQualityList(data));
+  }
+
+  getPaperQualityList(): any[] {
+    return this._paperQualityList;
+  }
+
+  setPaperQualityList(value: any) {
+    this._paperQualityList = value;
+  }
+
+  initMarketSegmentList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/marketsegmentlist').subscribe(data => this.setMarketSegmentList(data));
+  }
+
+  getMarketSegmentList(): any[] {
+    return this._marketSegmentList;
+  }
+
+  setMarketSegmentList(value: any) {
+    this._marketSegmentList = value;
+  }
+
+
+  initProductCategoryList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/productcategorylist').subscribe(data => this.setProductCategoryList(data));
+  }
+
+  getProductCategoryList(): any[] {
+    return this._productCategoryList;
+  }
+
+  setProductCategoryList(value: any) {
+    this._productCategoryList = value;
   }
 }

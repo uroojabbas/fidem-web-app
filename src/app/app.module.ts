@@ -20,6 +20,7 @@ import {
 , MatSnackBarModule
   , MatInputModule
   , MatRadioModule
+, MatStepperModule
   , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule
 } from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
@@ -44,6 +45,9 @@ import { VendorComponent } from './vendor-management/vendor/vendor.component';
 import { ClientManagementComponent } from './client-management/client-management.component';
 import { ClientComponent } from './client-management/client/client.component';
 import {ClientService} from './client-management/client.service';
+import { ProductManagementComponent } from './product-management/product-management.component';
+import { ProductComponent } from './product-management/product/product.component';
+import {ProductService} from './product-management/product.service';
 
 const appRoutes: Routes = [
   {
@@ -69,6 +73,11 @@ const appRoutes: Routes = [
     path: 'user-management',
     canActivate: [AuthguardGuard],
     component: UserManagementComponent
+  },
+  {
+    path: 'product',
+    canActivate: [AuthguardGuard],
+    component: ProductManagementComponent
   }
 ]
 
@@ -86,7 +95,9 @@ const appRoutes: Routes = [
     DialogComponent,
     VendorComponent,
     ClientManagementComponent,
-    ClientComponent
+    ClientComponent,
+    ProductManagementComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -115,11 +126,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatStepperModule
   ],
-  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe],
+  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
-  ClientComponent]
+  ClientComponent, ProductComponent]
 })
 export class AppModule { }

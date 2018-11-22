@@ -101,7 +101,7 @@ export class ClientService {
   }
 
 
-  saveVendor(): Observable<any> {
+  saveClient(): Observable<any> {
     if (this.clientForm.valid) {
       console.log(this.clientForm.value);
       return this._http.post<User>(this.userService.getrestURL() + '/client/save', this.clientForm.value);
@@ -109,7 +109,7 @@ export class ClientService {
   }
 
   save(): void {
-    this.saveVendor().subscribe(data => this.notificationService.showSuccess(':: Client Successfully Added.'),
+    this.saveClient().subscribe(data => this.notificationService.showSuccess(':: Client Successfully Added.'),
       error => this.notificationService.showError(error));
   }
 

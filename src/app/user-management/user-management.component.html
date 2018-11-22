@@ -10,14 +10,19 @@
       <mat-cell *matCellDef="let element">{{element.username}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Email</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+    <ng-container matColumnDef="designationname">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Designation</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.designationname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="phone">
       <mat-header-cell *matHeaderCellDef>Contact #</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.phone}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="departmentname">
+      <mat-header-cell *matHeaderCellDef>Department</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.departmentname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

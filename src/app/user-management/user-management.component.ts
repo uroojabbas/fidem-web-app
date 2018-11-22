@@ -22,7 +22,7 @@ export class UserManagementComponent implements OnInit {
   public searchKey: string;
   dataSource: UserManagementDataSource;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns: string[] = [ 'name', 'username', 'email', 'phone', 'actions'];
+  displayedColumns: string[] = [ 'name', 'username', 'phone', 'departmentname', 'designationname', 'actions'];
   DELETE_SUCCESS_MESSAGE = 'User Successfully deleted';
 
   constructor(private user: UserService,

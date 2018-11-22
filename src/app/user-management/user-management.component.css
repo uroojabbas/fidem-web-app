@@ -29,12 +29,11 @@
 
 /* filter controls */
 .search-div{
-  margin: 10px;
+  margin: 0px;
 }
 .search-form-field{
   width: 30%;
   margin-left: 10px;
-  padding: 10px 10px;
   background-color: #f5f5f5;
   border-radius: 2px;
 }
@@ -48,6 +47,6 @@
   padding-bottom: 0px;
 }
 .search-form-field div.mat-form-field-suffix button{
-  height: 32px;
+  height: 30px;
   width: 32px;
 }

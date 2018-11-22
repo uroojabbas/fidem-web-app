@@ -43,25 +43,19 @@
           </mat-expansion-panel>
           <mat-expansion-panel>
             <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
+              <mat-panel-title>
               Data Managment
+              </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <mat-action-row style="align-content: left">
-                <a [routerLink]="['/vendor']">Vendor Management
+            <mat-list>
+              <mat-list-item><a [routerLink]="['/vendor']">Vendor Management</a></mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item><a [routerLink]="['/client']">Client Management</a></mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item><a [routerLink]="['/product']">Product Management</a></mat-list-item>
+            </mat-list>
 
-                </a>
-              </mat-action-row>
-
-            <mat-action-row style="align-content: left">
-                <a [routerLink]="['/client']">Client Management
-
-                </a>
-              </mat-action-row>
-            <mat-action-row style="align-content: left">
-              <a [routerLink]="['/product']">Product Management
-
-              </a>
-            </mat-action-row>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
@@ -86,12 +80,13 @@
             <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
               Admin
             </mat-expansion-panel-header>
-            <mat-action-row style="alignment: center">
-            <a [routerLink]="['/user-management']"> User Management
 
-            </a>
-            </mat-action-row>
-          </mat-expansion-panel>
+            <mat-list>
+              <mat-list-item><a [routerLink]="['/user-management']"> User Management</a></mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+
+            </mat-expansion-panel>
         </mat-accordion>
       </mat-drawer>
 

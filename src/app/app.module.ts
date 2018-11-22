@@ -20,6 +20,7 @@ import {
 , MatSnackBarModule
   , MatInputModule
   , MatRadioModule
+, MatListModule
 , MatStepperModule
   , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule
 } from '@angular/material';
@@ -127,6 +128,7 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatListModule,
     MatStepperModule
   ],
   providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,

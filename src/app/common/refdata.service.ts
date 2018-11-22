@@ -21,6 +21,8 @@ export class RefdataService {
     this.initPaperQualityList();
     this.initMarketSegmentList();
     this.initProductCategoryList();
+    this.initDesignationList();
+    this.initDepartmentList();
   }
 
   private _cityList: any[];
@@ -33,15 +35,47 @@ export class RefdataService {
   private _paperQualityList: any[];
   private _marketSegmentList: any[];
   private _productCategoryList: any[];
+  private _designationList: any[];
+  private _departmentList: any[];
+
+
+  getDepartmentList(): any[] {
+    return this._departmentList;
+  }
+
+  setDepartmentList(data: any): void {
+    console.log('department list : ' + data);
+    this._departmentList = data;
+  }
+
+  initDepartmentList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/departmentlist').subscribe(data => this.setDepartmentList(data));
+  }
+
+  getDesignationList(): any[] {
+    return this._designationList;
+  }
+
+  setDesignationList(data: any): void {
+    console.log('designation list : ' + data);
+    this._designationList = data;
+  }
+
+  initDesignationList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/designationlist').subscribe(data => this.setDesignationList(data));
+  }
 
   getCityList(): any[] {
     return this._cityList;
   }
 
   setCityList(data: any): void {
-    console.log(data);
     this._cityList = data;
   }
+
+  initCityList(): void  {
+    this._http.get(this.userSevice.getrestURL() + '/citylist').subscribe(data => this.setCityList(data));
+    }
 
   getRegionList(): any[] {
     return this._regionList;
@@ -50,12 +84,7 @@ export class RefdataService {
     this._regionList = data;
   }
 
-
-  initCityList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/citylist').subscribe(data => this.setCityList(data));
-    }
-
-    initRegionList(): void {
+  initRegionList(): void {
        this._http.get(this.userSevice.getrestURL() + '/reigonlist').subscribe(data => this.setRegionList(data));
     }
 

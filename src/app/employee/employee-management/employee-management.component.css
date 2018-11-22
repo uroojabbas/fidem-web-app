@@ -8,15 +8,16 @@ form.employee-form{
 }
 
 .bottom-padding{
-  padding-bottom: 10px;
+  padding-bottom: 50px;
 }
 
 .top-padding{
   padding-top: 20px;
+  height: 90px;
 }
 
 .left-padding{
-  padding-left: 30px;
+  padding-left: 7px;
 }
 mat-radio-group mat-radio-button{
   margin-left: 5px;

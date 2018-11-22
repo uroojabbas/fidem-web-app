@@ -4,12 +4,12 @@
       <div class="controls-container">
         <input hidden formControlName="id">
         <mat-form-field>
-          <input formControlName="name" placeholder="Full Name*" matInput="">
+          <input formControlName="name" placeholder="Full Name*" matInput="" required>
           <mat-error>Full Name is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="username" placeholder="Login Id*" matInput="">
+          <input formControlName="username" placeholder="Login Id*" matInput="" required>
           <mat-error>Login Id is required.</mat-error>
         </mat-form-field>
 
@@ -19,16 +19,24 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="phone" placeholder="Contact #" matInput="">
+          <input formControlName="phone" placeholder="Contact #" matInput="" required>
           <mat-error>Invalid phone number.</mat-error>
         </mat-form-field>
 
 
         <mat-form-field>
-          <mat-select formControlName="departmentid" placeholder="Department*">
-            <mat-option>None</mat-option>
-            <ng-container *ngFor="let department of departments">
-              <mat-option [value]="department.id">{{department.value}}</mat-option>
+          <mat-select formControlName="departmentname" placeholder="Department" required>
+            <ng-container *ngFor="let department of departmentList">
+              <mat-option [value]="department.name">{{department.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Department is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="designationname" placeholder="Designation" required>
+            <ng-container *ngFor="let designation of designationList">
+              <mat-option [value]="designation.name">{{designation.name}}</mat-option>
             </ng-container>
           </mat-select>
           <mat-error>Department is required.</mat-error>
@@ -73,7 +81,10 @@
             {{gender.value}}
           </mat-radio-button>
         </mat-radio-group>
-        <mat-checkbox style="font-size: 12px" class="left-padding" formControlName="ispermanent">Permanent Employee</mat-checkbox>
+       </div>
+
+      <div class="bottom-padding; top-padding; left-padding">
+        <mat-checkbox style="font-size: 12px" formControlName="ispermanent">Permanent Employee</mat-checkbox>
       </div>
     </div>
   </div>

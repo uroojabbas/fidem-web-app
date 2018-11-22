@@ -13,18 +13,16 @@ import {NotificationService} from '../../common/notification.service';
 })
 export class EmployeeManagementComponent implements OnInit {
 
-  public departments = [
-    {id: 1, value: 'Accounts'},
-    {id: 2, value: 'Human Resource'},
-    {id: 3, value: 'Sales'},
-    {id: 4, value: 'Procurement'}
-  ];
 
   public genderlist = [
     {id: 1, value: 'Male'},
     {id: 2, value: 'Female'},
     {id: 3, value: 'Other'}
     ];
+
+  public departmentList: any[];
+
+  public designationList: any[];
 
   public cityList: any[];
 
@@ -54,6 +52,8 @@ export class EmployeeManagementComponent implements OnInit {
   ngOnInit() {
     this.cityList = this.refDataService.getCityList();
     this.regionList = this.refDataService.getRegionList();
+    this.departmentList = this.refDataService.getDepartmentList();
+    this.designationList = this.refDataService.getDesignationList();
   }
 
   onClear() {
@@ -61,7 +61,7 @@ export class EmployeeManagementComponent implements OnInit {
     this.employeeservice.initializeEmployeeForm();
   }
 
-  onSubmit() {
+   onSubmit() {
      this.employeeservice.addEmployee().subscribe(data => this.showSuccessMessage(data),
        error => this.handleError(error));
   }

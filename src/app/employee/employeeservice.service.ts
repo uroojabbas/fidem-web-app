@@ -4,13 +4,15 @@ import {HttpClient} from '@angular/common/http';
 import {UserService} from '../user.service';
 import {Observable} from 'rxjs';
 import {User} from '../user';
+import {RefdataService} from '../common/refdata.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeserviceService {
 
-  constructor(private _http: HttpClient, private userService: UserService) { }
+  constructor(private _http: HttpClient, private userService: UserService,
+              private refDataService: RefdataService) { }
 
   public employeeForm: FormGroup = new FormGroup({
     id: new FormControl(null),
@@ -20,11 +22,12 @@ export class EmployeeserviceService {
     address: new FormControl(null, Validators.required),
     cityid: new FormControl(1, ),
     regionid: new FormControl(1, Validators.required),
-    departmentid: new FormControl(1, Validators.required),
+    departmentname: new FormControl(1, Validators.required),
     hiredate: new FormControl(''),
     ispermanent: new FormControl(false),
     gender: new FormControl(1),
-    username: new FormControl(null, Validators.required)
+    username: new FormControl(null, Validators.required),
+    designationname:  new FormControl(null, Validators.required)
   });
 
   initializeEmployeeForm() {
@@ -37,11 +40,12 @@ export class EmployeeserviceService {
         address: '',
         cityid: 1,
         regionid: 1,
-        departmentid: 1,
+        departmentname: 1,
         hiredate: null,
         ispermanent: false,
         gender: null,
-        username: ''
+        username: '',
+        designationname: null
       }
     );
   }
@@ -62,11 +66,12 @@ export class EmployeeserviceService {
       address: employee.address,
       cityid: employee.cityid,
       regionid: employee.regionid,
-      departmentid: employee.departmentid,
+      departmentname: employee.departmentname,
       hiredate: employee.hiredate,
       ispermanent: true,
       gender: employee.gender,
-      username: employee.username
+      username: employee.username,
+      designationname: employee.designationname
     });
 
    }

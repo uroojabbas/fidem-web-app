@@ -129,7 +129,8 @@ const appRoutes: Routes = [
     MatSortModule,
     MatStepperModule
   ],
-  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService],
+  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
+  EmployeeserviceService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
   ClientComponent, ProductComponent]

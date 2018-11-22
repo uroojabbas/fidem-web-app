@@ -1,4 +1,5 @@
-<div class="mat-elevation-z8; data-table">
+<div class="page-container">
+<div class="mat-elevation-z8; data-table; content-wrap">
   <mat-table [dataSource]="listData"  matSort>
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef  mat-sort-header>Full Name</mat-header-cell>
@@ -52,7 +53,7 @@
 </div>
 
 <div>
-  <mat-toolbar-row style="background-color: whitesmoke;">
+  <mat-toolbar-row  class="footer">
     <div style="padding-right: 5px">
       <button mat-raised-button class="tool-bar-button" (click)="onCreate()" style="color: darkgreen" matTooltip="Add User">
         Add User
@@ -70,4 +71,5 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
     </mat-toolbar-row>
 
+</div>
 </div>

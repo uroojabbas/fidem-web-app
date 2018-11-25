@@ -1,0 +1,128 @@
+<mat-horizontal-stepper [linear]="purchaseOrderService.isLinear" #stepper>
+  <mat-step [stepControl]="purchaseOrderService.purchaseOrderForm">
+    <form [formGroup]="purchaseOrderService.purchaseOrderForm">
+      <ng-template matStepLabel>Select Vendor</ng-template>
+
+      <mat-form-field>
+        <mat-select formControlName="vendorId" placeholder="Select Vendor" required>
+          <ng-container *ngFor="let vendor of purchaseOrderService._vendorList">
+            <mat-option [value]="vendor.id">{{vendor.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error>Vendor is required.</mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button matStepperNext type="button" (click)="purchaseOrderService.createPurchaseOrder()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="purchaseOrderService.purchaseOrderForm">
+    <form [formGroup]="purchaseOrderService.purchaseOrderForm">
+      <ng-template matStepLabel>Purchase Order</ng-template>
+
+      <mat-grid-list cols="4" rowHeight="8:1">
+        <mat-grid-tile><div class="text-inside-grid">Date</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.date | date:'yyyy-MM-dd'}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">Vendor</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorName}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">Address</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorAddress}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">Email</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorEmail}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">Contact Person</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorContactPerson}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">Contact #</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorContact}}</div></mat-grid-tile>
+      </mat-grid-list>
+
+      <div style="padding-top: 3px; padding-bottom: 1px">
+        <mat-form-field>
+          <mat-select formControlName="productId" placeholder="Select Product">
+            <ng-container *ngFor="let product of purchaseOrderService._vendorProductList">
+              <mat-option [value]="product.id">{{product.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+          </mat-form-field>
+
+        <button  (click)="addProduct()" style="margin-left: 5px" mat-raised-button color="accent" matTooltip="Add Product">
+          <mat-icon aria-label="Add Product">playlist_add</mat-icon>
+        </button>
+
+      </div>
+    </form>
+      <div class="mat-elevation-z8; data-table">
+        <mat-table [dataSource]="dataSource"  matSort>
+
+          <ng-container matColumnDef="isbn">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>ISBN #</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.isbn}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Product Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Quantity</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+            <mat-form-field style="width: 30px">
+              <input matInput [(ngModel)]="element.quantity"
+                     [value]="element.quantity">
+            </mat-form-field>
+            </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Price</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.price}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="discount">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Discount (%)</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.discount}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="discountedPrice">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Discounted Price</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{getDiscountedPrice(element.price, element.discount)}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Total</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{getTotalAmount(element.price, element.discount, element.quantity)}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-icon-button color="warn" (click)="onDelete(row.id)" matTooltip="Delete"><mat-icon>delete_outline</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+
+    <div class="header">
+      <div class="button-row">
+        <button mat-raised-button type="button" matStepperPrevious>Back</button>
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+        <button mat-raised-button  matStepperNext type="button">Next</button>
+        <span class="fill-remaining-space"></span>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

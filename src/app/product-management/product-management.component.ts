@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {NotificationService} from '../common/notification.service';
 import {ProductService} from './product.service';
 import {ProductComponent} from './product/product.component';
+import {CommonService} from '../common/common.service';
 
 @Component({
   selector: 'app-product-management',
@@ -27,7 +28,8 @@ export class ProductManagementComponent implements OnInit {
               private _http: HttpClient,
               private notificationService: NotificationService,
               private dialogService: DialogService,
-              private productService: ProductService) {
+              private productService: ProductService,
+              private commonService: CommonService) {
     this.user.setComponentName('Product Management');
   }
 
@@ -37,7 +39,7 @@ export class ProductManagementComponent implements OnInit {
 
   initProductList() {
 
-    this._http.get(this.user.getrestURL() + '/products').subscribe(data => this.setProuctList(data),
+     this.commonService.initProductList().subscribe(data => this.setProuctList(data),
        error => this.notificationService.showError(error));
     }
 

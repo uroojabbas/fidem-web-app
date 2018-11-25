@@ -49,6 +49,9 @@ import {ClientService} from './client-management/client.service';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { ProductComponent } from './product-management/product/product.component';
 import {ProductService} from './product-management/product.service';
+import { PurchaseOrderManagementComponent } from './purchase-order-management/purchase-order-management.component';
+import { PurchaseOrderComponent } from './purchase-order-management/purchase-order/purchase-order.component';
+import {CommonService} from './common/common.service';
 
 const appRoutes: Routes = [
   {
@@ -79,6 +82,11 @@ const appRoutes: Routes = [
     path: 'product',
     canActivate: [AuthguardGuard],
     component: ProductManagementComponent
+  },
+  {
+    path: 'purchase-order',
+    canActivate: [AuthguardGuard],
+    component: PurchaseOrderManagementComponent
   }
 ]
 
@@ -98,7 +106,9 @@ const appRoutes: Routes = [
     ClientManagementComponent,
     ClientComponent,
     ProductManagementComponent,
-    ProductComponent
+    ProductComponent,
+    PurchaseOrderManagementComponent,
+    PurchaseOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -132,9 +142,9 @@ const appRoutes: Routes = [
     MatStepperModule
   ],
   providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
-  EmployeeserviceService],
+  EmployeeserviceService, CommonService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
-  ClientComponent, ProductComponent]
+  ClientComponent, ProductComponent, PurchaseOrderComponent]
 })
 export class AppModule { }

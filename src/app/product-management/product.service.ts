@@ -7,6 +7,7 @@ import {RefdataService} from '../common/refdata.service';
 import {User} from '../user';
 import {Observable} from 'rxjs';
 import {NotificationService} from '../common/notification.service';
+import {CommonService} from '../common/common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +20,24 @@ export class ProductService {
   public pagerQualityList: any[];
   public marketSegmentList: any[];
   public productCategoryList: any[];
+  public vendorList: any[];
 
   constructor(private _http: HttpClient,
               private refDataService: RefdataService,
               private userService: UserService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private commonService: CommonService) {
     this.languageList = this.refDataService.getLanguageList();
     this.countryList = this.refDataService.getCountryList();
     this.pagerQualityList = this.refDataService.getPaperQualityList();
     this.marketSegmentList = this.refDataService.getMarketSegmentList();
     this.productCategoryList = this.refDataService.getProductCategoryList();
+    this.commonService.initVendorList().subscribe(data => this.setVendorList(data));
+
+  }
+
+  setVendorList(vendorList: any): void {
+    this.vendorList = vendorList;
   }
 
   public searchISBN(): void {
@@ -86,6 +95,7 @@ export class ProductService {
     productcost: new FormControl(null, Validators.required),
     paperqualityid: new FormControl(null),
     retailprice: new FormControl(null, Validators.required),
+    vendorName: new FormControl('', Validators.required),
     userid: new FormControl(this.userService.getUserId(), Validators.required)
   });
 
@@ -109,6 +119,7 @@ export class ProductService {
         productcost: null,
         paperqualityid: null,
         retailprice: null,
+        vendorName: '',
         userid: this.userService.getUserId()
 
 
@@ -133,6 +144,7 @@ export class ProductService {
       productcost: product.productcost,
       paperqualityid: product.paperqualityid,
       retailprice: product.retailprice,
+      vendorName: product.vendorName,
       userid: this.userService.getUserId()
 
     });

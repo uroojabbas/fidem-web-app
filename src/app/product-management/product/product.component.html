@@ -67,7 +67,16 @@
                   <mat-option [value]="country.id">{{country.country}}</mat-option>
                 </ng-container>
               </mat-select>
-              <mat-error>Client Type is required.</mat-error>
+              <mat-error>Language is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select formControlName="vendorName" placeholder="Vendor" required>
+                <ng-container *ngFor="let vendor of productService.vendorList">
+                  <mat-option [value]="vendor.name">{{vendor.name}}</mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error>Vendor is required.</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -78,15 +87,17 @@
               <input matInput placeholder="Product Cost" formControlName="productcost" required>
             </mat-form-field>
 
-            <mat-form-field>
-              <input matInput placeholder="Retail Price" formControlName="retailprice" required>
-            </mat-form-field>
 
           </div>
         </div>
 
         <div class="column middle_two">
           <div class="controls-container">
+
+            <mat-form-field>
+              <input matInput placeholder="Retail Price" formControlName="retailprice" required>
+            </mat-form-field>
+
             <mat-form-field>
               <input matInput placeholder="Page Count" formControlName="pagecount" required>
             </mat-form-field>

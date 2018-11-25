@@ -15,22 +15,11 @@
             <mat-expansion-panel-header>
               Procurement
             </mat-expansion-panel-header>
-            <mat-action-row>
-              <button mat-button="button1"  class="tool-menu-button"><a [routerLink]="['/']"> Feature 1
-                <mat-icon style="color: greenyellow">person</mat-icon>
-              </a>
-              </button>
-            </mat-action-row>
-            <mat-action-row style="align-content: left">
-              <button mat-button="button1"  class="tool-menu-button">Feature 2
-                <mat-icon style="color: gold">person</mat-icon>
-              </button>
-            </mat-action-row>
-            <mat-action-row>
-              <button mat-button="button1"  class="tool-menu-button">Feature 3
-                <mat-icon style="color: blueviolet">person</mat-icon>
-              </button>
-            </mat-action-row>
+            <mat-list>
+              <mat-list-item><li><a [routerLink]="['/purchase-order']">Purchase Order</a></li></mat-list-item>
+              <mat-divider></mat-divider>
+              </mat-list>
+
           </mat-expansion-panel>
 
           <mat-expansion-panel>

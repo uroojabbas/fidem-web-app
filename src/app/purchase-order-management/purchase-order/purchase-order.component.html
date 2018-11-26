@@ -54,7 +54,15 @@
           </button>
 
         </div></mat-grid-tile>
-        <mat-grid-tile>Total Quantity : {{getTotalQuantity()}}</mat-grid-tile>
+        <mat-grid-tile><div>
+          Total Quantity : {{getTotalQuantity()}}
+        </div>
+          <div>
+            <mat-icon style="font-size: medium">linear_scale</mat-icon>
+          </div>
+        <div>
+          Products Count : {{getProductsCount()}}
+        </div></mat-grid-tile>
         <mat-grid-tile>Total Amount : {{getSumOfAmount()}}</mat-grid-tile>
       </mat-grid-list>
 

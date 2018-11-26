@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
               private productDialog: MatDialogRef<ProductComponent>) { }
 
   ngOnInit() {
-    this.isLinear = 'true';
+    this.isLinear = 'false';
   }
 
   getProductDetail(): any {

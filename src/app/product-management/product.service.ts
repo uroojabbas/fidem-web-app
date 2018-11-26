@@ -51,8 +51,7 @@ export class ProductService {
   private setProductDetail(data): void {
     this.productData = data;
     console.log(data.totalItems);
-    console.log(data.items.length)
-    if (this.productData != null && this.productData.items.length > 0) {
+    if (this.productData != null && this.productData.totalItems > 0) {
 
       this.productForm.get('author').setValue(this.productData.items[0].volumeInfo.authors.toString());
 

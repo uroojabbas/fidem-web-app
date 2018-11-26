@@ -20,6 +20,8 @@ export class PurchaseOrderService {
   public vendorContact: string;
   public date: Date =  new Date();
   public vendorDiscount: number;
+  private id: number;
+
   constructor(private commnonService: CommonService,
               private userService: UserService) {
     this.commnonService.initVendorList().subscribe(data => this.initVendorList(data));
@@ -51,13 +53,15 @@ export class PurchaseOrderService {
     const productId = this.purchaseOrderForm.get('productId').value;
     const product  = this._vendorProductList.find(vp => vp.id === productId);
     const discountedPrice =  product.productcost - (product.productcost * this.vendorDiscount) / 100;
+    this.id += 1;
     return {
+      id: this.id,
       isbn: product.isbn,
       name: product.name,
       quantity: 1,
       price: product.productcost,
       discount: this.vendorDiscount
-    }
+    };
   }
   private setVendorProductList(data: any): void {
     this._vendorProductList = data;

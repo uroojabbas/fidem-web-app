@@ -36,20 +36,28 @@
         <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorContact}}</div></mat-grid-tile>
       </mat-grid-list>
 
-      <div style="padding-top: 3px; padding-bottom: 1px">
-        <mat-form-field>
-          <mat-select formControlName="productId" placeholder="Select Product">
-            <ng-container *ngFor="let product of purchaseOrderService._vendorProductList">
-              <mat-option [value]="product.id">{{product.name}}</mat-option>
-            </ng-container>
-          </mat-select>
-          </mat-form-field>
-
-        <button  (click)="addProduct()" style="margin-left: 5px" mat-raised-button color="accent" matTooltip="Add Product">
-          <mat-icon aria-label="Add Product">playlist_add</mat-icon>
-        </button>
+      <div style="padding-top: 15px">
 
       </div>
+      <mat-grid-list cols="3" rowHeight="7:1">
+        <mat-grid-tile>      <div style="padding-top: 1px; padding-bottom: 1px">
+          <mat-form-field>
+            <mat-select formControlName="productId" placeholder="Select Product">
+              <ng-container *ngFor="let product of purchaseOrderService._vendorProductList">
+                <mat-option [value]="product.id">{{product.name}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+
+          <button  (click)="addProduct()" style="margin-left: 5px; font-size: smaller; height: available" mat-raised-button color="accent" matTooltip="Add Product">
+            <mat-icon aria-label="Add Product">playlist_add</mat-icon>
+          </button>
+
+        </div></mat-grid-tile>
+        <mat-grid-tile>Total Quantity : {{getTotalQuantity()}}</mat-grid-tile>
+        <mat-grid-tile>Total Amount : {{getSumOfAmount()}}</mat-grid-tile>
+      </mat-grid-list>
+
     </form>
       <div class="mat-elevation-z8; data-table">
         <mat-table [dataSource]="dataSource"  matSort>
@@ -113,7 +121,6 @@
         <button mat-raised-button type="button" matStepperPrevious>Back</button>
         <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
         <button mat-raised-button  matStepperNext type="button">Next</button>
-        <span class="fill-remaining-space"></span>
       </div>
     </div>
   </mat-step>

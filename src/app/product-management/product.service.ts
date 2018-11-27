@@ -68,10 +68,16 @@ export class ProductService {
       console.log('Country : ' + country.id);
       console.log('countrycode : ' + countrycode);
       this.productForm.get('countryid').setValue(country.id);
-      this.productForm.get('name').setValue(this.productData.items[0].volumeInfo.title.toString());
-      this.productForm.get('publisher').setValue(this.productData.items[0].volumeInfo.publisher.toString());
+
+      const title = this.productData.items[0].volumeInfo.title;
+      this.productForm.get('name').setValue(title === undefined ? '' : title.toString());
+
+      const publisher = this.productData.items[0].volumeInfo.publisher;
+      this.productForm.get('publisher').setValue(publisher === undefined ? '' : publisher.toString());
       this.productForm.get('pagecount').setValue(this.productData.items[0].volumeInfo.pageCount);
-      this.productForm.get('subject').setValue(this.productData.items[0].volumeInfo.categories.toString());
+
+      const subject = this.productData.items[0].volumeInfo.categories;
+      this.productForm.get('subject').setValue(subject === undefined ? '' : subject.toString());
      }
 
     return this.productData || {};
@@ -157,7 +163,9 @@ export class ProductService {
   }
 
   save(): void {
-    this.saveProduct().subscribe(data => this.notificationService.showSuccess(':: Client Successfully Added.'),
+    this.saveProduct().subscribe(data => {
+        this.notificationService.showSuccess(':: Client Successfully Added.');
+      this.populateForm(data); },
       error => this.notificationService.showError(error));
   }
 

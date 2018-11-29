@@ -52,7 +52,7 @@ export class PurchaseOrderService {
 
     const vendorId = this.purchaseOrderForm.get('vendorId').value;
     const vendor  = this._vendorList.find(v => v.id === vendorId);
-    this.vendorName = vendor.name;
+    this.vendorName = vendor.name === undefined ? '' : vendor.name;
     this.vendorAddress = vendor.address;
     this.vendorEmail = vendor.email;
     this.vendorContactPerson = vendor.contactperson;

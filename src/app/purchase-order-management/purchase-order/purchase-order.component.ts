@@ -4,6 +4,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {PurchaseOrderDatasource, PurchaseOrderItem} from './purchase-order-datasource';
 import {ProductComponent} from '../../product-management/product/product.component';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-purchase-order',
@@ -14,14 +15,18 @@ export class PurchaseOrderComponent implements OnInit {
 
   data: PurchaseOrderItem[] = [];
   dataSource = new MatTableDataSource<PurchaseOrderItem>(this.data);
+
   @ViewChild(MatSort) sort: MatSort;
+
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns = ['isbn', 'name',  'quantity', 'price', 'discount', 'discountedPrice', 'total', 'action'];
   DELETE_SUCCESS_MESSAGE = 'Product Successfully deleted';
   private totalQuantity: number;
   constructor(private purchaseOrderService: PurchaseOrderService,
-              private purchaseOrderDialog: MatDialogRef<PurchaseOrderComponent>) { }
+             private purchaseOrderDialog: MatDialogRef<PurchaseOrderComponent>) {
+
+  }
 
   ngOnInit() {
   }
@@ -73,5 +78,14 @@ export class PurchaseOrderComponent implements OnInit {
 
   getProductsCount(): number {
     return this.dataSource.data.length;
+  }
+
+  save() {
+    this.purchaseOrderService.save(this.dataSource.data);
+  }
+
+  onDelete(id: number): void {
+    this.data.splice(id,1 );
+    this.dataSource = new MatTableDataSource<PurchaseOrderItem>(this.data);
   }
 }

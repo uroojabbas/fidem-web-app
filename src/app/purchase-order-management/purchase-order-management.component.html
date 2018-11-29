@@ -3,25 +3,17 @@
 
     <ng-container matColumnDef="vendorName">
       <mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.vendorName}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.vendor.name}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="purchaseOrderNo">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Author</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.purchaseOrderNo}}</mat-cell>
+    <ng-container matColumnDef="poId">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>PO #</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.poId}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="purchaseOrderDate">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Language</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.purchaseOrderDate}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <button mat-icon-button (click)="onEdit(row.id)" matTooltip="Edit"><mat-icon>launch</mat-icon></button>
-        <button mat-icon-button color="warn" (click)="onDelete(row.id)" matTooltip="Delete"><mat-icon>delete_outline</mat-icon></button>
-      </mat-cell>
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>PO Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.insertedtime}}</mat-cell>
     </ng-container>
 
 

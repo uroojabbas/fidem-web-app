@@ -3,6 +3,11 @@ import {CommonService} from '../common/common.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import {PurchaseOrderItem} from './purchase-order/purchase-order-datasource';
+import {User} from '../user';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {DialogService} from '../common/dialog.service';
+import {NotificationService} from '../common/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +26,18 @@ export class PurchaseOrderService {
   public date: Date =  new Date();
   public vendorDiscount: number;
   private id: number;
-
+  private poDetails: any[];
+  public poNumber: string;
+  public editable: boolean;
+  public disabled: boolean;
   constructor(private commnonService: CommonService,
-              private userService: UserService) {
+              private userService: UserService,
+              private _http: HttpClient,
+              private dialogService: DialogService,
+              private notificationService: NotificationService) {
     this.commnonService.initVendorList().subscribe(data => this.initVendorList(data));
+    this.editable = true;
+    this.disabled = false;
   }
 
   initProductList(productList: any): void {
@@ -71,7 +84,8 @@ export class PurchaseOrderService {
     id: new FormControl(null),
     vendorId: new FormControl(null, Validators.required),
     productId: new FormControl(null),
-    userid: new FormControl(this.userService.getUserId(), Validators.required)
+    userid: new FormControl(this.userService.getUserId(), Validators.required),
+     poId: new FormControl('')
   });
 
 
@@ -81,20 +95,56 @@ export class PurchaseOrderService {
         id: null,
         vendorId: null,
         productId: null,
-        userid: this.userService.getUserId()
-
-
+        userid: this.userService.getUserId(),
+        poId: ''
       });
   }
 
   populateForm(purchaseOrder) {
     this.purchaseOrderForm.setValue({
       id: purchaseOrder.id,
-      vendorId: purchaseOrder.vendorId,
+      vendorId: purchaseOrder.vendor.id,
       productId: null,
-      userid: this.userService.getUserId()
+      userid: this.userService.getUserId(),
+      poId: purchaseOrder.poId
 
     });
   }
+
+
+  save(dataList): void {
+    this.setPoDetails(dataList);
+    const po = {
+      id: null,
+      users: {id: this.userService.getUserId()},
+      vendor: {id: this.purchaseOrderForm.get('vendorId').value},
+      postatus: [{postatusid: 1}],
+      modifiedbyuserid: null,
+      modifiedtime: null,
+      insertedtime: new Date(),
+      isdeleted: false,
+      podetail: this.poDetails
+    };
+    this._http.post<User>(this.userService.getrestURL() + '/purchaseorder/save', po).subscribe(data => {
+        this.notificationService.showSuccess(':: Product Successfully Added.');
+        this.editable = false;
+        this.disabled = true;
+        this.populateForm(data);
+        console.log('PoId' + this.purchaseOrderForm.get('poId').value);
+        this.poNumber = this.purchaseOrderForm.get('poId').value; },
+      error => this.notificationService.showError(error));
+  }
+
+  private setPoDetails(dataList): void {
+    this.poDetails = [ ];
+    dataList.forEach((d, index) => {
+       const product  = this._vendorProductList.find(vp => vp.name === d.name);
+      const poDetail =     {id: null,
+        poid: null,
+        productid: product.id,
+        quantity: d.quantity};
+      this.poDetails.push(poDetail);
+    });
+    }
 
 }

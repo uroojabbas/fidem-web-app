@@ -17,7 +17,7 @@ export class PurchaseOrderManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   public listData: MatTableDataSource<any>;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedColumns = ['vendorName', 'purchaseOrderNo', 'purchaseOrderDate', 'actions'];
+  public displayedColumns = ['vendorName', 'poId', 'purchaseOrderDate'];
   public searchKey: string;
   DELETE_SUCCESS_MESSAGE = 'Purchase Order Successfully deleted';
 
@@ -37,19 +37,8 @@ export class PurchaseOrderManagementComponent implements OnInit {
 
   initPurchaseOrderList() {
 
-    // this._http.get(this.user.getrestURL() + '/products').subscribe(data => this.setPurhaseOrderList(data),
-    //  error => this.notificationService.showError(error));
-    const data = [{
-      vendorName: 'Test Vendor 1',
-      purchaseOrderNo: 'Po-1234',
-      purchaseOrderDate: '25-Nov-2018'
-    },
-      {
-        vendorName: 'Test Vendor 2',
-        purchaseOrderNo: 'Po-12344',
-        purchaseOrderDate: '25-Nov-2018'
-      }];
-    this.setPurhaseOrderList(data);
+    this._http.get(this.user.getrestURL() + '/purchaseorders').subscribe(data => this.setPurhaseOrderList(data),
+    error => this.notificationService.showError(error));
   }
 
   setPurhaseOrderList(data: any): void {

@@ -15,13 +15,23 @@
 }
 
 mat-grid-tile {
-  background: lightblue;
   alignment: left;
+  background: lightblue;
 }
+
 
 .text-inside-grid {
   position: absolute;
   left: 5px;
+  alignment: center;
+  align-content: center;
+}
+
+.text-inside-grid-small {
+  position: absolute;
+  left: 5px;
+  alignment: center;
+  font-size: smaller;
 }
 /* Clear floats after the columns */
 .row:after {

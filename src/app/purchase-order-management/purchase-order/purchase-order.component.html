@@ -1,5 +1,5 @@
 <mat-horizontal-stepper [linear]="purchaseOrderService.isLinear" #stepper>
-  <mat-step [stepControl]="purchaseOrderService.purchaseOrderForm">
+  <mat-step [stepControl]="purchaseOrderService.purchaseOrderForm" [editable]="purchaseOrderService.editable">
     <form [formGroup]="purchaseOrderService.purchaseOrderForm">
       <ng-template matStepLabel>Select Vendor</ng-template>
 
@@ -13,34 +13,36 @@
       </mat-form-field>
 
       <div>
-        <button mat-raised-button matStepperNext type="button" (click)="purchaseOrderService.createPurchaseOrder()">Next</button>
-      </div>
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+
+        <button style="margin-left: 10px"  mat-raised-button matStepperNext type="button" (click)="purchaseOrderService.createPurchaseOrder()">Next</button>
+        </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="purchaseOrderService.purchaseOrderForm">
+  <mat-step [stepControl]="purchaseOrderService.purchaseOrderForm" [editable]="purchaseOrderService.editable">
     <form [formGroup]="purchaseOrderService.purchaseOrderForm">
       <ng-template matStepLabel>Purchase Order</ng-template>
 
       <mat-grid-list cols="4" rowHeight="8:1">
-        <mat-grid-tile><div class="text-inside-grid">Date</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.date | date:'yyyy-MM-dd'}}</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">Vendor</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorName}}</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">Address</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorAddress}}</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">Email</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorEmail}}</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">Contact Person</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorContactPerson}}</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">Contact #</div></mat-grid-tile>
-        <mat-grid-tile><div class="text-inside-grid">{{purchaseOrderService.vendorContact}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Date</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">{{purchaseOrderService.date | date:'yyyy-MM-dd'}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Vendor</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">{{purchaseOrderService.vendorName}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Address</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">{{purchaseOrderService.vendorAddress}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Email</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">{{purchaseOrderService.vendorEmail}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Contact Person</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">{{purchaseOrderService.vendorContactPerson}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Contact #</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">{{purchaseOrderService.vendorContact}}</div></mat-grid-tile>
       </mat-grid-list>
 
       <div style="padding-top: 15px">
 
       </div>
       <mat-grid-list cols="3" rowHeight="7:1">
-        <mat-grid-tile>      <div style="padding-top: 1px; padding-bottom: 1px">
+        <mat-grid-tile >      <div style="padding-top: 1px; padding-bottom: 1px">
           <mat-form-field>
             <mat-select formControlName="productId" placeholder="Select Product">
               <ng-container *ngFor="let product of purchaseOrderService._vendorProductList">
@@ -54,7 +56,7 @@
           </button>
 
         </div></mat-grid-tile>
-        <mat-grid-tile><div>
+        <mat-grid-tile ><div>
           Total Quantity : {{getTotalQuantity()}}
         </div>
           <div>
@@ -63,7 +65,7 @@
         <div>
           Products Count : {{getProductsCount()}}
         </div></mat-grid-tile>
-        <mat-grid-tile>Total Amount : {{getSumOfAmount()}}</mat-grid-tile>
+        <mat-grid-tile >Total Amount : {{getSumOfAmount()}}</mat-grid-tile>
       </mat-grid-list>
 
     </form>
@@ -134,10 +136,62 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <div style="margin-top: 5px">
+
+      <mat-grid-list cols="1" rowHeight="32:1">
+        <mat-grid-tile ><div class="text-inside-grid">Date           : {{purchaseOrderService.date | date:'yyyy-MM-dd'}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Vendor         : {{purchaseOrderService.vendorName}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">PO #        : {{purchaseOrderService.poNumber}}</div></mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
+    <div style="margin-top: 2px">
+      <mat-grid-list cols="4" rowHeight="8:1">
+        <mat-grid-tile ><div class="text-inside-grid-small">Address        : {{purchaseOrderService.vendorAddress}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid-small">Email          : {{purchaseOrderService.vendorEmail}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid-small">Contact Person : {{purchaseOrderService.vendorContactPerson}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid-small">Contact #      : {{purchaseOrderService.vendorContact}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid-small">Total Products : {{getProductsCount()}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid-small">Total Quantity :{{getTotalQuantity()}}</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid-small">Total Amount :{{getSumOfAmount()}}</div></mat-grid-tile>
+        <mat-grid-tile ></mat-grid-tile>
+      </mat-grid-list>
+
+    </div>
+    <div style="margin-top: 20px">
+      <mat-grid-list cols="7" rowHeight="6:1">
+
+        <mat-grid-tile><div class="text-inside-grid">ISBN #</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">Product</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Quantity</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Price</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Discount (%)</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Discounted Price</div></mat-grid-tile>
+        <mat-grid-tile ><div class="text-inside-grid">Total</div></mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+
+    <div style="margin-top: 5px">
+      <mat-grid-list cols="7" rowHeight="3:1">
+        <div *ngFor="let data of dataSource.data">
+          <mat-grid-tile><div class="text-inside-grid">{{data.isbn}}</div></mat-grid-tile>
+          <mat-grid-tile><div class="text-inside-grid-small">{{data.name}}</div></mat-grid-tile>
+          <mat-grid-tile><div class="text-inside-grid">{{data.quantity}}</div></mat-grid-tile>
+          <mat-grid-tile><div class="text-inside-grid">{{data.price}}</div></mat-grid-tile>
+          <mat-grid-tile><div class="text-inside-grid">{{data.discount}}</div></mat-grid-tile>
+          <mat-grid-tile><div class="text-inside-grid">{{getDiscountedPrice(data.price, data.discount)}}</div></mat-grid-tile>
+          <mat-grid-tile><div class="text-inside-grid">{{getTotalAmount(data.price, data.discount, data.quantity)}}</div></mat-grid-tile>
+        </div>
+      </mat-grid-list>
+    </div>
+
+    <div class="header" style="margin-top: 20px">
+      <div class="button-row">
+        <button mat-raised-button matStepperPrevious [disabled]="purchaseOrderService.disabled">Back</button>
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+        <button mat-raised-button  color="primary" type="button" (click)="save()" [disabled]="purchaseOrderService.disabled">Save</button>
+      </div>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

@@ -45,12 +45,12 @@ export class PurchaseOrderManagementComponent implements OnInit {
 
     this.listData = new MatTableDataSource(data);
 
-    console.log('PO list: ' + this.listData.data);
+    this.notificationService.showSuccess(':: Purcahse Order List Loaded.');
   }
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
-    //this.productService.initializeProductForm();
+    // this.productService.initializeProductForm();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '90%';

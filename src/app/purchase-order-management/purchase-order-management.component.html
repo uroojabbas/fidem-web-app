@@ -1,19 +1,44 @@
 <div class="mat-elevation-z8; data-table">
   <mat-table [dataSource]="listData"  matSort>
-
-    <ng-container matColumnDef="vendorName">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.vendor.name}}</mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="poId">
       <mat-header-cell *matHeaderCellDef  mat-sort-header>PO #</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.poId}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="purchaseOrderDate">
+    <ng-container matColumnDef="vendorName">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.vendorName}}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="insertedtime">
       <mat-header-cell *matHeaderCellDef  mat-sort-header>PO Date</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.insertedtime}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalProducts">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Total Products</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.totalProducts}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalQuantity">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Total Quantity</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.totalQuantity}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalAmount">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Total Amount</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.totalAmount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>User</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.userName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="poStatusType">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.poStatusType}}</mat-cell>
     </ng-container>
 
 

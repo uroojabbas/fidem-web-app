@@ -118,7 +118,7 @@ export class PurchaseOrderService {
       id: null,
       users: {id: this.userService.getUserId()},
       vendor: {id: this.purchaseOrderForm.get('vendorId').value},
-      postatus: [{postatusid: 1}],
+      postatus: {postatusType: {id: 1}},
       modifiedbyuserid: null,
       modifiedtime: null,
       insertedtime: new Date(),
@@ -141,7 +141,7 @@ export class PurchaseOrderService {
        const product  = this._vendorProductList.find(vp => vp.name === d.name);
       const poDetail =     {id: null,
         poid: null,
-        productid: product.id,
+        product: {id: product.id},
         quantity: d.quantity};
       this.poDetails.push(poDetail);
     });

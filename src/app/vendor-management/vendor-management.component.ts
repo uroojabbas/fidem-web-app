@@ -44,19 +44,15 @@ export class VendorManagementComponent implements OnInit {
 
   setVendorList(data: any): void {
 
-    console.log("Vendor list : " + data);
-    const tempData = [data];
     this.listData = new MatTableDataSource(data);
 
     this.listData.sort = this.sort;
     this.listData.paginator = this.paginator;
     this.listData.filterPredicate = ( data , filter) => {
       return this.displayedColumns.some(ele => {
-        return ele !== 'actions' && data[ele].toLowerCase().indexOf(filter) !== -1;
+        return ele !== 'actions' && data[ele] !== undefined && data[ele].toString().toLowerCase().indexOf(filter) !== -1;
       });
     };
-    console.log("Vendor list" + this.listData);
-
     this.changeDetectorRef.detectChanges();
     this.notificationService.showSuccess(':: Vendor List Loaded.');
 

@@ -52,13 +52,21 @@ export class ProductManagementComponent implements OnInit {
     this.listData.paginator = this.paginator;
     this.listData.filterPredicate = ( data , filter) => {
       return this.displayedColumns.some(ele => {
-        return ele !== 'actions' && data[ele].toLowerCase().indexOf(filter) !== -1;
+        return ele !== 'actions' && data[ele] !== undefined && data[ele].toString().toLowerCase().indexOf(filter) !== -1;
       });
     };
-    console.log("product list" + this.listData);
 
     // this.changeDetectorRef.detectChanges();
     this.notificationService.showSuccess(':: Product List Loaded.');
+  }
+
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
+
+  applyFilter()  {
+    this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
   onCreate() {

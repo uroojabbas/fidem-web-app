@@ -75,9 +75,3 @@ mat-grid-tile {
   height: 25px;
 }
 
-.mat-cell, .mat-header-cell {
-  flex: 1;
-  max-height: 15px;
-  display: flex;
-  align-items: center;
-}

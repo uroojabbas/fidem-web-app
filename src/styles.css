@@ -40,3 +40,35 @@ snack-bar-container.notificatin simple-snack-bar{
   border-left: 2px #fc7169;
   height: 100%;
 }
+
+
+.page-container {
+  position: relative;
+  min-height: 80vh;
+  min-width: 100%;
+}
+.content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.5rem;            /* Footer height */
+}
+
+.link {
+  color:blue;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+.mat-success {
+  background-color: green;
+  color: #fff;
+}
+
+.mat-cancel {
+  background-color: dimgrey;
+  color: #fff;
+}

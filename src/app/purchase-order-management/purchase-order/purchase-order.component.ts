@@ -5,6 +5,8 @@ import {MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
 import {PurchaseOrderDatasource, PurchaseOrderItem} from './purchase-order-datasource';
 import {ProductComponent} from '../../product-management/product/product.component';
 import {UserService} from '../../user.service';
+import {NotificationService} from '../../common/notification.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-purchase-order',
@@ -24,15 +26,53 @@ export class PurchaseOrderComponent implements OnInit {
   DELETE_SUCCESS_MESSAGE = 'Product Successfully deleted';
   private totalQuantity: number;
   constructor(private purchaseOrderService: PurchaseOrderService,
-             private purchaseOrderDialog: MatDialogRef<PurchaseOrderComponent>) {
+             private purchaseOrderDialog: MatDialogRef<PurchaseOrderComponent>,
+              private notificationService: NotificationService) {
 
   }
 
   ngOnInit() {
+    if (this.purchaseOrderService.displayStepper === false) {
+      console.log('Approve PO');
+      if (this.purchaseOrderService.id !== undefined) {
+        this.purchaseOrderService.initPurchaseOrder(this.purchaseOrderService.id).subscribe(data => this.setPurhaseOrder(data),
+          error => this.notificationService.showError(error));
+      }
+    }
+  }
+
+  setPurhaseOrder(data: any): void {
+    const po = data;
+
+    this.purchaseOrderService.populateForm(po);
+    const poDetails =  po.podetail;
+    console.log('PO Data : ' + poDetails);
+
+    if (poDetails !== undefined) {
+      poDetails.forEach((d, index) => {
+        const purchaseItem = {
+          id: d.product.id,
+          isbn: d.product.isbn,
+          name: d.product.name,
+          quantity: d.quantity,
+          price: d.product.productcost,
+          discount: po.vendor.discount
+        };
+
+        this.addProductItem(purchaseItem);
+      });
+    }
+
+    this.purchaseOrderService.setVendorInfo(po.vendor.id);
+
   }
 
   public addProduct() {
     const purchaseItem = this.purchaseOrderService.getPurchaseOrderItem();
+    this.addProductItem(purchaseItem);
+  }
+
+  public addProductItem(purchaseItem) {
     this.data.push(purchaseItem);
     this.dataSource = new MatTableDataSource<PurchaseOrderItem>(this.data);
     console.log('purchase Item : ' + this.dataSource.data);
@@ -87,5 +127,30 @@ export class PurchaseOrderComponent implements OnInit {
   onDelete(id: number): void {
     this.data.splice(id,1 );
     this.dataSource = new MatTableDataSource<PurchaseOrderItem>(this.data);
+  }
+
+  approvePO() {
+    this.purchaseOrderService.approvePO().subscribe(data => {
+        this.notificationService.showSuccess(':: PO Approved.');
+        this.purchaseOrderService.populateForm(data);
+        setTimeout(() => this.purchaseOrderDialog.close(),3000); } ,
+      error => this.notificationService.showError(error));
+  }
+
+  rejectPO() {
+    this.purchaseOrderService.rejectPO().subscribe(data => {
+        this.notificationService.showSuccess(':: PO Rejected.');
+        this.purchaseOrderService.populateForm(data);
+        setTimeout(() => this.purchaseOrderDialog.close(),3000); // 2500 is millisecond
+      } ,
+      error => this.notificationService.showError(error));
+  }
+
+  cancelPO() {
+    this.purchaseOrderService.cancelPO().subscribe(data => {
+        this.notificationService.showSuccess(':: PO Canceled.');
+        this.purchaseOrderService.populateForm(data);
+        setTimeout(() => this.purchaseOrderDialog.close(),3000) } ,
+      error => this.notificationService.showError(error));
   }
 }

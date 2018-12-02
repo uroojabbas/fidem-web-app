@@ -5,6 +5,7 @@ import {NotificationService} from '../common/notification.service';
 import {HttpClient} from '@angular/common/http';
 import {DialogService} from '../common/dialog.service';
 import {PurchaseOrderComponent} from './purchase-order/purchase-order.component';
+import {PurchaseOrderService} from './purchase-order.service';
 
 @Component({
   selector: 'app-purchase-order-management',
@@ -15,7 +16,7 @@ export class PurchaseOrderManagementComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  public listData: MatTableDataSource<any>;
+  public listData: MatTableDataSource<any> = new MatTableDataSource();
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns = ['poId', 'vendorName', 'insertedtime', 'totalProducts', 'totalQuantity',
   'totalAmount', 'userName', 'poStatusType'];
@@ -27,7 +28,8 @@ export class PurchaseOrderManagementComponent implements OnInit {
               private _http: HttpClient,
               private dialogService: DialogService,
               private changeDetectorRef: ChangeDetectorRef,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private purchaseOrderService: PurchaseOrderService) {
 
     this.user.setComponentName('Purchase Order Management');
   }
@@ -54,9 +56,12 @@ export class PurchaseOrderManagementComponent implements OnInit {
 
   setPurhaseOrderList(data: any): void {
 
+
     this.listData = new MatTableDataSource(data);
-    this.listData.sort = this.sort;
     this.listData.paginator = this.paginator;
+    this.listData.sort = this.sort;
+
+
     this.listData.filterPredicate = ( data , filter) => {
       return this.displayedColumns.some(ele => {
         return ele !== 'actions' && data[ele] !== undefined && data[ele].toString().toLowerCase().indexOf(filter) !== -1;
@@ -68,6 +73,8 @@ export class PurchaseOrderManagementComponent implements OnInit {
   }
 
   onCreate() {
+    this.purchaseOrderService.displayStepper = true;
+    this.purchaseOrderService.initializePurchaseOrderForm();
     const dialogConfig = new MatDialogConfig();
     // this.productService.initializeProductForm();
     dialogConfig.disableClose = true;
@@ -78,4 +85,24 @@ export class PurchaseOrderManagementComponent implements OnInit {
       this.initPurchaseOrderList();
     });
   }
+
+  onApprove(id: number) {
+    this.purchaseOrderService.displayStepper = false;
+    this.purchaseOrderService.id = id;
+
+    const data = this.listData.data.find(d => d.id === id);
+    console.log('VendorId : ' + data.vendor.id);
+
+
+    const dialogConfig = new MatDialogConfig();
+    // this.productService.initializeProductForm();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '90%';
+    this.dialog.open(PurchaseOrderComponent, dialogConfig).afterClosed().subscribe(result => {
+      console.log('refresh page');
+      this.initPurchaseOrderList();
+    });
+  }
+
 }

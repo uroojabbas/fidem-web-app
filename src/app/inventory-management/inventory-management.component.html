@@ -1,0 +1,82 @@
+<div class="page-container">
+  <div class="mat-elevation-z8; data-table">
+    <mat-table [dataSource]="listData"  matSort>
+      <ng-container matColumnDef="poId">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO #</th>
+        <td style="width: 16%" mat-cell *matCellDef="let element">{{element.poId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="vendorName">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Name</th>
+        <td style="width: 12%" mat-cell *matCellDef="let element">{{element.vendorName}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="insertedtime">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO Date</th>
+        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.insertedtime}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalProducts">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Products</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalProducts}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalQuantity">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Quantity</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalQuantity}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalAmount">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Amount</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalAmount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>User</th>
+        <td style="width: 12%" mat-cell *matCellDef="let element">{{element.userName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="poStatusType">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Status</th>
+        <td style="width: 19%" mat-cell *matCellDef="let element">{{element.poStatusType}}</td>
+      </ng-container>
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading data...
+        </mat-footer-cell>
+      </ng-container>
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          No data.
+        </mat-footer-cell>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+    </mat-table>
+  </div>
+  <div class="footer">
+    <mat-toolbar-row style="background-color: whitesmoke;">
+      <div style="padding-right: 5px">
+        <button mat-raised-button class="tool-bar-button" (click)="onCreate()" style="color: darkgreen" matTooltip="Add Purchase Order">
+          Add Inventory
+        </button>
+      </div>
+
+      <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <span class="tool-bar-spacer"></span>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="user.pageSize" showFirstLastButtons></mat-paginator>
+    </mat-toolbar-row>
+
+  </div>
+</div>

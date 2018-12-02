@@ -52,6 +52,8 @@ import {ProductService} from './product-management/product.service';
 import { PurchaseOrderManagementComponent } from './purchase-order-management/purchase-order-management.component';
 import { PurchaseOrderComponent } from './purchase-order-management/purchase-order/purchase-order.component';
 import {CommonService} from './common/common.service';
+import { InventoryManagementComponent } from './inventory-management/inventory-management.component';
+import { InventoryComponent } from './inventory-management/inventory/inventory.component';
 
 const appRoutes: Routes = [
   {
@@ -87,6 +89,11 @@ const appRoutes: Routes = [
     path: 'purchase-order',
     canActivate: [AuthguardGuard],
     component: PurchaseOrderManagementComponent
+  },
+  {
+    path: 'inventory',
+    canActivate: [AuthguardGuard],
+    component: InventoryManagementComponent
   }
 ]
 
@@ -108,7 +115,9 @@ const appRoutes: Routes = [
     ProductManagementComponent,
     ProductComponent,
     PurchaseOrderManagementComponent,
-    PurchaseOrderComponent
+    PurchaseOrderComponent,
+    InventoryManagementComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
@@ -145,6 +154,6 @@ const appRoutes: Routes = [
   EmployeeserviceService, CommonService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
-  ClientComponent, ProductComponent, PurchaseOrderComponent]
+  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent]
 })
 export class AppModule { }

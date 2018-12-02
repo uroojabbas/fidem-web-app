@@ -14,11 +14,13 @@ export class UserService {
   private userId: number;
   private _url: string;
   private componentName: string;
+  private pageSize: number;
 
   constructor(private _http: HttpClient, private router: Router ) {
     this.isUserLoggedIn = false;
     this._url = 'http://localhost:8080';
     // this._url = 'http://google.com'
+    this.pageSize = 17;
   }
 
   public getrestURL(): string {

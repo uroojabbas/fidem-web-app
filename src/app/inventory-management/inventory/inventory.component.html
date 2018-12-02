@@ -1,0 +1,43 @@
+<mat-horizontal-stepper [linear]="inventoryService.isLinear" #stepper>
+  <mat-step [stepControl]="inventoryService.inventoryForm" [editable]="inventoryService.editable">
+    <form [formGroup]="inventoryService.inventoryForm">
+      <ng-template matStepLabel>Select Vendor</ng-template>
+
+      <mat-form-field>
+        <mat-select formControlName="vendorId" placeholder="Select Vendor" required>
+          <ng-container *ngFor="let vendor of inventoryService._vendorList">
+            <mat-option [value]="vendor.id">{{vendor.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error>Vendor is required.</mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+
+        <button style="margin-left: 10px"  mat-raised-button matStepperNext type="button" (click)="inventoryService.addInventory()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="inventoryService.inventoryForm" [editable]="inventoryService.editable">
+
+    <div class="header">
+      <div class="button-row">
+        <button mat-raised-button type="button" matStepperPrevious>Back</button>
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+        <button mat-raised-button  matStepperNext type="button">Next</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+
+    <div class="header" style="margin-top: 20px">
+      <div class="button-row">
+        <button mat-raised-button matStepperPrevious [disabled]="inventoryService.disabled">Back</button>
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+        <button mat-raised-button  color="primary" type="button" (click)="save()" [disabled]="inventoryService.disabled">Save</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

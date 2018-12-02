@@ -25,19 +25,21 @@ export class PurchaseOrderService {
   public vendorContact: string;
   public date: Date =  new Date();
   public vendorDiscount: number;
-  private id: number;
+  public id: number;
   private poDetails: any[];
   public poNumber: string;
   public editable: boolean;
   public disabled: boolean;
-  constructor(private commnonService: CommonService,
+  public displayStepper: boolean;
+  constructor(private commonService: CommonService,
               private userService: UserService,
               private _http: HttpClient,
               private dialogService: DialogService,
               private notificationService: NotificationService) {
-    this.commnonService.initVendorList().subscribe(data => this.initVendorList(data));
+    this.commonService.initVendorList().subscribe(data => this.initVendorList(data));
     this.editable = true;
     this.disabled = false;
+    this.displayStepper = true;
   }
 
   initProductList(productList: any): void {
@@ -51,6 +53,19 @@ export class PurchaseOrderService {
   public createPurchaseOrder() {
 
     const vendorId = this.purchaseOrderForm.get('vendorId').value;
+
+    this.setVendorInfo(vendorId);
+
+    this.commonService.getProductListByVendor(vendorId).subscribe(data => this.setVendorProductList(data));
+  }
+
+  initPurchaseOrder(id: number): Observable<any>  {
+
+    return this._http.get(this.userService.getrestURL() + '/purchaseorder/' + id);
+  }
+
+
+  public setVendorInfo(vendorId: number) {
     const vendor  = this._vendorList.find(v => v.id === vendorId);
     this.vendorName = vendor.name === undefined ? '' : vendor.name;
     this.vendorAddress = vendor.address;
@@ -58,10 +73,7 @@ export class PurchaseOrderService {
     this.vendorContactPerson = vendor.contactperson;
     this.vendorContact = vendor.contactone;
     this.vendorDiscount = vendor.discount === undefined ? 1 : vendor.discount;
-
-    this.commnonService.getProductListByVendor(vendorId).subscribe(data => this.setVendorProductList(data));
   }
-
   public getPurchaseOrderItem(): any {
     const productId = this.purchaseOrderForm.get('productId').value;
     const product  = this._vendorProductList.find(vp => vp.id === productId);
@@ -76,6 +88,7 @@ export class PurchaseOrderService {
       discount: this.vendorDiscount
     };
   }
+
   private setVendorProductList(data: any): void {
     this._vendorProductList = data;
   }
@@ -89,7 +102,7 @@ export class PurchaseOrderService {
   });
 
 
-  initializeProductForm() {
+  initializePurchaseOrderForm() {
     this.purchaseOrderForm.setValue(
       {
         id: null,
@@ -109,6 +122,8 @@ export class PurchaseOrderService {
       poId: purchaseOrder.poId
 
     });
+
+    this.poNumber = purchaseOrder.poId;
   }
 
 
@@ -126,12 +141,11 @@ export class PurchaseOrderService {
       podetail: this.poDetails
     };
     this._http.post<User>(this.userService.getrestURL() + '/purchaseorder/save', po).subscribe(data => {
-        this.notificationService.showSuccess(':: Product Successfully Added.');
+        this.notificationService.showSuccess(':: PO Successfully Added.');
         this.editable = false;
         this.disabled = true;
         this.populateForm(data);
-        console.log('PoId' + this.purchaseOrderForm.get('poId').value);
-        this.poNumber = this.purchaseOrderForm.get('poId').value; },
+        console.log('PoId' + this.purchaseOrderForm.get('poId').value); },
       error => this.notificationService.showError(error));
   }
 
@@ -147,4 +161,30 @@ export class PurchaseOrderService {
     });
     }
 
+    private getPO() {
+        return      {
+        id: this.purchaseOrderForm.get('id').value,
+        users: {id: this.userService.getUserId()}
+      };
+    }
+    public approvePO(): Observable<any> {
+
+      const po = this.getPO();
+
+      return this._http.post<User>(this.userService.getrestURL() + '/purchaseorder/approve', po);
+}
+
+  public rejectPO(): Observable<any>  {
+
+    const po = this.getPO();
+
+    return this._http.post<User>(this.userService.getrestURL() + '/purchaseorder/reject', po);
+  }
+
+  public cancelPO(): Observable<any>  {
+
+    const po = this.getPO();
+
+    return this._http.post<User>(this.userService.getrestURL() + '/purchaseorder/cancel', po);
+  }
 }

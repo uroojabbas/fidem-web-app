@@ -29,11 +29,15 @@ html, body {
 }
 .tool-bar-icon{
   align-content: center;
-  font-size: 45px;
+  font-size: large;
 }
 
+.mat-toolbar-row{
+  height: 40px;
+  vertical-align: middle;
+}
 .tool-bar-button{
-  padding: 0px 30px;
+  padding: 0px 10px;
   cursor: pointer;
 }
 
@@ -46,16 +50,14 @@ html, body {
   padding: 0px;
   font-size: 12px;
   align-content: left;
-  vertical-align: bottom;
-  padding-top:30px;
-}
+  vertical-align: middle;
+  }
 
 .tool-bar-user-text{
   padding-left: 3px;
   font-size: 12px;
   align-content: left;
-  vertical-align: bottom;
-  padding-top:30px;
+  vertical-align: middle;
 }
 
 .mat-expansion-panel-header.mat-expanded {

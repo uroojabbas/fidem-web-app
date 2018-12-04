@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {CommonService} from '../common/common.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
+import {HttpClient} from '@angular/common/http';
+import {NotificationService} from '../common/notification.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +23,8 @@ export class InventoryService {
     poId: new FormControl('')
   });
   constructor(public commonService: CommonService,
-  public userService: UserService) {
+  public userService: UserService,
+              private _http: HttpClient) {
     this.editable = true;
     this.disabled = false;
 
@@ -33,5 +37,8 @@ export class InventoryService {
 
   addInventory() { }
 
-
+  getInventoryList(): Observable<any> {
+    const vendorId = this.inventoryForm.get('vendorId').value;
+   return this._http.get(this.userService.getrestURL() + '/po/vendor/' + vendorId);
+  }
 }

@@ -1,12 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PurchaseOrderService} from '../purchase-order.service';
-import {DataSource} from '@angular/cdk/collections';
 import {MatDialogRef, MatSort, MatTableDataSource} from '@angular/material';
-import {PurchaseOrderDatasource, PurchaseOrderItem} from './purchase-order-datasource';
-import {ProductComponent} from '../../product-management/product/product.component';
-import {UserService} from '../../user.service';
+import {PurchaseOrderItem} from './purchase-order-datasource';
 import {NotificationService} from '../../common/notification.service';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-purchase-order',

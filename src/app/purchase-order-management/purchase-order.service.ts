@@ -17,7 +17,7 @@ export class PurchaseOrderService {
   public _productList: any[];
   public _vendorProductList: any[];
   public _vendorList: any[];
-  public isLinear = true;
+  public isLinear = false;
   public vendorName: string;
   public vendorAddress: string;
   public vendorEmail: string;

@@ -74,6 +74,7 @@ export class PurchaseOrderManagementComponent implements OnInit {
 
   onCreate() {
     this.purchaseOrderService.displayStepper = true;
+    this.purchaseOrderService.disabled = false;
     this.purchaseOrderService.initializePurchaseOrderForm();
     const dialogConfig = new MatDialogConfig();
     // this.productService.initializeProductForm();

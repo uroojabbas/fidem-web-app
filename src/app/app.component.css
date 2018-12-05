@@ -61,11 +61,11 @@ html, body {
 }
 
 .mat-expansion-panel-header.mat-expanded {
-  background: cornflowerblue;
+  background: #ffdb00;
 }
 
 .tool-bar-heading{
-  color: aliceblue;
+  color: #ffdb00;
   margin: 0;
   padding: 0px 0px 6px 0px;
   padding-right: 1%;
@@ -77,7 +77,7 @@ html, body {
 }
 
 .tool-bar-small-heading{
-  color: aliceblue;
+  color: #ffdb00;
   margin: 0;
   padding: 0px 0px 6px 0px;
   padding-right: 1%;
@@ -93,13 +93,13 @@ html, body {
 }
 
 .mat-list-item {
-  background-color: #283593;
+  background-color: #ffdb00;
   max-height: min-content;
   vertical-align: middle;
 }
 
 a:link, a:visited {
-  color: white;
+  color: grey;
   text-align: left;
   padding-bottom: 2px;
   padding-left: 2px;
@@ -113,5 +113,5 @@ a:link, a:visited {
 
 
 a:hover, a:active {
-  background-color: blueviolet;
+  background-color: lightgrey;
 }

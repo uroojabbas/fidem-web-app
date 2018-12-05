@@ -2,7 +2,7 @@
 
   <mat-drawer-container class="dashboard-container">
       <mat-drawer *ngIf="user.getUserLoggedIn()" mode="side" opened style="width: 17%">
-        <mat-toolbar-row style="color: aliceblue; background-color: #283593">
+        <mat-toolbar-row style="color: grey; background-color: #ffdb00">
           <span class="tool-bar-text">Logged in as :</span> <h1 class="tool-bar-user-text">{{user.getUserName()}}</h1>
         </mat-toolbar-row>
 
@@ -80,7 +80,7 @@
 
     <mat-drawer-content>
       <div *ngIf="user.getUserLoggedIn()" style="width: 100%">
-        <mat-toolbar-row  style="color: aliceblue; background-color: #283593">
+        <mat-toolbar-row  style="color: grey; background-color: #ffdb00">
           <span>
             <h1 class="tool-bar-user-text">{{user.getComponentName()}}</h1>
           </span>

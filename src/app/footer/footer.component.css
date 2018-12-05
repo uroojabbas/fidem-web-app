@@ -7,7 +7,7 @@
 
 .tool-bar-icon{
   font-size: 15px;
-  color: aliceblue;
+  color: #ffdb00;
   vertical-align: bottom;
 }
 
@@ -19,7 +19,7 @@
 .tool-bar-footer-text{
   font-size: 13px;
   padding: 2px;
-  color: aliceblue;
+  color: grey;
   vertical-align: text-top;
 
 }

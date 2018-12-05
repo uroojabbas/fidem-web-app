@@ -89,7 +89,7 @@ export class UserManagementComponent implements OnInit {
     };
     console.log("User list" + this.listData);
     this.changeDetectorRef.detectChanges();
-    this.notificationService.showSuccess(':: Employee List Loaded.');
+    this.notificationService.showSuccess('User List Loaded');
     this.showPaging = true;
    }
 
@@ -108,7 +108,7 @@ export class UserManagementComponent implements OnInit {
 
   onDelete(id: number) {
     console.log('Delete : ' + id);
-    this.dialogService.openConfirmDialog('Are you sure to delete this records?')
+    this.dialogService.openConfirmDialog('Are you sure you want to delete this record?')
       .afterClosed().subscribe(res => {
       this.remove(res, id);
       });

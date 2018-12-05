@@ -127,7 +127,7 @@ export class PurchaseOrderComponent implements OnInit {
 
   approvePO() {
     this.purchaseOrderService.approvePO().subscribe(data => {
-        this.notificationService.showSuccess(':: PO Approved.');
+        this.notificationService.showSuccess('Purchase Order Approved');
         this.purchaseOrderService.populateForm(data);
         setTimeout(() => this.purchaseOrderDialog.close(),3000); } ,
       error => this.notificationService.showError(error));
@@ -135,7 +135,7 @@ export class PurchaseOrderComponent implements OnInit {
 
   rejectPO() {
     this.purchaseOrderService.rejectPO().subscribe(data => {
-        this.notificationService.showSuccess(':: PO Rejected.');
+        this.notificationService.showSuccess('Purchase Order Rejected');
         this.purchaseOrderService.populateForm(data);
         setTimeout(() => this.purchaseOrderDialog.close(),3000); // 2500 is millisecond
       } ,
@@ -144,7 +144,7 @@ export class PurchaseOrderComponent implements OnInit {
 
   cancelPO() {
     this.purchaseOrderService.cancelPO().subscribe(data => {
-        this.notificationService.showSuccess(':: PO Canceled.');
+        this.notificationService.showSuccess('Purchase Order Cancelled');
         this.purchaseOrderService.populateForm(data);
         setTimeout(() => this.purchaseOrderDialog.close(),3000) } ,
       error => this.notificationService.showError(error));

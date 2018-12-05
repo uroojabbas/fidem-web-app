@@ -47,7 +47,7 @@ export class InventoryComponent implements OnInit {
     };
 
     this.changeDetectorRef.detectChanges();
-    this.notificationService.showSuccess(':: Purcahse Order List Loaded.');
+    this.notificationService.showSuccess('Purchase Order List Loaded');
   }
 
   closeForm() {
@@ -57,7 +57,7 @@ export class InventoryComponent implements OnInit {
   showPOList() {
     this.inventoryService.getInventoryList().subscribe(data => {
         this.setInventoryList(data);
-        this.notificationService.showSuccess(':: PO Successfully Added.'); } ,
+        this.notificationService.showSuccess('Purchase Order Successfully Added'); } ,
       error => this.notificationService.showError(error)
     );
   }

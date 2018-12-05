@@ -164,7 +164,7 @@ export class ProductService {
 
   save(): void {
     this.saveProduct().subscribe(data => {
-        this.notificationService.showSuccess(':: Product Successfully Added.');
+        this.notificationService.showSuccess('Product Successfully Added');
       this.populateForm(data); },
       error => this.notificationService.showError(error));
   }

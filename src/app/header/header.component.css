@@ -19,11 +19,11 @@
   font-size: 12px;
   align-content: left;
   vertical-align: bottom;
-  padding-top:30px;
+  padding-top:15px;
 }
 
 .tool-bar-heading{
-  color: aliceblue;
+  color: grey;
   margin: 0;
   padding: 0px 0px 6px 0px;
   padding-right: 1%;
@@ -31,18 +31,18 @@
   line-height: 44px;
   letter-spacing: -2px;
   font-weight: bold;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
 }
 
 .tool-bar-small-heading{
-  color: aliceblue;
+  color: grey;
   margin: 0;
   padding: 0px 0px 6px 0px;
-  padding-right: 1%;
+  padding-right: %;
   font-size: 15px;
   line-height: 44px;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
   font-weight: bold;
-  padding-top:26px;
-  letter-spacing: 2px;
+  padding-top:23px;
+  letter-spacing: 0px;
 }

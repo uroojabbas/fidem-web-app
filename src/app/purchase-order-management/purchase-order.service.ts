@@ -141,7 +141,7 @@ export class PurchaseOrderService {
       podetail: this.poDetails
     };
     this._http.post<User>(this.userService.getrestURL() + '/purchaseorder/save', po).subscribe(data => {
-        this.notificationService.showSuccess(':: PO Successfully Added.');
+        this.notificationService.showSuccess('Purchase Order Successfully Added');
         this.editable = false;
         this.disabled = true;
         this.populateForm(data);

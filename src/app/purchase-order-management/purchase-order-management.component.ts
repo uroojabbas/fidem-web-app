@@ -69,7 +69,7 @@ export class PurchaseOrderManagementComponent implements OnInit {
     };
 
     this.changeDetectorRef.detectChanges();
-    this.notificationService.showSuccess('Purchase Order List Loaded.');
+    this.notificationService.showSuccess('Purchase Order List Loaded');
   }
 
   onCreate() {

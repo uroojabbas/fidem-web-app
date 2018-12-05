@@ -68,7 +68,7 @@ export class EmployeeManagementComponent implements OnInit {
 
   showSuccessMessage(data: any) {
 
-    this.notificationService.showSuccess(':: Employee Record Successfully Added.');
+    this.notificationService.showSuccess('User Record Successfully Added');
   }
 
   handleError(httpErrorResponse: HttpErrorResponse) {

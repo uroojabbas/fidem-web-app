@@ -109,7 +109,7 @@ export class ClientService {
   }
 
   save(): void {
-    this.saveClient().subscribe(data => this.notificationService.showSuccess(':: Client Successfully Added.'),
+    this.saveClient().subscribe(data => this.notificationService.showSuccess('Client Successfully Added'),
       error => this.notificationService.showError(error));
   }
 

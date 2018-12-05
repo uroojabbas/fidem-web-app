@@ -54,7 +54,7 @@ export class VendorManagementComponent implements OnInit {
       });
     };
     this.changeDetectorRef.detectChanges();
-    this.notificationService.showSuccess(':: Vendor List Loaded.');
+    this.notificationService.showSuccess('Vendor List Loaded');
 
 
   }
@@ -82,7 +82,7 @@ export class VendorManagementComponent implements OnInit {
 
   onDelete(id: number): void {
     console.log('Delete : ' + id);
-    this.dialogService.openConfirmDialog('Are you sure to delete this records?')
+    this.dialogService.openConfirmDialog('Are you sure you want to delete this record?')
       .afterClosed().subscribe(res => {
       this.remove(res, id);
     });

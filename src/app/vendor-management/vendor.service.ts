@@ -87,7 +87,7 @@ export class VendorService {
   }
 
     save(): void {
-      this.saveVendor().subscribe(data => this.notificationService.showSuccess(':: Vendor Successfully Added.'),
+      this.saveVendor().subscribe(data => this.notificationService.showSuccess('Vendor Successfully Added'),
         error => this.notificationService.showError(error));
     }
 

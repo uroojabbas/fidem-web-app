@@ -26,7 +26,9 @@ export class InventoryManagementComponent implements OnInit {
               private _http: HttpClient,
               private dialogService: DialogService,
               private changeDetectorRef: ChangeDetectorRef,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+    this.user.setComponentName('Inventory Management');
+  }
 
   ngOnInit() {
     this.initInventoryList();

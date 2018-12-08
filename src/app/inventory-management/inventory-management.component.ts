@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {UserService} from '../user.service';
 import {NotificationService} from '../common/notification.service';
 import {InventoryComponent} from './inventory/inventory.component';
+import {CommonService} from '../common/common.service';
 
 @Component({
   selector: 'app-inventory-management',
@@ -17,8 +18,7 @@ export class InventoryManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   public listData: MatTableDataSource<any> = new MatTableDataSource();
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedColumns = ['poId', 'vendorName', 'insertedtime', 'totalProducts', 'totalQuantity',
-    'totalAmount', 'userName', 'poStatusType'];
+  public displayedColumns = ['name', 'subject', 'originalQuantity', 'totalLtdQuantity', 'remainingQuantity'];
   public searchKey: string;
 
   constructor(private user: UserService,
@@ -26,7 +26,8 @@ export class InventoryManagementComponent implements OnInit {
               private _http: HttpClient,
               private dialogService: DialogService,
               private changeDetectorRef: ChangeDetectorRef,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private commonService: CommonService) {
     this.user.setComponentName('Inventory Management');
   }
 
@@ -35,6 +36,22 @@ export class InventoryManagementComponent implements OnInit {
   }
 
   initInventoryList() {
+
+    this.commonService.initProductList().subscribe(data => this.setInventoryList(data),
+      error => this.notificationService.showError(error));
+  }
+
+  setInventoryList(data: any): void {
+
+    this.listData = new MatTableDataSource(data);
+
+    this.listData.sort = this.sort;
+    this.listData.paginator = this.paginator;
+    this.listData.filterPredicate = (data, filter) => {
+      return this.displayedColumns.some(ele => {
+        return ele !== 'actions' && data[ele] !== undefined && data[ele].toString().toLowerCase().indexOf(filter) !== -1;
+      });
+    };
   }
 
   onCreate() {

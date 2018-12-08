@@ -1,46 +1,32 @@
 <div class="page-container">
   <div class="mat-elevation-z8; data-table">
     <mat-table [dataSource]="listData"  matSort>
-      <ng-container matColumnDef="poId">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO #</th>
-        <td style="width: 16%" mat-cell *matCellDef="let element">{{element.poId}}</td>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Name</th>
+        <td style="width: 16%" mat-cell *matCellDef="let element">{{element.name}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="vendorName">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Name</th>
-        <td style="width: 12%" mat-cell *matCellDef="let element">{{element.vendorName}}</td>
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Subject</th>
+        <td style="width: 12%" mat-cell *matCellDef="let element">{{element.subject}}</td>
       </ng-container>
 
 
-      <ng-container matColumnDef="insertedtime">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO Date</th>
-        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.insertedtime}}</td>
+      <ng-container matColumnDef="originalQuantity">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Ordered Quantity</th>
+        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.originalQuantity}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="totalProducts">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Products</th>
-        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalProducts}}</td>
+      <ng-container matColumnDef="totalLtdQuantity">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Received Quantity</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalLtdQuantity}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="totalQuantity">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Quantity</th>
-        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalQuantity}}</td>
+      <ng-container matColumnDef="remainingQuantity">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Remaining Quantity</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.originalQuantity - element.totalLtdQuantity}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="totalAmount">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Amount</th>
-        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalAmount}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="userName">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>User</th>
-        <td style="width: 12%" mat-cell *matCellDef="let element">{{element.userName}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="poStatusType">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Status</th>
-        <td style="width: 19%" mat-cell *matCellDef="let element">{{element.poStatusType}}</td>
-      </ng-container>
       <ng-container matColumnDef="loading">
         <mat-footer-cell *matFooterCellDef colspan="6">
           Loading data...

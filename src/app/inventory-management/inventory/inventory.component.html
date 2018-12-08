@@ -23,7 +23,7 @@
     <ng-template matStepLabel>Select PO to Add Inventory</ng-template>
     <div>
       <div>
-        <mat-table [dataSource]="listData"  matSort>
+        <mat-table [dataSource]="listDataSource"  matSort>
           <ng-container matColumnDef="poId">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO #</th>
             <td style="width: 15%" mat-cell *matCellDef="let element">{{element.poId}}</td>
@@ -82,8 +82,8 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
-          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listDataSource!=null}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listDataSource!=null && listDataSource.data.length === 0)}"></mat-footer-row>
 
         </mat-table>
       </div>
@@ -114,7 +114,7 @@
 
     <div>
       <div>
-        <mat-table [dataSource]="productList"  matSort>
+        <mat-table [dataSource]="productListDatasource"  matSort>
           <ng-container matColumnDef="productName">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>Product Name</th>
             <td style="width: 15%" mat-cell *matCellDef="let element">{{element.product.name}}</td>
@@ -133,15 +133,27 @@
 
           <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">         <mat-form-field style="width: 30px">
-              <input matInput [(ngModel)]="element.quantity"
-                     [value]="element.quantity">
+            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.quantity}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalLtdQuantity">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Received Quantity</th>
+            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.product.totalLtdQuantity}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="addQuantity">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Add Quantity</th>
+            <td style="width: 10%" mat-cell *matCellDef="let element">
+              <mat-form-field style="width: 30px" >
+              <input matInput [(ngModel)]="element.product.quantity"
+                     [value]="element.product.quantity">
             </mat-form-field></td>
           </ng-container>
 
           <ng-container matColumnDef="remainingQuantity">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>Remaining Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.quantity}}</td>
+            <td style="width: 10%" mat-cell *matCellDef="let element">
+              {{remainingQuantity(element.quantity, element.product.totalLtdQuantity, element.product.quantity)}}</td>
           </ng-container>
 
           <ng-container matColumnDef="loading">
@@ -157,8 +169,8 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedProdColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedProdColumns;"></tr>
-          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
-          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listDataSource!=null}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listDataSource!=null && listDataSource.data.length==0)}"></mat-footer-row>
 
         </mat-table>
       </div>
@@ -167,7 +179,7 @@
       <div class="button-row">
         <button mat-raised-button matStepperPrevious [disabled]="inventoryService.disabled">Back</button>
         <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
-        <button mat-raised-button  color="primary" type="button" (click)="save()" [disabled]="inventoryService.disabled">Save</button>
+        <button mat-raised-button  color="primary" type="button" (click)="saveInventory()" [disabled]="inventoryService.disabled">Save</button>
       </div>
     </div>
   </mat-step>

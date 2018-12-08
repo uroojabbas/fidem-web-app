@@ -16,13 +16,18 @@ export class InventoryComponent implements OnInit {
     'totalAmount', 'poStatusType', 'action'];
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedProdColumns = ['productName', 'isbn', 'subject', 'quantity', 'remainingQuantity'];
+  public displayedProdColumns = ['productName', 'isbn', 'subject', 'quantity', 'totalLtdQuantity', 'addQuantity',
+  'remainingQuantity'];
 
   DELETE_SUCCESS_MESSAGE = 'Product Successfully deleted';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  public listData: MatTableDataSource<any> = new MatTableDataSource();
-  public productList: MatTableDataSource<any> = new MatTableDataSource();
+
+  public productList: any = [];
+  public productListDatasource = new MatTableDataSource<any> (this.productList);
+
+  public listData: any = [];
+  public listDataSource = new MatTableDataSource<any> (this.listData);
 
   public searchKey: string;
 
@@ -36,8 +41,8 @@ export class InventoryComponent implements OnInit {
   }
 
   setInventoryList(data) {
-
-    this.listData = new MatTableDataSource(data);
+    this.listData = data;
+    this.listDataSource = new MatTableDataSource(this.listData);
     this.listData.paginator = this.paginator;
     this.listData.sort = this.sort;
     this.listData.filterPredicate = ( data , filter) => {
@@ -63,9 +68,25 @@ export class InventoryComponent implements OnInit {
   }
 
   showProducts(poId: number) {
-    const po = this.listData.data.find(d => d.id === poId);
-    console.log('Po Details : ' + po.podetail);
+    const po = this.listDataSource.data.find(d => d.id === poId);
 
-    this.productList = new MatTableDataSource(po.podetail);
+    po.podetail.forEach((d, index) => {
+      this.productList.push(d);
+    });
+    this.productListDatasource = new MatTableDataSource(this.productList);
+  }
+
+  public remainingQuantity(quantity: number, ltdQuantity: number, addQuantity: number): number {
+    const qty = (quantity !== undefined ? quantity : 0);
+    const ltdQty = (ltdQuantity !== undefined) ? ltdQuantity : 0;
+    const addQty = (addQuantity !== undefined) ? addQuantity : 0;
+
+    return Number(qty || 0) - (Number(ltdQty || 0) + Number(addQty || 0));
+  }
+
+  public saveInventory() {
+    this.changeDetectorRef.detectChanges();
+    console.log('inventoryList : ' + JSON.stringify(this.productListDatasource.data));
+    this.inventoryService.save(this.productListDatasource.data);
   }
 }

@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {NotificationService} from '../common/notification.service';
 import {Observable} from 'rxjs';
 import {User} from '../user';
+import {RefdataService} from '../common/refdata.service';
 
 
 @Injectable({
@@ -17,6 +18,8 @@ export class InventoryService {
   public editable: boolean;
   public disabled: boolean;
   public isLinear = true;
+  public _regionList: any[];
+
   public inventoryForm: FormGroup = new FormGroup({
     id: new FormControl(null),
     vendorId: new FormControl(null, Validators.required),
@@ -24,13 +27,29 @@ export class InventoryService {
     userid: new FormControl(this.userService.getUserId(), Validators.required),
     poId: new FormControl('')
   });
+
+  public inventoryTransferForm: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    transferType: new FormControl('Region_Inventory_Transfer', Validators.required),
+  });
+
+  public inventoryTransferRegionForm: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    transferRegionFrom: new FormControl(null, Validators.required),
+    transferRegionTo: new FormControl(null)});
+
+  public isRegionTransfer(): boolean {
+    const transferType = this.inventoryTransferForm.get('transferType').value;
+    return (transferType === 'Region_Inventory_Transfer') ? true : false;
+  }
   constructor(public commonService: CommonService,
   public userService: UserService,
               private _http: HttpClient,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private refDataService: RefdataService) {
     this.editable = true;
     this.disabled = false;
-
+    this._regionList = refDataService.getRegionList();
     this.commonService.initVendorList().subscribe(data => this.initVendorList(data));
   }
 
@@ -45,11 +64,26 @@ export class InventoryService {
    return this._http.get(this.userService.getrestURL() + '/po/vendor/' + vendorId);
   }
 
+  getProductList(): Observable<any> {
+    const region = this.inventoryTransferRegionForm.get('transferRegionFrom').value;
+    const url = this.userService.getrestURL() + '/products/region/' + region;
+    console.log("rest url : " + url);
+    return this._http.get(url);
+  }
+
   public save(inventory) {
     this._http.post<User>(this.userService.getrestURL() + '/inventory/add', inventory).subscribe(data => {
         this.notificationService.showSuccess('Inventory Successfully Added');
         this.editable = false;
-        this.disabled = true;},
+        this.disabled = true; },
+      error => this.notificationService.showError(error));
+  }
+
+  public saveInventoryTransfer(transferOrder) {
+    this._http.post<User>(this.userService.getrestURL() + '/transferOrder/save', transferOrder).subscribe(data => {
+        this.notificationService.showSuccess('Inventory Transfer Successfully Added');
+        this.editable = false;
+        this.disabled = true; },
       error => this.notificationService.showError(error));
   }
 }

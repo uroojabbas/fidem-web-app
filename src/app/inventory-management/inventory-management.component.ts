@@ -6,6 +6,8 @@ import {UserService} from '../user.service';
 import {NotificationService} from '../common/notification.service';
 import {InventoryComponent} from './inventory/inventory.component';
 import {CommonService} from '../common/common.service';
+import {InventoryTransferComponent} from './inventory-transfer/inventory-transfer.component';
+import {InventoryService} from './inventory.service';
 
 @Component({
   selector: 'app-inventory-management',
@@ -27,7 +29,8 @@ export class InventoryManagementComponent implements OnInit {
               private dialogService: DialogService,
               private changeDetectorRef: ChangeDetectorRef,
               private dialog: MatDialog,
-              private commonService: CommonService) {
+              private commonService: CommonService,
+              private inventoryService: InventoryService) {
     this.user.setComponentName('Inventory Management');
   }
 
@@ -52,15 +55,30 @@ export class InventoryManagementComponent implements OnInit {
         return ele !== 'actions' && data[ele] !== undefined && data[ele].toString().toLowerCase().indexOf(filter) !== -1;
       });
     };
+
+    this.notificationService.showSuccess('Inventory List Loaded');
   }
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
-    // this.productService.initializeProductForm();
+    this.inventoryService.disabled = false;
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '90%';
     this.dialog.open(InventoryComponent, dialogConfig).afterClosed().subscribe(result => {
+      console.log('refresh page');
+      this.initInventoryList();
+    });
+  }
+
+  onTransfer() {
+    const dialogConfig = new MatDialogConfig();
+    // this.productService.initializeProductForm();
+    this.inventoryService.disabled = false;
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '90%';
+    this.dialog.open(InventoryTransferComponent, dialogConfig).afterClosed().subscribe(result => {
       console.log('refresh page');
       this.initInventoryList();
     });

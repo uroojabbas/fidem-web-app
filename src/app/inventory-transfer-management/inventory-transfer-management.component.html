@@ -1,32 +1,45 @@
 <div class="page-container">
   <div class="mat-elevation-z8; data-table">
     <mat-table [dataSource]="listData"  matSort>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Name</th>
-        <td style="width: 16%" mat-cell *matCellDef="let element">{{element.name}}</td>
+      <ng-container matColumnDef="toId">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>TO #</th>
+        <td style="width: 16%" mat-cell *matCellDef="let element"><span class="link"  (click)="onApprove(element.id)">{{element.toId}}</span></td>
       </ng-container>
 
-      <ng-container matColumnDef="subject">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Subject</th>
-        <td style="width: 12%" mat-cell *matCellDef="let element">{{element.subject}}</td>
+      <ng-container matColumnDef="insertedtime">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO Date</th>
+        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.insertedtime}}</td>
       </ng-container>
 
-
-      <ng-container matColumnDef="originalQuantity">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Ordered Quantity</th>
-        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.originalQuantity}}</td>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Quantity</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalQuantity}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="totalLtdQuantity">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Received Quantity</th>
-        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalLtdQuantity}}</td>
+      <ng-container matColumnDef="totalProduct">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Product(s)</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalProducts}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="remainingQuantity">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Remaining Quantity</th>
-        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.originalQuantity - element.totalLtdQuantity}}</td>
+      <ng-container matColumnDef="transferType">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Transfer Type</th>
+        <td style="width: 20%" mat-cell *matCellDef="let element">{{element.transfertype}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="fromRegion">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>From</th>
+        <td style="width: 10%" mat-cell *matCellDef="let element">{{element.fromregion}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="toRegion">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>To</th>
+        <td style="width: 7%" mat-cell *matCellDef="let element">{{element.toregion}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="toStatusType">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Status</th>
+        <td style="width: 20%" mat-cell *matCellDef="let element">{{element.toStatusType}}</td>
+      </ng-container>
       <ng-container matColumnDef="loading">
         <mat-footer-cell *matFooterCellDef colspan="6">
           Loading data...
@@ -48,16 +61,11 @@
   <div class="footer">
     <mat-toolbar-row style="background-color: whitesmoke;">
       <div style="padding-right: 5px">
-        <button mat-raised-button class="tool-bar-button" (click)="onCreate()" style="color: darkgreen" matTooltip="Add Inventory">
-          Add Inventory
-        </button>
-      </div>
-
-      <div style="padding-right: 5px">
         <button mat-raised-button class="tool-bar-button" (click)="onTransfer()" style="color: darkgreen" matTooltip="Add Inventory">
           Transfer Inventory
         </button>
       </div>
+
       <mat-form-field class="search-form-field" floatLabel="never">
         <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
         <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">

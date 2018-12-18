@@ -1,0 +1,45 @@
+<div>
+
+  <div style="margin-top: 5px">
+    <mat-grid-list cols="2" rowHeight="16:1">
+      <mat-grid-tile ><div class="text-inside-grid">TO #        : {{inventoryTransferService.poNumber}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Date           : {{inventoryTransferService.date | date:'yyyy-MM-dd'}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Created By         : {{inventoryTransferService.userName}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Transfer Type         : {{inventoryTransferService.transferType}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">From(Region)         : {{inventoryTransferService.fromRegion}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">To(Region)         : {{inventoryTransferService.toRegion}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Total Products         : {{inventoryTransferService.totalProducts}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Total Quantity        : {{inventoryTransferService.totalQuantity}}</div></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <div style="margin-top: 20px">
+    <mat-grid-list cols="3" rowHeight="12:1">
+      <mat-grid-tile><div class="text-inside-grid">ISBN #</div></mat-grid-tile>
+      <mat-grid-tile><div class="text-inside-grid">Product</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Quantity</div></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <div style="margin-top: 5px">
+    <mat-grid-list cols="3" rowHeight="12:1">
+      <div *ngFor="let data of inventoryTransferService.productList">
+        <mat-grid-tile><div class="text-inside-grid">{{data.product.isbn}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid-small">{{data.product.name}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{data.quantity}}</div></mat-grid-tile>
+        </div>
+    </mat-grid-list>
+  </div>
+
+  <div class="header" style="margin-top: 20px">
+    <div class="button-row">
+      <button *ngIf="inventoryTransferService.isPendingApproval()" mat-raised-button type="button" color="success" (click)="approveTO()">Approve TO</button>
+      <button *ngIf="inventoryTransferService.isTODispatched()" mat-raised-button type="button" color="success" (click)="receivedTO()">Inventory Received</button>
+      <button *ngIf="inventoryTransferService.isApproved()" mat-raised-button type="button" color="success" (click)="dispatchTO()">Dispatch TO</button>
+      <button *ngIf="inventoryTransferService.isPendingApproval()" mat-raised-button type="button" color="warn" (click)="rejectTO()">Reject TO </button>
+      <button *ngIf="inventoryTransferService.isPendingApproval()" mat-raised-button type="button" color="cancel" (click)="cancelTO()">Cancel TO</button>
+      <button mat-raised-button  color="accent" type="button" (click)="closeForm()">Close</button>
+
+    </div>
+  </div>
+</div>

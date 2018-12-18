@@ -17,12 +17,13 @@ import {
   , MatPaginatorModule
   , MatSortModule
   , MatGridListModule
-, MatSnackBarModule
+  , MatSnackBarModule
   , MatInputModule
   , MatRadioModule
-, MatListModule
-, MatStepperModule
-  , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule
+  , MatListModule
+  , MatStepperModule
+  , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -54,6 +55,9 @@ import { PurchaseOrderComponent } from './purchase-order-management/purchase-ord
 import {CommonService} from './common/common.service';
 import { InventoryManagementComponent } from './inventory-management/inventory-management.component';
 import { InventoryComponent } from './inventory-management/inventory/inventory.component';
+import { InventoryTransferComponent } from './inventory-management/inventory-transfer/inventory-transfer.component';
+import { InventoryTransferManagementComponent } from './inventory-transfer-management/inventory-transfer-management.component';
+import { InventoryTransferStatusComponent } from './inventory-transfer-management/inventory-transfer-status/inventory-transfer-status.component';
 
 const appRoutes: Routes = [
   {
@@ -94,6 +98,11 @@ const appRoutes: Routes = [
     path: 'inventory',
     canActivate: [AuthguardGuard],
     component: InventoryManagementComponent
+  },
+  {
+    path: 'inventory-transfer',
+    canActivate: [AuthguardGuard],
+    component: InventoryTransferManagementComponent
   }
 ]
 
@@ -117,7 +126,10 @@ const appRoutes: Routes = [
     PurchaseOrderManagementComponent,
     PurchaseOrderComponent,
     InventoryManagementComponent,
-    InventoryComponent
+    InventoryComponent,
+    InventoryTransferComponent,
+    InventoryTransferManagementComponent,
+    InventoryTransferStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -148,12 +160,14 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatAutocompleteModule
   ],
   providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
   EmployeeserviceService, CommonService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
-  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent]
+  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
+    InventoryTransferComponent, InventoryTransferStatusComponent]
 })
 export class AppModule { }

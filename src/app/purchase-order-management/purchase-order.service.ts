@@ -93,7 +93,8 @@ export class PurchaseOrderService {
     this._vendorProductList = data;
   }
 
-   public purchaseOrderForm: FormGroup = new FormGroup({
+
+  public purchaseOrderForm: FormGroup = new FormGroup({
     id: new FormControl(null),
     vendorId: new FormControl(null, Validators.required),
     productId: new FormControl(null),

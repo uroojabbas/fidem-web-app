@@ -1,0 +1,155 @@
+<mat-horizontal-stepper [linear]="inventoryService.isLinear" #stepper [linear]="inventoryService.isLinear">
+  <mat-step [stepControl]="inventoryService.inventoryTransferForm" [editable]="inventoryService.editable">
+    <form [formGroup]="inventoryService.inventoryTransferForm">
+      <ng-template matStepLabel>Select Inventory Transfer Type</ng-template>
+
+      <mat-radio-group class="transferType-radio-group" formControlName="transferType">
+        <mat-radio-button class="transferType-radio-button" *ngFor="let transferType of transferTypes" [value]="transferType.value">
+          {{transferType.label}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="transferType-selected-value">Select type of Inventory Transfer</div>
+
+
+      <div class="inventory-selected-value">
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+
+        <button style="margin-left: 10px"  mat-raised-button matStepperNext type="button">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="inventoryService.inventoryTransferRegionForm" [editable]="inventoryService.editable">
+    <form [formGroup]="inventoryService.inventoryTransferRegionForm">
+
+    <ng-template matStepLabel>Select Region to Transfer Inventory</ng-template>
+
+    <mat-grid-list cols="3" rowHeight="3:1">
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select formControlName="transferRegionFrom" placeholder="Select Region" required>
+            <ng-container *ngFor="let region of inventoryService._regionList">
+              <mat-option [value]="region.regionname">{{region.regionname}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-hint>Transfer Inventory From  </mat-hint>
+          <mat-error>Region is required.</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field *ngIf="inventoryService.isRegionTransfer()">
+          <mat-select formControlName="transferRegionTo" placeholder="Select Region">
+            <ng-container *ngFor="let region of inventoryService._regionList">
+              <mat-option [value]="region.regionname">{{region.regionname}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-hint>Transfer Inventory To </mat-hint>
+          <mat-error>Region is required.</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+          <div class="inventory-selected-value">
+            <button mat-raised-button matStepperPrevious type="button" [disabled]="inventoryService.disabled">Back</button>
+
+            <button style="margin-left: 10px"  mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+
+            <button style="margin-left: 10px"  mat-raised-button matStepperNext type="button" (click)="showProductList()">Next</button>
+          </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Transfer Inventory</ng-template>
+
+    <div>
+      <mat-grid-list cols="1" rowHeight="6:1">
+        <mat-grid-tile>
+
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Add Product" aria-label="Select Product" matInput [formControl]="productControl" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let product of filteredOptions | async" [value]="product.name">
+                {{product.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <button  (click)="addProduct()" style="margin-left: 5px; font-size: smaller; height: available" mat-raised-button color="accent" matTooltip="Add Product">
+            <mat-icon aria-label="Add Product">playlist_add</mat-icon>
+          </button>
+
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div>
+        <mat-table [dataSource]="selectedProductListDatasource"  matSort>
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Product Name</th>
+            <td style="width: 15%" mat-cell *matCellDef="let element">{{element.name}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="isbn">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>ISBN #</th>
+            <td style="width: 12%" mat-cell *matCellDef="let element">{{element.isbn}}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="subject">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Subject</th>
+            <td style="width: 10%; alignment: left" mat-cell *matCellDef="let element">{{element.subject}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalLtdQuantity">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Available Quantity</th>
+            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.totalLtdQuantity}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="addQuantity">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Transfer Quantity</th>
+            <td style="width: 10%" mat-cell *matCellDef="let element">
+              <mat-form-field style="width: 30px" >
+                <input matInput [(ngModel)]="element.quantity"
+                       [value]="element.quantity">
+              </mat-form-field></td>
+          </ng-container>
+
+          <ng-container matColumnDef="remainingQuantity">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Remaining Quantity</th>
+            <td style="width: 10%" mat-cell *matCellDef="let element">
+              {{remainingQuantity( element.totalLtdQuantity,0, element.quantity)}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+              Loading data...
+            </mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+              No data.
+            </mat-footer-cell>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedProdColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedProdColumns;"></tr>
+          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':productListDatasource!=null}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(productListDatasource!=null && productListDatasource.data.length==0)}"></mat-footer-row>
+
+        </mat-table>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="button-row">
+        <button mat-raised-button matStepperPrevious type="button" [disabled]="inventoryService.disabled">Back</button>
+        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
+        <button mat-raised-button  color="primary" type="button" (click)="saveTransfer()" [disabled]="inventoryService.disabled">Save</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

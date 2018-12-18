@@ -70,9 +70,10 @@ export class InventoryTransferComponent implements OnInit {
 
   addProduct() {
     const product = this.productList.find(p => p.name.toLowerCase() === this.productControl.value.toLowerCase() );
-
-    this.selectedProductList.push(product);
-    this.selectedProductListDatasource = new MatTableDataSource<any> (this.selectedProductList);
+    if (product !== null && product !== undefined) {
+      this.selectedProductList.push(product);
+      this.selectedProductListDatasource = new MatTableDataSource<any>(this.selectedProductList);
+    }
   }
 
   showProductList() {

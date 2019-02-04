@@ -72,10 +72,13 @@ export class InventoryService {
   }
 
   public save(inventory) {
-    this._http.post<User>(this.userService.getrestURL() + '/inventory/add', inventory).subscribe(data => {
+    const inventoryList = {userId: this.userService.getUserId(),
+      products: inventory};
+      console.log('inventory list' + inventoryList);
+    this._http.post<Object>(this.userService.getrestURL() + '/inventory/add', inventoryList).subscribe(data => {
         this.notificationService.showSuccess('Inventory Successfully Added');
         this.editable = false;
-        this.disabled = true; },
+        this.disabled = true; },  
       error => this.notificationService.showError(error));
   }
 

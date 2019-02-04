@@ -104,16 +104,16 @@
             <td style="width: 10%; alignment: left" mat-cell *matCellDef="let element">{{element.subject}}</td>
           </ng-container>
 
-          <ng-container matColumnDef="totalLtdQuantity">
+          <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>Available Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.totalLtdQuantity}}</td>
+            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.quantity}}</td>
           </ng-container>
 
-          <ng-container matColumnDef="addQuantity">
+          <ng-container matColumnDef="transferQuantity">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>Transfer Quantity</th>
             <td style="width: 10%" mat-cell *matCellDef="let element">
               <mat-form-field style="width: 30px" >
-                <input matInput [(ngModel)]="element.quantity"
+                <input matInput [(ngModel)]="element.transferQuantity"
                        [value]="element.quantity">
               </mat-form-field></td>
           </ng-container>
@@ -121,7 +121,7 @@
           <ng-container matColumnDef="remainingQuantity">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>Remaining Quantity</th>
             <td style="width: 10%" mat-cell *matCellDef="let element">
-              {{remainingQuantity( element.totalLtdQuantity,0, element.quantity)}}</td>
+              {{remainingQuantity( element.quantity,0, element.transferQuantity)}}</td>
           </ng-container>
 
           <ng-container matColumnDef="loading">

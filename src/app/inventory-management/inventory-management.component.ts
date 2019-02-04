@@ -20,7 +20,7 @@ export class InventoryManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   public listData: MatTableDataSource<any> = new MatTableDataSource();
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedColumns = ['name', 'subject', 'originalQuantity', 'totalLtdQuantity', 'remainingQuantity'];
+  public displayedColumns = ['name', 'subject', 'isbn', 'quantity', 'region', 'inventoryType'];
   public searchKey: string;
 
   constructor(private user: UserService,
@@ -46,6 +46,7 @@ export class InventoryManagementComponent implements OnInit {
 
   setInventoryList(data: any): void {
 
+
     this.listData = new MatTableDataSource(data);
 
     this.listData.sort = this.sort;
@@ -57,6 +58,15 @@ export class InventoryManagementComponent implements OnInit {
     };
 
     this.notificationService.showSuccess('Inventory List Loaded');
+  }
+
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
+
+  applyFilter()  {
+    this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
   onCreate() {

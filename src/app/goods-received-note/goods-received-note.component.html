@@ -1,0 +1,73 @@
+<div class="page-container">
+  <div class="mat-elevation-z8; data-table">
+    <mat-table [dataSource]="listData"  matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>GRN #</th>
+        <td style="width: 15%" mat-cell *matCellDef="let element"><span class="link"  (click)="showGRNDetails(element.id)">{{element.grnId}}</span></td>
+      </ng-container>
+
+      <ng-container matColumnDef="purchaseOrderId">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO</th>
+        <td style="width: 15%" mat-cell *matCellDef="let element"><span class="link"  (click)="showPurchaseOrder(element.poId)">{{element.purchaseOrderId}}</span></td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="vendorName">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Supplier</th>
+        <td style="width: 25%; alignment: left" mat-cell *matCellDef="let element">{{element.vendorName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="receivedDate">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Received Date</th>
+        <td style="width: 15%" mat-cell *matCellDef="let element">{{element.receivedDate}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Amount</th>
+        <td style="width: 10%" mat-cell *matCellDef="let element">{{element.amount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Created By</th>
+        <td style="width: 25%" mat-cell *matCellDef="let element">{{element.userName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="onEdit(row.id)" matTooltip="Create Invoice"><mat-icon>note_add</mat-icon></button>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading data...
+        </mat-footer-cell>
+      </ng-container>
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          No data.
+        </mat-footer-cell>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+    </mat-table>
+  </div>
+  <div class="footer">
+    <mat-toolbar-row style="background-color: whitesmoke;">
+      <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <span class="tool-bar-spacer"></span>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="user.pageSize" showFirstLastButtons></mat-paginator>
+    </mat-toolbar-row>
+  </div>
+</div>

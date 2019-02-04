@@ -12,19 +12,24 @@
       </ng-container>
 
 
-      <ng-container matColumnDef="originalQuantity">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Ordered Quantity</th>
-        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.originalQuantity}}</td>
+      <ng-container matColumnDef="isbn">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>ISBN</th>
+        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.isbn}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="totalLtdQuantity">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Received Quantity</th>
-        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.totalLtdQuantity}}</td>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Quantity</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.quantity}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="remainingQuantity">
-        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Remaining Quantity</th>
-        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.originalQuantity - element.totalLtdQuantity}}</td>
+      <ng-container matColumnDef="region">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Region</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.region}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="inventoryType">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Inventory Type</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.inventoryType}}</td>
       </ng-container>
 
       <ng-container matColumnDef="loading">

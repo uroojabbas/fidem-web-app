@@ -1,0 +1,59 @@
+<div *ngIf ="isReady">
+
+  <div style="margin-top: 5px">
+    <mat-grid-list cols="1" rowHeight="32:1">
+      <mat-grid-tile ><div class="text-inside-grid">GRN Date           : {{getGrnDate()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">GRN #           : {{getGrnId()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Vendor         : {{getVendorName()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">PO #        : {{getPoId()}}</div></mat-grid-tile>
+
+    </mat-grid-list>
+  </div>
+
+  <div style="margin-top: 2px">
+    <mat-grid-list cols="4" rowHeight="8:1">
+      <mat-grid-tile ><div class="text-inside-grid-small">Address        : {{getVendorAddress()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Email          : {{getVendorEmail()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Contact Person : {{getVendorContactPerson()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Contact #      : {{getVendorContact()}}</div></mat-grid-tile>
+      <mat-grid-tile><div class="text-inside-grid-small">Total Products : {{getProductsCount()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Total Quantity :{{getTotalQuantity()}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Total Amount :{{getSumOfAmount()}}</div></mat-grid-tile>
+      <mat-grid-tile ></mat-grid-tile>
+      </mat-grid-list>
+
+  </div>
+
+  <div style="margin-top: 20px">
+    <mat-grid-list cols="7" rowHeight="6:1">
+
+      <mat-grid-tile><div class="text-inside-grid">ISBN #</div></mat-grid-tile>
+      <mat-grid-tile><div class="text-inside-grid">Product</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Quantity</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Price</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Discount (%)</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Discounted Price</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid">Total</div></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+
+  <div style="margin-top: 5px">
+    <mat-grid-list cols="7" rowHeight="3:1">
+      <div *ngFor="let data of dataSource.data">
+        <mat-grid-tile><div class="text-inside-grid">{{data.isbn}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid-small">{{data.name}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{data.quantity}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{data.price}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{data.discount}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{getDiscountedPrice(data.price, data.discount)}}</div></mat-grid-tile>
+        <mat-grid-tile><div class="text-inside-grid">{{getTotalAmount(data.price, data.discount, data.quantity)}}</div></mat-grid-tile>
+      </div>
+    </mat-grid-list>
+  </div>
+  <div class="header" style="margin-top: 20px">
+    <div class="button-row">
+      <button mat-raised-button  color="accent" type="button" (click)="closeForm()">Close</button>
+    </div>
+  </div>
+</div>

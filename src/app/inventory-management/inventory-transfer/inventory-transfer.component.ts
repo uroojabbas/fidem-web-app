@@ -16,7 +16,7 @@ import {map, startWith} from 'rxjs/internal/operators';
 })
 export class InventoryTransferComponent implements OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedProdColumns = ['productName', 'isbn', 'subject', 'totalLtdQuantity', 'addQuantity',
+  public displayedProdColumns = ['productName', 'isbn', 'subject', 'quantity', 'transferQuantity',
     'remainingQuantity'];
 
   DELETE_SUCCESS_MESSAGE = 'Product Successfully deleted';
@@ -48,9 +48,10 @@ export class InventoryTransferComponent implements OnInit {
 
 
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = (value !== undefined) ? value.toLowerCase() : '';
 
-    return this.productListDatasource.data.filter(product => product.name.toLowerCase().includes(filterValue));
+    return this.productListDatasource.data.filter(product =>
+      product.name.toLowerCase().includes(filterValue));
   }
 
   closeForm() {
@@ -119,8 +120,8 @@ export class InventoryTransferComponent implements OnInit {
       const product  = d;
       const toDetail =     {id: null,
         product: {id: product.id},
-        quantity: d.quantity};
-      if (d.quantity > 0) {
+        quantity: d.transferQuantity};
+      if (d.transferQuantity > 0) {
         toDetails.push(toDetail);
       }
     });

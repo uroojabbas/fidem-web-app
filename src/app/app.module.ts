@@ -58,6 +58,9 @@ import { InventoryComponent } from './inventory-management/inventory/inventory.c
 import { InventoryTransferComponent } from './inventory-management/inventory-transfer/inventory-transfer.component';
 import { InventoryTransferManagementComponent } from './inventory-transfer-management/inventory-transfer-management.component';
 import { InventoryTransferStatusComponent } from './inventory-transfer-management/inventory-transfer-status/inventory-transfer-status.component';
+import { GoodsReceivedNoteComponent } from './goods-received-note/goods-received-note.component';
+import { GoodsReceivedNoteDetailComponent } from './goods-received-note/goods-received-note-detail/goods-received-note-detail.component';
+import {GoodsReceivedNoteServiceService} from './goods-received-note/goods-received-note-service.service';
 
 const appRoutes: Routes = [
   {
@@ -103,6 +106,11 @@ const appRoutes: Routes = [
     path: 'inventory-transfer',
     canActivate: [AuthguardGuard],
     component: InventoryTransferManagementComponent
+  },
+  {
+    path: 'goods-received-note',
+    canActivate: [AuthguardGuard],
+    component: GoodsReceivedNoteComponent
   }
 ]
 
@@ -129,7 +137,9 @@ const appRoutes: Routes = [
     InventoryComponent,
     InventoryTransferComponent,
     InventoryTransferManagementComponent,
-    InventoryTransferStatusComponent
+    InventoryTransferStatusComponent,
+    GoodsReceivedNoteComponent,
+    GoodsReceivedNoteDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -164,10 +174,10 @@ const appRoutes: Routes = [
     MatAutocompleteModule
   ],
   providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
-  EmployeeserviceService, CommonService],
+  EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
   ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
-    InventoryTransferComponent, InventoryTransferStatusComponent]
+    InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent]
 })
 export class AppModule { }

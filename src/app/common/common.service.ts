@@ -36,6 +36,11 @@ export class CommonService {
     return this._http.get(this.userSevice.getrestURL() + '/products');
   }
 
+  initInventoryList(): Observable<any>  {
+    return this._http.get(this.userSevice.getrestURL() + '/inventory');
+  }
+
+
   constructor(private _http: HttpClient, private userSevice: UserService) { }
 
   getProductListByVendor(vendorId: number): Observable<any>  {

@@ -40,7 +40,7 @@ export class InventoryManagementComponent implements OnInit {
 
   initInventoryList() {
 
-    this.commonService.initProductList().subscribe(data => this.setInventoryList(data),
+    this.commonService.initInventoryList().subscribe(data => this.setInventoryList(data),
       error => this.notificationService.showError(error));
   }
 

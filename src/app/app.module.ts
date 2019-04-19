@@ -61,7 +61,10 @@ import { InventoryTransferStatusComponent } from './inventory-transfer-managemen
 import { GoodsReceivedNoteComponent } from './goods-received-note/goods-received-note.component';
 import { GoodsReceivedNoteDetailComponent } from './goods-received-note/goods-received-note-detail/goods-received-note-detail.component';
 import {GoodsReceivedNoteServiceService} from './goods-received-note/goods-received-note-service.service';
-
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
+import { PersonalInfoService } from './personal_info/personal-info.service';
+import { UserRoleComponent } from './user-role/user-role.component';
+import { AddRoleComponent } from './user-role/add-role/add-role.component';
 const appRoutes: Routes = [
   {
     path: '',
@@ -112,6 +115,17 @@ const appRoutes: Routes = [
     canActivate: [AuthguardGuard],
     component: GoodsReceivedNoteComponent
   }
+  ,
+  {
+	  path: 'user-role'
+	 , canActivate: [AuthguardGuard],
+      component: UserRoleComponent
+  },
+  {
+	  path: 'add-role'
+	 , canActivate: [AuthguardGuard],
+      component: AddRoleComponent
+  }
 ]
 
 @NgModule({
@@ -139,7 +153,10 @@ const appRoutes: Routes = [
     InventoryTransferManagementComponent,
     InventoryTransferStatusComponent,
     GoodsReceivedNoteComponent,
-    GoodsReceivedNoteDetailComponent
+    GoodsReceivedNoteDetailComponent,
+    PersonalInfoComponent,
+    UserRoleComponent,
+    AddRoleComponent
   ],
   imports: [
     BrowserModule,
@@ -173,11 +190,11 @@ const appRoutes: Routes = [
     MatStepperModule,
     MatAutocompleteModule
   ],
-  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
+  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,PersonalInfoService,
   EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService],
   bootstrap: [AppComponent],
-  entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent,
-  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
+  entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ,PersonalInfoComponent,UserRoleComponent,
+AddRoleComponent,  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
     InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent]
 })
 export class AppModule { }

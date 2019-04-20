@@ -1,0 +1,74 @@
+form.client-form{
+  margin: 5px;
+}
+
+.controls-container{
+  width: 100%;
+  padding: 5%;
+  border-left: 6px #fc7169;
+}
+
+.bottom-padding{
+  padding-bottom: 5px;
+}
+
+.top-padding{
+  padding-top: 5px;
+}
+
+.left-padding{
+  padding-left: 30px;
+}
+mat-radio-group mat-radio-button{
+  margin-left: 5px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Style the header */
+.header {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 5px;
+}
+
+
+/* Middle column */
+.column.middle {
+  width: 33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px){
+  .column.side, .column.middle {
+    width: 100%;
+  }
+}
+
+.personalInfo-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.personalInfo-full-width {
+  width: 100%;
+}

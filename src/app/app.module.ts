@@ -61,10 +61,11 @@ import { InventoryTransferStatusComponent } from './inventory-transfer-managemen
 import { GoodsReceivedNoteComponent } from './goods-received-note/goods-received-note.component';
 import { GoodsReceivedNoteDetailComponent } from './goods-received-note/goods-received-note-detail/goods-received-note-detail.component';
 import {GoodsReceivedNoteServiceService} from './goods-received-note/goods-received-note-service.service';
-import { PersonalInfoComponent } from './personal-info/personal-info.component';
-import { PersonalInfoService } from './personal_info/personal-info.service';
 import { UserRoleComponent } from './user-role/user-role.component';
 import { AddRoleComponent } from './user-role/add-role/add-role.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
+import {PersonalInfoService} from './personal-info/personal-info.service';
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -156,7 +157,8 @@ const appRoutes: Routes = [
     GoodsReceivedNoteDetailComponent,
     PersonalInfoComponent,
     UserRoleComponent,
-    AddRoleComponent
+    AddRoleComponent,
+    PersonalInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -190,11 +192,11 @@ const appRoutes: Routes = [
     MatStepperModule,
     MatAutocompleteModule
   ],
-  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,PersonalInfoService,
-  EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService],
+  providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
+  EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService, PersonalInfoService],
   bootstrap: [AppComponent],
-  entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ,PersonalInfoComponent,UserRoleComponent,
-AddRoleComponent,  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
-    InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent]
+  entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ,
+    UserRoleComponent, AddRoleComponent,  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
+    InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent, PersonalInfoComponent]
 })
 export class AppModule { }

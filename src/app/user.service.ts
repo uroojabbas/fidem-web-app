@@ -5,6 +5,8 @@ import { map, catchError, tap } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {forkJoin} from 'rxjs';
 import {Router} from '@angular/router';
+import {PersonalInfoComponent} from './personal-info/personal-info.component';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 
 @Injectable( {providedIn: 'root'} )
 export class UserService {
@@ -16,7 +18,7 @@ export class UserService {
   private componentName: string;
   private pageSize: number;
 
-  constructor(private _http: HttpClient, private router: Router ) {
+  constructor(private _http: HttpClient, private router: Router) {
     this.isUserLoggedIn = false;
     this._url = 'http://localhost:8080';
     // this._url = 'http://google.com'
@@ -27,7 +29,7 @@ export class UserService {
     return this._url;
   }
   getComponentName(): string {
-   return this.componentName;
+    return this.componentName;
   }
 
   setComponentName(componentName: string) {
@@ -75,8 +77,8 @@ export class UserService {
 
   public getUserById(id: number): Observable<any>  {
     console.log('User service', id);
-      return this._http.get('http://localhost:8080/user/' + id).pipe(map(this.extractData));
-    }
+    return this._http.get('http://localhost:8080/user/' + id).pipe(map(this.extractData));
+  }
 
   public navigate(url: string) {
     this.router.navigate([url]);

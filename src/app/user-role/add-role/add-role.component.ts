@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {MatDialogRef} from '@angular/material';
+import {NotificationService} from '../../common/notification.service';
+import {UserService} from '../../user.service';
+import {InventoryComponent} from '../../inventory-management/inventory/inventory.component';
 
 @Component({
   selector: 'app-add-role',
@@ -8,11 +12,15 @@ import { Component, OnInit } from '@angular/core';
 export class AddRoleComponent implements OnInit {
   dialogRef: any;
 
-  constructor() { }
+  constructor(private rolePermissionDialog: MatDialogRef<AddRoleComponent>,
+              private notificationService: NotificationService,
+              private changeDetectorRef: ChangeDetectorRef,
+              private user: UserService) { }
 
   ngOnInit() {
   }
-  onNoClick(): void {
-    this.dialogRef.close();
+
+  onCloseDialog(): void {
+    this.rolePermissionDialog.close();
   }
 }

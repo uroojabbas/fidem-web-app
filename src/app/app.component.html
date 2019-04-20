@@ -75,7 +75,7 @@
               <mat-list-item><li><a [routerLink]="['/user-management']"> User Management</a></li></mat-list-item>
               <mat-divider></mat-divider>
               <mat-list-item><li><a [routerLink]="['/user-role']"> Role Management</a></li></mat-list-item>
-            
+
             </mat-list>
 
             </mat-expansion-panel>
@@ -97,7 +97,7 @@
             <mat-icon class="tool-bar-icon">email</mat-icon>
           </button>
 
-          <button mat-icon-button class="tool-bar-button" matTooltip="Personal Info">
+          <button mat-icon-button class="tool-bar-button" matTooltip="Personal Info" (click)="showPersonalInfo()">
             <mat-icon class="tool-bar-icon">person</mat-icon>
           </button>
 

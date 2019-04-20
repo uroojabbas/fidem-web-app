@@ -1,0 +1,28 @@
+<div>
+  <form class="personalInfo-form" #personalInfoForm="ngForm" [formGroup]="personalInfoService.personalInfoForm">
+    <div>
+    <mat-form-field class="example-full-width">
+      <input matInput="" formControlName="password" type="password" placeholder="Enter Old Password" required>
+    </mat-form-field>
+    </div>
+
+    <div>
+    <mat-form-field class="example-full-width">
+      <input matInput="" formControlName="newPassword" type="password" placeholder="Enter New Password" required>
+    </mat-form-field>
+    </div>
+
+    <div>
+    <mat-form-field class="example-full-width">
+      <input matInput="" formControlName="confirmPassword" type="password" placeholder="Confirm Password" required>
+    </mat-form-field>
+    </div>
+
+    <div class="header">
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="button">Change Password</button>
+        <button mat-raised-button color="accent" type="button" (click)="closePersonalInfoDialog()">Close</button>
+      </div>
+    </div>
+  </form>
+</div>

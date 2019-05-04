@@ -103,7 +103,7 @@ export class AddRoleComponent implements OnInit {
       modulepermissionses: userRolePermission
     };
 
-    console.log(JSON.stringify(userRole));
-    alert(JSON.stringify(userRole));
+    this.userRoleService.saveUserRole(userRole).subscribe(data => this.notificationService.showSuccess('User Role Added Successfully'),
+      error => this.notificationService.showError(error));;
   }
 }

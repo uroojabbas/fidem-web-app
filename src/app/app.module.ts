@@ -23,7 +23,7 @@ import {
   , MatListModule
   , MatStepperModule
   , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule,
-  MatAutocompleteModule
+  MatAutocompleteModule, MatTreeModule
 } from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -65,6 +65,9 @@ import { UserRoleComponent } from './user-role/user-role.component';
 import { AddRoleComponent } from './user-role/add-role/add-role.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import {PersonalInfoService} from './personal-info/personal-info.service';
+import { InvoiceManagementComponent } from './invoice-management/invoice-management.component';
+import { InvoiceComponent } from './invoice-management/invoice/invoice.component';
+import {InvoiceManagementService} from './invoice-management/invoice-management.service';
 
 const appRoutes: Routes = [
   {
@@ -126,6 +129,11 @@ const appRoutes: Routes = [
 	  path: 'add-role'
 	 , canActivate: [AuthguardGuard],
       component: AddRoleComponent
+  },
+  {
+    path: 'invoice-management'
+    , canActivate: [AuthguardGuard],
+    component: InvoiceManagementComponent
   }
 ]
 
@@ -158,7 +166,9 @@ const appRoutes: Routes = [
     PersonalInfoComponent,
     UserRoleComponent,
     AddRoleComponent,
-    PersonalInfoComponent
+    PersonalInfoComponent,
+    InvoiceManagementComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,
@@ -190,10 +200,11 @@ const appRoutes: Routes = [
     MatSortModule,
     MatListModule,
     MatStepperModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTreeModule
   ],
   providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
-  EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService, PersonalInfoService],
+  EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService, PersonalInfoService, InvoiceManagementService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ,
     UserRoleComponent, AddRoleComponent,  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,

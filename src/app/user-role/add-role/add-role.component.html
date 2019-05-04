@@ -1,22 +1,69 @@
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Role Name">
-  </mat-form-field>
+<form class="personalInfo-form" #personalInfoForm="ngForm" [formGroup]="userRoleService.userRoleForm">
+  <div>
+    <mat-form-field class="example-full-width">
+      <input matInput="" formControlName="roleName" placeholder="Enter Role Name" required>
+    </mat-form-field>
+  </div>
+</form>
 
-  <mat-label>Permissions </mat-label>
+<div class="mat-elevation-z8; data-table">
+  <mat-table [dataSource]="listData"  matSort>
 
-  <mat-checkbox>Add User</mat-checkbox>
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
 
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
 
-	<mat-checkbox>Delete User</mat-checkbox>
+    <ng-container matColumnDef="moduleName">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Module Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.moduleName}}</mat-cell>
+    </ng-container>
 
-	<mat-checkbox>View User</mat-checkbox>
+      <ng-container matColumnDef="permissionType">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>Permission Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.permissionType}}</mat-cell>
+      </ng-container>
 
-  <div class="header">
-    <div class="button-row">
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
 
-  <button mat-raised-button color="primary" type="button">Add Role</button>
-	<button mat-raised-button color="accent" type="button" (click)="onCloseDialog()">Close</button>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" style="max-height: 15px"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+  </mat-table>
 </div>
-</div>
+<div>
+  <mat-toolbar-row style="background-color: whitesmoke;">
+    <div style="padding-right: 5px">
+      <button mat-raised-button class="tool-bar-button" (click)="onCreate()" style="color: darkgreen" matTooltip="Add User Role">
+        Add Role
+      </button>
+      <button style="margin-left: 10px" mat-raised-button color="accent" type="button" (click)="onCloseDialog()">Close</button>
+    </div>
+  </mat-toolbar-row>
+
 </div>

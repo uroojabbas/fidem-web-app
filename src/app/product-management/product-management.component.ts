@@ -19,7 +19,7 @@ export class ProductManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   public listData: MatTableDataSource<any>;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedColumns = ['name', 'author', 'languagename', 'publishername', 'isbn', 'subject', 'actions'];
+  public displayedColumns = ['name', 'author', 'languagename', 'publisher', 'isbn', 'subject', 'actions'];
   public searchKey: string;
   DELETE_SUCCESS_MESSAGE = 'Product Successfully deleted';
 

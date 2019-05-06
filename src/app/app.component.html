@@ -29,7 +29,10 @@
               Sales
             </mat-expansion-panel-header>
 
-            This the expansion 2 content
+            <mat-list>
+            <mat-list-item><li><a [routerLink]="['/client']">Client Management</a></li></mat-list-item>
+            <mat-divider></mat-divider>
+            </mat-list>
 
           </mat-expansion-panel>
           <mat-expansion-panel>
@@ -41,8 +44,6 @@
 
             <mat-list>
               <mat-list-item><li><a [routerLink]="['/vendor']">Vendor Management</a></li></mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item><li><a [routerLink]="['/client']">Client Management</a></li></mat-list-item>
               <mat-divider></mat-divider>
               <mat-list-item><li><a [routerLink]="['/product']">Product Management</a></li></mat-list-item>
               <mat-divider></mat-divider>

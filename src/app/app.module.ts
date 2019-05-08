@@ -120,15 +120,13 @@ const appRoutes: Routes = [
     component: GoodsReceivedNoteComponent
   }
   ,
-  {
-	  path: 'user-role'
-	 , canActivate: [AuthguardGuard],
-      component: UserRoleComponent
+  {  path: 'user-role',
+     canActivate: [AuthguardGuard],
+    component: UserRoleComponent
   },
-  {
-	  path: 'add-role'
-	 , canActivate: [AuthguardGuard],
-      component: AddRoleComponent
+  {path: 'add-role',
+ canActivate: [AuthguardGuard],
+  component: AddRoleComponent
   },
   {
     path: 'invoice-management'

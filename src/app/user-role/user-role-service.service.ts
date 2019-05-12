@@ -34,8 +34,9 @@ initializePersonalInfoForm() {
 
 saveUserRole(userRoleObject: any): Observable<any> {
   if (this.userRoleForm.valid) {
-  return this._http.post<User>(this.userService.getrestURL() + '/userRole/save', userRoleObject);
+    return this._http.post<User>(this.userService.getrestURL() + '/userRole/save', userRoleObject);
+  }
 }
-}
+
 }
 

@@ -40,4 +40,9 @@ export class AddroleService {
      });
 
   }
+
+
+  deleteUserRole(id: number): Observable<any> {
+    return this._http.post<User>(this.userService.getrestURL() + '/userRole/delete', id);
+  }
 }

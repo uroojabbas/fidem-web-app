@@ -66,7 +66,7 @@ onEdit(id: number) {
   }
   remove(isDelete: boolean, id: number) {
     if( isDelete ) {
-      this.user.deleteUser(id).subscribe(data => { this.notificationService.showSuccess(this.DELETE_SUCCESS_MESSAGE);
+      this.addRoleService.deleteUserRole(id).subscribe(data => { this.notificationService.showSuccess(this.DELETE_SUCCESS_MESSAGE);
           this.getUserRoleList(); },
         error => this.notificationService.showError(error));
     }

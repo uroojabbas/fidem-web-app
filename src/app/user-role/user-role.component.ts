@@ -21,7 +21,7 @@ export class UserRoleComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   public listData: MatTableDataSource<any> = new MatTableDataSource();
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedColumns = ['roleId', 'roleName', 'actions'];
+  public displayedColumns = ['id', 'roleName', 'actions'];
   public searchKey: string;
   DELETE_SUCCESS_MESSAGE = 'User Successfully deleted';
   datasource: RoleManagementDataSource;
@@ -35,8 +35,7 @@ export class UserRoleComponent implements OnInit {
     private addRoleService: AddroleService,
     private commonService: CommonService) {
 this.user.setComponentName('User Role Management');
-this.initUserRoleList();
-}
+    }
 
 onEdit(id: number) {
 
@@ -50,15 +49,14 @@ onEdit(id: number) {
   dialogConfig.width = '75%';
   this.dialog.open(AddRoleComponent, dialogConfig).afterClosed().subscribe(result => {
     console.log('refresh page');
-    this.getUserRoleList();
+
   });
 }
 
   ngOnInit() {
-  }
-  init() {
     this.getUserRoleList();
   }
+
   onDelete(id: number) {
     console.log('Delete : ' + id);
     this.dialogService.openConfirmDialog('Are you sure you want to delete this record?')
@@ -74,16 +72,10 @@ onEdit(id: number) {
     }
 }
   getUserRoleList() {
-    this._http.get(this.user.getrestURL() + '/users').subscribe(data => this.setUserRoleList(data),
+    this._http.get(this.user.getrestURL() + '/userRoles').subscribe(data => this.setUserRoleList(data),
       error => this.notificationService.showError(error));
   }
 
-  initUserRoleList() {
-    const data = [{roleId:1,
-    roleName:'Admin'},
-  {roleId:2,
-  roleName:'Manager'}];
-  }
 
   setUserRoleList(data): void {
 
@@ -98,7 +90,7 @@ onEdit(id: number) {
     };
 
     this.notificationService.showSuccess('User Role List Loaded');
-  }
+    }
 
   onSearchClear() {
     this.searchKey = '';

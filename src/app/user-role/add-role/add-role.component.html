@@ -1,11 +1,17 @@
-<div>
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Enter Role Name" value="">
-  </mat-form-field>
-</div>
+<form class="personalInfo-form" #personalInfoForm="ngForm" [formGroup]="addRoleService.userRoleForm">
+  <div>
+    <mat-form-field class="example-full-width">
+      <input matInput="" formControlName="roleName" placeholder="Enter Role Name" required>
+    </mat-form-field>
+  </div>
+</form>
+
 <div class="mat-elevation-z8; data-table">
   <mat-table [dataSource]="listData"  matSort>
+
+    <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
+
       <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox (change)="$event ? masterToggle() : null"
                       [checked]="selection.hasValue() && isAllSelected()"
@@ -26,10 +32,11 @@
       <mat-header-cell *matHeaderCellDef  mat-sort-header>Module Name</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.moduleName}}</mat-cell>
     </ng-container>
-      <ng-container matColumnDef="permissionType">
-        <mat-header-cell *matHeaderCellDef  mat-sort-header>Permission Name</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.permissionType}}</mat-cell>
-      </ng-container>
+
+    <ng-container matColumnDef="permissionType">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Permission Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.permissionType}}</mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="loading">
       <mat-footer-cell *matFooterCellDef colspan="6">
@@ -46,10 +53,17 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" style="max-height: 15px"></mat-row>
     <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
     <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
- </mat-table>
- <div>
- <button mat-raised-button color="accent" type="button" (click)="onCloseDialog()">Close</button>
- </div>
- <button mat-raised-button color="accent" type="button" (click)="addUserRole">Add Role</button>
+
+  </mat-table>
+</div>
+<div>
+  <mat-toolbar-row style="background-color: whitesmoke;">
+    <div style="padding-right: 5px">
+      <button mat-raised-button class="tool-bar-button" (click)="addUserRole()" style="color: darkgreen" matTooltip="Add User Role">
+        Add Role
+      </button>
+      <button style="margin-left: 10px" mat-raised-button color="accent" type="button" (click)="closeRoleDialog()">Close</button>
+    </div>
+  </mat-toolbar-row>
 
 </div>

@@ -27,7 +27,7 @@ export class AddRoleComponent implements OnInit {
   constructor(private rolePermissionDialog: MatDialogRef<AddRoleComponent>,
               private notificationService: NotificationService,
               private changeDetectorRef: ChangeDetectorRef,
-              private user: UserService,private addRoleService: AddroleService) { }
+              private user: UserService, private addRoleService: AddroleService) { }
 
   ngOnInit() {
     this.initModulePermissionList();
@@ -43,6 +43,7 @@ export class AddRoleComponent implements OnInit {
       this.listData.sort = this.sort;
       this.notificationService.showSuccess('Permission List Loaded');
     }
+
     closeRoleDialog(): void {
     this.rolePermissionDialog.close();
   }
@@ -58,10 +59,16 @@ export class AddRoleComponent implements OnInit {
       userRolePermission.push(tempPermission); });
     const userRole =         {
       roleName: this.addRoleService.userRoleForm.get('roleName').value,
+      insertedbyuserid: this.user.getUserId(),
+      modifiedbyuserid: this.user.getUserId(),
       modulepermissionses: userRolePermission
     };
-    console.log(JSON.stringify(userRole));
-    alert(JSON.stringify(userRole));
+    if (this.addRoleService.userRoleForm.valid) {
+      this.addRoleService.saveUserRole(userRole).subscribe(response => this.notificationService.showSuccess('User Role added successfully'),
+        error => this.notificationService.showError(error));
+    } else {
+      this.notificationService.showErrorMsg('Ivalid Form');
+    }
 
     }
 

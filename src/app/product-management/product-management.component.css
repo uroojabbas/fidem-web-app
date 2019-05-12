@@ -4,7 +4,7 @@
 
 .data-table{
   width: 98%;
-  height: 385px;
+  height: auto;
   margin: 2px auto;
   overflow:auto;
 }

@@ -20,5 +20,7 @@ export class GoodsReceivedNoteServiceService {
     return this._http.get(this.userService.getrestURL() + '/grn/id/' + id);
   }
 
-
+  getGRNList(): Observable<any>  {
+    return this._http.get(this.userService.getrestURL() + '/grn/grn-list');
+  }
 }

@@ -44,7 +44,7 @@ snack-bar-container.notificatin simple-snack-bar{
 
 .page-container {
   position: relative;
-  min-height: 79vh;
+  min-height: 98vh;
   min-width: 100%;
 }
 .content-wrap {

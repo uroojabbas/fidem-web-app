@@ -206,6 +206,7 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ,
     UserRoleComponent, AddRoleComponent,  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
-    InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent, PersonalInfoComponent]
+    InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent, PersonalInfoComponent,
+    InvoiceComponent]
 })
 export class AppModule { }

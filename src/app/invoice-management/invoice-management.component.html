@@ -1,3 +1,73 @@
-<p>
-  invoice-management works!
-</p>
+<div>
+  <div>
+    <mat-table [dataSource]="listData"  matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Name</th>
+        <td style="width: 16%" mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Subject</th>
+        <td style="width: 12%" mat-cell *matCellDef="let element">{{element.subject}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="isbn">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>ISBN</th>
+        <td style="width: 12%; alignment: left" mat-cell *matCellDef="let element">{{element.isbn}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Quantity</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.quantity}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="region">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Region</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.region}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="inventoryType">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header>Inventory Type</th>
+        <td style="width: 11%" mat-cell *matCellDef="let element">{{element.inventoryType}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading data...
+        </mat-footer-cell>
+      </ng-container>
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          No data.
+        </mat-footer-cell>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+
+    </mat-table>
+  </div>
+  <div class="footer">
+    <mat-toolbar-row style="background-color: whitesmoke;">
+      <div style="padding-right: 5px">
+        <button mat-raised-button class="tool-bar-button" (click)="onCreate()" style="color: darkgreen" matTooltip="Add Inventory">
+          Add Invoice
+        </button>
+      </div>
+
+      <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <span class="tool-bar-spacer"></span>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="user.pageSize" showFirstLastButtons></mat-paginator>
+    </mat-toolbar-row>
+
+  </div>
+</div>

@@ -64,7 +64,6 @@ export class InvoiceManagementService { public _vendorList: any[];
   getProductList(): Observable<any> {
     const region = this.inventoryTransferRegionForm.get('transferRegionFrom').value;
     const url = this.userService.getrestURL() + '/products/region/' + region;
-    console.log("rest url : " + url);
     return this._http.get(url);
   }
 

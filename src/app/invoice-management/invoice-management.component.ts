@@ -8,6 +8,7 @@ import {NotificationService} from '../common/notification.service';
 import {CommonService} from '../common/common.service';
 import {UserService} from '../user.service';
 import {InvoiceComponent} from './invoice/invoice.component';
+import {InvoiceManagementService} from './invoice-management.service';
 
 @Component({
   selector: 'app-invoice-management',
@@ -29,7 +30,7 @@ export class InvoiceManagementComponent implements OnInit {
               private changeDetectorRef: ChangeDetectorRef,
               private dialog: MatDialog,
               private commonService: CommonService,
-              private inventoryService: InventoryService) {
+              private invoiceManagementService: InvoiceManagementService) {
     this.user.setComponentName('Inventory Management');
   }
 
@@ -70,7 +71,7 @@ export class InvoiceManagementComponent implements OnInit {
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
-    this.inventoryService.disabled = false;
+    this.invoiceManagementService.disabled = false;
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '90%';
@@ -83,7 +84,7 @@ export class InvoiceManagementComponent implements OnInit {
   onTransfer() {
     const dialogConfig = new MatDialogConfig();
     // this.productService.initializeProductForm();
-    this.inventoryService.disabled = false;
+    this.invoiceManagementService.disabled = false;
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '90%';

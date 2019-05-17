@@ -68,6 +68,8 @@ import {PersonalInfoService} from './personal-info/personal-info.service';
 import { InvoiceManagementComponent } from './invoice-management/invoice-management.component';
 import { InvoiceComponent } from './invoice-management/invoice/invoice.component';
 import {InvoiceManagementService} from './invoice-management/invoice-management.service';
+import { DcVendorComponent } from './dynamic-component/dc-vendor/dc-vendor.component';
+import { DcGoodsReceivedNoteComponent } from './dynamic-component/dc-goods-received-note/dc-goods-received-note.component';
 
 const appRoutes: Routes = [
   {
@@ -166,7 +168,9 @@ const appRoutes: Routes = [
     AddRoleComponent,
     PersonalInfoComponent,
     InvoiceManagementComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    DcVendorComponent,
+    DcGoodsReceivedNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -207,6 +211,6 @@ const appRoutes: Routes = [
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ,
     UserRoleComponent, AddRoleComponent,  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
     InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent, PersonalInfoComponent,
-    InvoiceComponent]
+    InvoiceComponent, GoodsReceivedNoteComponent, DcVendorComponent, DcGoodsReceivedNoteComponent]
 })
 export class AppModule { }

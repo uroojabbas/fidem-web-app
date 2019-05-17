@@ -1,0 +1,14 @@
+<div *ngIf="ready">
+
+  <div style="margin-top: 2px">
+    <mat-grid-list cols="3" rowHeight="8:1">
+      <mat-grid-tile ><div class="text-inside-grid">Vendor         : {{vendor.name}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Address        : {{vendor.address}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Email          : {{vendor.email}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Contact Person : {{vendor.contactperson}}</div></mat-grid-tile>
+      <mat-grid-tile ><div class="text-inside-grid-small">Contact #      : {{vendor.contactone}}</div></mat-grid-tile>
+      <mat-grid-tile ></mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+</div>

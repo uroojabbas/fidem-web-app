@@ -1,11 +1,11 @@
-<mat-horizontal-stepper [linear]="inventoryService.isLinear" #stepper [linear]="inventoryService.isLinear">
-  <mat-step [stepControl]="inventoryService.inventoryForm" [editable]="inventoryService.editable">
-    <form [formGroup]="inventoryService.inventoryForm">
+<mat-horizontal-stepper [linear]="invoiceManagementService.isLinear" #stepper [linear]="invoiceManagementService.isLinear">
+  <mat-step [stepControl]="invoiceManagementService.inventoryForm" [editable]="invoiceManagementService.editable">
+    <form [formGroup]="invoiceManagementService.inventoryForm">
       <ng-template matStepLabel>Select Vendor</ng-template>
 
       <mat-form-field>
         <mat-select formControlName="vendorId" placeholder="Select Vendor" required>
-          <ng-container *ngFor="let vendor of inventoryService._vendorList">
+          <ng-container *ngFor="let vendor of invoiceManagementService._vendorList">
             <mat-option [value]="vendor.id">{{vendor.name}}</mat-option>
           </ng-container>
         </mat-select>
@@ -15,57 +15,55 @@
       <div>
         <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
 
-        <button style="margin-left: 10px"  mat-raised-button matStepperNext type="button" (click)="showPOList()">Next</button>
+        <button style="margin-left: 10px"  mat-raised-button matStepperNext type="button" (click)="getGRNList()">Next</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="inventoryService.inventoryForm" [editable]="inventoryService.editable">
-    <ng-template matStepLabel>Select Purchase Order(s)</ng-template>
+  <mat-step [stepControl]="invoiceManagementService.inventoryForm" [editable]="invoiceManagementService.editable">
+    <ng-template matStepLabel>Select GRN(s)</ng-template>
     <div>
       <div>
-        <mat-table [dataSource]="listDataSource"  matSort>
-          <ng-container matColumnDef="poId">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO #</th>
-            <td style="width: 15%" mat-cell *matCellDef="let element">{{element.poId}}</td>
-          </ng-container>
+        <mat-table [dataSource]="listData"  matSort>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header>GRN #</th>
+          <td style="width: 15%" mat-cell *matCellDef="let element"><span class="link"  (click)="showGRNDetails(element.id)">{{element.grnId}}</span></td>
+        </ng-container>
 
-          <ng-container matColumnDef="vendorName">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Vendor Name</th>
-            <td style="width: 20%" mat-cell *matCellDef="let element">{{element.vendorName}}</td>
-          </ng-container>
+        <ng-container matColumnDef="purchaseOrderId">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO</th>
+          <td style="width: 15%" mat-cell *matCellDef="let element"><span class="link"  (click)="showPurchaseOrder(element.poId)">{{element.purchaseOrderId}}</span></td>
+        </ng-container>
 
 
-          <ng-container matColumnDef="insertedtime">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>PO Date</th>
-            <td style="width: 10%; alignment: left" mat-cell *matCellDef="let element">{{element.insertedtime}}</td>
-          </ng-container>
+        <ng-container matColumnDef="vendorName">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header>Supplier</th>
+          <td style="width: 25%; alignment: left" mat-cell *matCellDef="let element">{{element.vendorName}}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="totalProducts">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Products</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.totalProducts}}</td>
-          </ng-container>
+        <ng-container matColumnDef="receivedDate">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header>Received Date</th>
+          <td style="width: 15%" mat-cell *matCellDef="let element">{{element.receivedDate}}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="totalQuantity">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.totalQuantity}}</td>
-          </ng-container>
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header>Amount</th>
+          <td style="width: 10%" mat-cell *matCellDef="let element">{{element.amount}}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="totalAmount">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Total Amount</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.totalAmount}}</td>
-          </ng-container>
+        <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header>Created By</th>
+          <td style="width: 25%" mat-cell *matCellDef="let element">{{element.userName}}</td>
+        </ng-container>
 
-          <ng-container matColumnDef="poStatusType">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Status</th>
-            <td style="width: 19%" mat-cell *matCellDef="let element">{{element.poStatusType}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>Add Inventory</th>
-            <td style="width: 10%; vertical-align: middle" mat-cell *matCellDef="let row">
-              <button (click)="showProducts(row.id)"
-                      style="font-size: small;"
-                      mat-icon-button type="button"  matTooltip="Add Inventory" matStepperNext><mat-icon>add_circle</mat-icon></button>
+        <!-- Checkbox Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Select</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row.id) : null"
+                            [checked]="selection.isSelected(row.id)"
+                            [aria-label]="checkboxLabel(row.id)">
+              </mat-checkbox>
             </td>
           </ng-container>
 
@@ -82,8 +80,8 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listDataSource!=null}"></mat-footer-row>
-          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listDataSource!=null && listDataSource.data.length === 0)}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length === 0)}"></mat-footer-row>
 
         </mat-table>
       </div>
@@ -93,6 +91,7 @@
         <mat-toolbar-row style="background-color: whitesmoke;">
           <div style="padding-right: 5px">
             <button mat-raised-button type="button" matStepperPrevious>Back</button>
+            <button [disabled]="selection.selected.length===0" style="margin-left: 5px"  (click)="showComponents()" mat-raised-button type="button" matStepperNext>Next</button>
             <button mat-raised-button style="margin-left: 5px" type="button" color="accent" (click)="closeForm()">Close</button>
           </div>
 
@@ -109,78 +108,18 @@
       </div>
     </div>
   </mat-step>
+  <mat-step [stepControl]="invoiceManagementService.inventoryForm" [editable]="invoiceManagementService.editable">
+    <ng-template matStepLabel>Create Invoice</ng-template>
+    <div #childComponent></div>
+    <button mat-raised-button type="button" matStepperPrevious (click)="destroyAllComponents()">Back</button>
+    <button [disabled]="selection.selected.length===0" style="margin-left: 5px"  mat-raised-button type="button" matStepperNext>Next</button>
+
+  </mat-step>
   <mat-step>
     <ng-template matStepLabel>Add Inventory</ng-template>
 
-    <div>
-      <div>
-        <mat-table [dataSource]="productListDatasource"  matSort>
-          <ng-container matColumnDef="productName">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Product Name</th>
-            <td style="width: 15%" mat-cell *matCellDef="let element">{{element.product.name}}</td>
-          </ng-container>
+    <button mat-raised-button type="button" matStepperPrevious>Back</button>
+    <button [disabled]="selection.selected.length===0" style="margin-left: 5px"  mat-raised-button type="button" matStepperNext>Next</button>
 
-          <ng-container matColumnDef="isbn">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>ISBN #</th>
-            <td style="width: 12%" mat-cell *matCellDef="let element">{{element.product.isbn}}</td>
-          </ng-container>
-
-
-          <ng-container matColumnDef="subject">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Subject</th>
-            <td style="width: 10%; alignment: left" mat-cell *matCellDef="let element">{{element.product.subject}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.quantity}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="totalLtdQuantity">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Received Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">{{element.product.totalLtdQuantity}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="addQuantity">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Add Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">
-              <mat-form-field style="width: 30px" >
-                <input matInput [(ngModel)]="element.product.quantity"
-                       [value]="element.product.quantity">
-              </mat-form-field></td>
-          </ng-container>
-
-          <ng-container matColumnDef="remainingQuantity">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Remaining Quantity</th>
-            <td style="width: 10%" mat-cell *matCellDef="let element">
-              {{remainingQuantity(element.quantity, element.product.totalLtdQuantity, element.product.quantity)}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="loading">
-            <mat-footer-cell *matFooterCellDef colspan="6">
-              Loading data...
-            </mat-footer-cell>
-          </ng-container>
-          <ng-container matColumnDef="noData">
-            <mat-footer-cell *matFooterCellDef colspan="6">
-              No data.
-            </mat-footer-cell>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedProdColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedProdColumns;"></tr>
-          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listDataSource!=null}"></mat-footer-row>
-          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listDataSource!=null && listDataSource.data.length==0)}"></mat-footer-row>
-
-        </mat-table>
-      </div>
-    </div>
-    <div class="header">
-      <div class="button-row">
-        <button mat-raised-button matStepperPrevious [disabled]="inventoryService.disabled">Back</button>
-        <button mat-raised-button type="button" color="accent" (click)="closeForm()">Close</button>
-        <button mat-raised-button  color="primary" type="button" (click)="saveInventory()" [disabled]="inventoryService.disabled">Save</button>
-      </div>
-    </div>
   </mat-step>
 </mat-horizontal-stepper>

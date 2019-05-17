@@ -1,0 +1,76 @@
+.row {
+  display: flex;
+  max-width: 100%;
+}
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* Style the header */
+.header {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+mat-grid-tile {
+  alignment: left;
+  background: lightblue;
+}
+
+
+.text-inside-grid {
+  position: absolute;
+  left: 5px;
+  alignment: center;
+  align-content: center;
+}
+
+.text-inside-grid-small {
+  position: absolute;
+  left: 5px;
+  alignment: center;
+  font-size: smaller;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.mat-column-name{
+  flex: 0 0 200px;
+}
+
+.mat-column-isbn{
+  flex: 0 0 150px;
+}
+
+.mat-column-action{
+  flex: 0 0 20px;
+}
+
+.mat-column-price{
+  flex: 0 0 75px;
+}
+
+.mat-column-quantity{
+  flex: 0 0 75px;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.data-table{
+  width: 98%;
+  height: 250px;
+  overflow:auto;
+}
+
+.data-table-footer{
+  width: 100%;
+  height: 25px;
+}

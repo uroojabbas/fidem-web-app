@@ -67,7 +67,7 @@ export class AddRoleComponent implements OnInit {
       this.addRoleService.saveUserRole(userRole).subscribe(response => this.notificationService.showSuccess('User Role added successfully'),
         error => this.notificationService.showError(error));
     } else {
-      this.notificationService.showErrorMsg('Ivalid Form');
+      this.notificationService.showErrorMsg('Invalid Form');
     }
 
     }
@@ -94,5 +94,30 @@ export class AddRoleComponent implements OnInit {
         return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
       }
       return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.permissionTypeId + 1}`;
+    }
+    updateUserRole(): void
+    {
+      const userRolePermission: any[] = [];
+
+      this.selection.selected.forEach( selected => {
+        const tempPermission = {
+        id: selected.permissionTypeId,
+          permissionType: selected.permissionType,
+          isdeleted: false
+      };
+        userRolePermission.push(tempPermission); });
+      const userRole =         {
+        roleName: this.addRoleService.userRoleForm.get('roleName').value,
+        insertedbyuserid: this.user.getUserId(),
+        modifiedbyuserid: this.user.getUserId(),
+        modulepermissionses: userRolePermission
+      };
+      if (this.addRoleService.userRoleForm.valid) {
+        this.addRoleService.editUserRole(userRole).subscribe(response => this.notificationService.showSuccess('User Role Updated successfully'),
+          error => this.notificationService.showError(error));
+      } else {
+        this.notificationService.showErrorMsg('Invalid Form');
+      }
+
     }
 }

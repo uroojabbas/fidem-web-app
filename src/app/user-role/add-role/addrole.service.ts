@@ -30,7 +30,7 @@ export class AddroleService {
 
   saveUserRole(userRoleObject: any): Observable<any> {
     if (this.userRoleForm.valid) {
-      return this._http.post<User>(this.userService.getrestURL() + '/userRole/save', userRoleObject);
+      return this._http.post<User>(this.userService.getrestURL() + '/userRoles/save', userRoleObject);
     }
   }
   populateForm(userRole) {
@@ -40,9 +40,13 @@ export class AddroleService {
      });
 
   }
-
-
+  editUserRole(userRoleObject: any): Observable<any>{
+    if (this.userRoleForm.valid) {
+      return this._http.post<User>(this.userService.getrestURL() + '/userRoles/edit', userRoleObject);
+    }
+   }
+   
   deleteUserRole(id: number): Observable<any> {
-    return this._http.post<User>(this.userService.getrestURL() + '/userRole/delete', id);
+    return this._http.post<User>(this.userService.getrestURL() + '/userRoles/delete', id);
   }
 }

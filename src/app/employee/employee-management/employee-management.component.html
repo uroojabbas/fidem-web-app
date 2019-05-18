@@ -42,6 +42,14 @@
           <mat-error>Department is required.</mat-error>
         </mat-form-field>
 
+        <mat-form-field>
+          <mat-select formControlName="reportingmanager" placeholder="Reporting Manager">
+            <ng-container *ngFor="let employee of employeeList">
+              <mat-option [value]="employee.name">{{employee.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
       </div>
   </div>
   <div class="column middle">

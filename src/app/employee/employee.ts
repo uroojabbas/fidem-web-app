@@ -11,7 +11,7 @@ export class Employee {
   permanent: boolean;
   hiredate: Date;
   username: string;
-
+  reportingmanager: number;
 }
 
 

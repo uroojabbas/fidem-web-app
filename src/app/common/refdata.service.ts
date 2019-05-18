@@ -10,7 +10,7 @@ import {map} from 'rxjs/internal/operators';
 export class RefdataService {
 
 
-  constructor(private _http: HttpClient, private userSevice: UserService) {
+  constructor(private _http: HttpClient, private userService: UserService) {
     this.initVendorTypeList();
     this.initInstitutionTypeList();
     this.initClientTypeList();
@@ -23,6 +23,7 @@ export class RefdataService {
     this.initProductCategoryList();
     this.initDesignationList();
     this.initDepartmentList();
+    this.initEmployeeList();
   }
 
   private _cityList: any[];
@@ -37,7 +38,7 @@ export class RefdataService {
   private _productCategoryList: any[];
   private _designationList: any[];
   private _departmentList: any[];
-
+  private _employeeList: any[];
 
   getDepartmentList(): any[] {
     return this._departmentList;
@@ -49,7 +50,7 @@ export class RefdataService {
   }
 
   initDepartmentList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/departmentlist').subscribe(data => this.setDepartmentList(data));
+    this._http.get(this.userService.getrestURL() + '/departmentlist').subscribe(data => this.setDepartmentList(data));
   }
 
   getDesignationList(): any[] {
@@ -62,7 +63,7 @@ export class RefdataService {
   }
 
   initDesignationList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/designationlist').subscribe(data => this.setDesignationList(data));
+    this._http.get(this.userService.getrestURL() + '/designationlist').subscribe(data => this.setDesignationList(data));
   }
 
   getCityList(): any[] {
@@ -74,7 +75,7 @@ export class RefdataService {
   }
 
   initCityList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/citylist').subscribe(data => this.setCityList(data));
+    this._http.get(this.userService.getrestURL() + '/citylist').subscribe(data => this.setCityList(data));
     }
 
   getRegionList(): any[] {
@@ -85,11 +86,11 @@ export class RefdataService {
   }
 
   initRegionList(): void {
-       this._http.get(this.userSevice.getrestURL() + '/reigonlist').subscribe(data => this.setRegionList(data));
+       this._http.get(this.userService.getrestURL() + '/reigonlist').subscribe(data => this.setRegionList(data));
     }
 
     initVendorTypeList(): void {
-      this._http.get(this.userSevice.getrestURL() + '/vendortypes').subscribe(data => this.setVendorTypeList(data));
+      this._http.get(this.userService.getrestURL() + '/vendortypes').subscribe(data => this.setVendorTypeList(data));
     }
 
     getVendorTypeList(): any[] {
@@ -107,7 +108,7 @@ export class RefdataService {
   }
 
   initClientTypeList(): void {
-    this._http.get(this.userSevice.getrestURL() + '/clienttypelist').subscribe(data => this.setClientTypeList(data));
+    this._http.get(this.userService.getrestURL() + '/clienttypelist').subscribe(data => this.setClientTypeList(data));
   }
 
   setClientTypeList(data: any): void {
@@ -120,7 +121,7 @@ export class RefdataService {
 
 
   initInstitutionTypeList(): void {
-    this._http.get(this.userSevice.getrestURL() + '/institutetypelist').subscribe(data => this.setInstitutionTypeList(data));
+    this._http.get(this.userService.getrestURL() + '/institutetypelist').subscribe(data => this.setInstitutionTypeList(data));
   }
 
   setInstitutionTypeList(data: any): void {
@@ -132,7 +133,7 @@ export class RefdataService {
   }
 
   initCountyList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/countrylist').subscribe(data => this.setCountryList(data));
+    this._http.get(this.userService.getrestURL() + '/countrylist').subscribe(data => this.setCountryList(data));
   }
 
   getCountryList(): any[] {
@@ -144,7 +145,7 @@ export class RefdataService {
   }
 
   initLanguageList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/languagelist').subscribe(data => this.setLanguageList(data));
+    this._http.get(this.userService.getrestURL() + '/languagelist').subscribe(data => this.setLanguageList(data));
   }
 
 
@@ -157,7 +158,7 @@ export class RefdataService {
   }
 
   initPaperQualityList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/paperqualitylist').subscribe(data => this.setPaperQualityList(data));
+    this._http.get(this.userService.getrestURL() + '/paperqualitylist').subscribe(data => this.setPaperQualityList(data));
   }
 
   getPaperQualityList(): any[] {
@@ -169,7 +170,7 @@ export class RefdataService {
   }
 
   initMarketSegmentList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/marketsegmentlist').subscribe(data => this.setMarketSegmentList(data));
+    this._http.get(this.userService.getrestURL() + '/marketsegmentlist').subscribe(data => this.setMarketSegmentList(data));
   }
 
   getMarketSegmentList(): any[] {
@@ -182,7 +183,7 @@ export class RefdataService {
 
 
   initProductCategoryList(): void  {
-    this._http.get(this.userSevice.getrestURL() + '/productcategorylist').subscribe(data => this.setProductCategoryList(data));
+    this._http.get(this.userService.getrestURL() + '/productcategorylist').subscribe(data => this.setProductCategoryList(data));
   }
 
   getProductCategoryList(): any[] {
@@ -191,5 +192,15 @@ export class RefdataService {
 
   setProductCategoryList(value: any) {
     this._productCategoryList = value;
+  }
+
+  initEmployeeList(): void {
+      this._http.get(this.userService.getrestURL() + '/users').subscribe(data => this.setEmployeeList(data));
+  }
+  getEmployeeList(): any[] {
+    return this._employeeList;
+  }
+  setEmployeeList(value: any) {
+    this._employeeList = value;
   }
 }

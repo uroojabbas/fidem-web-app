@@ -27,7 +27,8 @@ export class EmployeeserviceService {
     ispermanent: new FormControl(false),
     gender: new FormControl(1),
     username: new FormControl(null, Validators.required),
-    designationname:  new FormControl(null, Validators.required)
+    designationname:  new FormControl(null, Validators.required),
+    reportingmanager: new FormControl(null)
   });
 
   initializeEmployeeForm() {
@@ -45,7 +46,8 @@ export class EmployeeserviceService {
         ispermanent: false,
         gender: null,
         username: '',
-        designationname: null
+        designationname: null,
+        reportingmanager: null
       }
     );
   }
@@ -71,7 +73,9 @@ export class EmployeeserviceService {
       ispermanent: true,
       gender: employee.gender,
       username: employee.username,
-      designationname: employee.designationname
+      designationname: employee.designationname,
+      reportingmanager: employee.id,
+
     });
 
    }

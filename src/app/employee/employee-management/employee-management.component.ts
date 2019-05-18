@@ -28,6 +28,8 @@ export class EmployeeManagementComponent implements OnInit {
 
   public regionList: any[];
 
+  public employeeList: any[];
+
   constructor(private employeeservice: EmployeeserviceService,
               private refDataService: RefdataService, private userService: UserService,
   private formDialog: MatDialogRef<EmployeeManagementComponent>,
@@ -49,11 +51,17 @@ export class EmployeeManagementComponent implements OnInit {
     this.regionList = data;
   }
 
+  private setEmployeeList(data: any)
+  {
+    this.employeeList = data;
+  }
+
   ngOnInit() {
     this.cityList = this.refDataService.getCityList();
     this.regionList = this.refDataService.getRegionList();
     this.departmentList = this.refDataService.getDepartmentList();
     this.designationList = this.refDataService.getDesignationList();
+    this.employeeList = this.refDataService.getEmployeeList();
   }
 
   onClear() {

@@ -13,6 +13,7 @@ import {HttpClient} from '@angular/common/http';
 import {InvoiceManagementService} from '../invoice-management.service';
 import {DcVendorComponent} from '../../dynamic-component/dc-vendor/dc-vendor.component';
 import {DcGoodsReceivedNoteComponent} from '../../dynamic-component/dc-goods-received-note/dc-goods-received-note.component';
+import {DcExpenseComponent} from '../../dynamic-component/dc-expense/dc-expense.component';
 
 @Component({
   selector: 'app-invoice',
@@ -37,7 +38,11 @@ export class InvoiceComponent implements OnInit, OnDestroy {
 
   vendorComponentRef: any;
   grnComponentRef: any;
-  @ViewChild('childComponent', { read: ViewContainerRef }) entry: ViewContainerRef;
+  expenseComponentRef: any;
+
+  @ViewChild('vendorComponent', { read: ViewContainerRef }) vendorEntry: ViewContainerRef;
+  @ViewChild('grnComponent', { read: ViewContainerRef }) grnEntry: ViewContainerRef;
+  @ViewChild('expenseComponent', { read: ViewContainerRef }) expenseEntry: ViewContainerRef;
 
   constructor(public inventoryService: InventoryService,
               private inventoryDialog: MatDialogRef<InventoryComponent>,
@@ -55,22 +60,16 @@ export class InvoiceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroyVendorComponent();
-    this.destroyGRNComponent();
+    this.destroyAllComponents();
   }
 
   destroyAllComponents() {
-    this.destroyVendorComponent();
-    this.destroyGRNComponent();
-  }
-
-  destroyVendorComponent() {
-    this.vendorComponentRef.destroy();
-  }
-
-  destroyGRNComponent() {
+    // this.expenseComponentRef.destroy();
     this.grnComponentRef.destroy();
+    this.vendorComponentRef.destroy();
+
   }
+
 
 
   closeForm() {
@@ -81,18 +80,24 @@ export class InvoiceComponent implements OnInit, OnDestroy {
   showComponents() {
     this.showInvoice();
     this.showGRNList();
+   // this.showExpense();
   }
   showInvoice() {
     const vendorId = this.invoiceManagementService.inventoryForm.get('vendorId').value;
     const factory = this.resolver.resolveComponentFactory(DcVendorComponent);
-    this.vendorComponentRef = this.entry.createComponent(factory);
+    this.vendorComponentRef = this.vendorEntry.createComponent(factory);
     (<DcVendorComponent>this.vendorComponentRef.instance).vendorId = vendorId;
     }
 
   showGRNList() {
     const factory = this.resolver.resolveComponentFactory(DcGoodsReceivedNoteComponent);
-    this.grnComponentRef = this.entry.createComponent(factory);
+    this.grnComponentRef = this.grnEntry.createComponent(factory);
     (<DcGoodsReceivedNoteComponent>this.grnComponentRef.instance).grnList = (this.selection.selected);
+  }
+
+  showExpense() {
+    const factory = this.resolver.resolveComponentFactory(DcExpenseComponent);
+    this.expenseComponentRef = this.expenseEntry.createComponent(factory);
   }
 
   showGRNDetails(id: number) {

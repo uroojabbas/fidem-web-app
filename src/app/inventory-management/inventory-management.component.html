@@ -58,17 +58,14 @@
         </button>
       </div>
 
-      <div style="padding-right: 5px">
-        <button mat-raised-button class="tool-bar-button" (click)="onTransfer()" style="color: darkgreen" matTooltip="Add Inventory">
-          Transfer Inventory
-        </button>
-      </div>
+
       <mat-form-field class="search-form-field" floatLabel="never">
         <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
         <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
+
 
       <span class="tool-bar-spacer"></span>
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="user.pageSize" showFirstLastButtons></mat-paginator>

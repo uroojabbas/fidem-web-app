@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +22,7 @@ import {
   , MatListModule
   , MatStepperModule
   , MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatDatepickerToggle, MatCheckboxModule, MatDialogModule,
-  MatAutocompleteModule, MatTreeModule
+  MatAutocompleteModule, MatTreeModule, MatProgressSpinnerModule, MatProgressBarModule
 } from '@angular/material';
 import { FooterComponent } from './footer/footer.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -70,6 +69,12 @@ import { InvoiceComponent } from './invoice-management/invoice/invoice.component
 import {InvoiceManagementService} from './invoice-management/invoice-management.service';
 import { DcVendorComponent } from './dynamic-component/dc-vendor/dc-vendor.component';
 import { DcGoodsReceivedNoteComponent } from './dynamic-component/dc-goods-received-note/dc-goods-received-note.component';
+import { DcExpenseComponent } from './dynamic-component/dc-expense/dc-expense.component';
+import {BrowserModule} from '@angular/platform-browser';
+import { FileUploadComponent } from './file-upload/file-upload/file-upload.component';
+import {FileUploadService} from './file-upload/file-upload.service';
+import { UserPermissionComponent } from './user-permission/user-permission.component';
+import {UserPermissionService} from './user-permission/user-permission.service';
 
 const appRoutes: Routes = [
   {
@@ -135,6 +140,12 @@ const appRoutes: Routes = [
     , canActivate: [AuthguardGuard],
     component: InvoiceManagementComponent
   }
+  ,
+  {
+    path: 'file-upload'
+    , canActivate: [AuthguardGuard],
+    component: FileUploadComponent
+  }
 ]
 
 @NgModule({
@@ -170,7 +181,10 @@ const appRoutes: Routes = [
     InvoiceManagementComponent,
     InvoiceComponent,
     DcVendorComponent,
-    DcGoodsReceivedNoteComponent
+    DcGoodsReceivedNoteComponent,
+    DcExpenseComponent,
+    FileUploadComponent,
+    UserPermissionComponent
   ],
   imports: [
     BrowserModule,
@@ -203,14 +217,21 @@ const appRoutes: Routes = [
     MatListModule,
     MatStepperModule,
     MatAutocompleteModule,
-    MatTreeModule
+    MatTreeModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [ClientService, Vendor, RefdataService,  User, UserService, AuthguardGuard, DatePipe, ProductService,
-  EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService, PersonalInfoService, InvoiceManagementService],
+  EmployeeserviceService, CommonService, GoodsReceivedNoteServiceService, PersonalInfoService, InvoiceManagementService,
+  FileUploadService, UserPermissionService],
   bootstrap: [AppComponent],
   entryComponents: [ VendorComponent, EmployeeManagementComponent, DialogComponent ,
     UserRoleComponent, AddRoleComponent,  ClientComponent, ProductComponent, PurchaseOrderComponent, InventoryComponent,
     InventoryTransferComponent, InventoryTransferStatusComponent, GoodsReceivedNoteDetailComponent, PersonalInfoComponent,
-    InvoiceComponent, GoodsReceivedNoteComponent, DcVendorComponent, DcGoodsReceivedNoteComponent]
+    InvoiceComponent, GoodsReceivedNoteComponent, DcVendorComponent, DcGoodsReceivedNoteComponent, DcExpenseComponent,
+  FileUploadComponent, UserPermissionComponent]
 })
 export class AppModule { }

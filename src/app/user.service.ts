@@ -15,16 +15,21 @@ export class UserService {
   private userName: string;
   private userId: number;
   private _url: string;
+  private _webURL: string;
   private componentName: string;
   private pageSize: number;
 
   constructor(private _http: HttpClient, private router: Router) {
     this.isUserLoggedIn = false;
     this._url = 'http://localhost:8080';
+    this._webURL = 'http://localhost:4200';
     // this._url = 'http://google.com'
     this.pageSize = 17;
   }
 
+  public getwebURL(): string {
+    return this._webURL;
+  }
   public getrestURL(): string {
     return this._url;
   }

@@ -1,3 +1,15 @@
+.grid-tile {
+  alignment: left;
+  background: lightblue;
+}
+
+.text-inside-grid-small {
+  position: absolute;
+  left: 5px;
+  alignment: center;
+  font-size: smaller;
+}
+
 .full-width-table {
   width: 100%;
 }
@@ -86,4 +98,20 @@
   background-color: #f1f1f1;
   text-align: center;
   margin-top: 30px;
+}
+
+.mat-row {
+  flex: 1 1 border-box;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.mat-header-row{
+  height: 30px;
+  vertical-align: middle;
+}
+
+.mat-cell,.mat-header-cell {
+  border-color: #8f9cb5;
+  text-align: start;
 }

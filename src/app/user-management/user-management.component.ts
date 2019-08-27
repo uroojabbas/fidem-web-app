@@ -8,6 +8,8 @@ import {HttpClient} from '@angular/common/http';
 import {NotificationService} from '../common/notification.service';
 import {DialogService} from '../common/dialog.service';
 import {EmployeeserviceService} from '../employee/employeeservice.service';
+import {UserPermissionComponent} from '../user-permission/user-permission.component';
+import {UserPermissionService} from '../user-permission/user-permission.service';
 
 @Component({
   selector: 'app-user-management',
@@ -31,7 +33,8 @@ export class UserManagementComponent implements OnInit {
               private notificationService: NotificationService,
               private dialogService: DialogService,
               private employeeService: EmployeeserviceService,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private changeDetectorRef: ChangeDetectorRef,
+              private userPermissionService: UserPermissionService) {
     this.user.setComponentName('User Management');
   }
 
@@ -45,6 +48,17 @@ export class UserManagementComponent implements OnInit {
       console.log('refresh page');
       this.getEmployeeList();
     });
+  }
+
+  addEditUserRole(id: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '75%';
+    this.userPermissionService.setUserId(id);
+    this.dialog.open(UserPermissionComponent, dialogConfig).afterClosed().subscribe(result => {
+      console.log('update user role');
+      });
   }
 
   onEdit(id: number) {

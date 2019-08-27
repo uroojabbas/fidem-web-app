@@ -1,0 +1,29 @@
+.mat-card-main {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.mat-card-header{
+  background-color: #f1f1f1;
+  padding: 2px;
+  text-align: center;
+  height: 50px;
+  margin-bottom: 10px;
+}
+.mat-card-content{
+  border: 2px;
+  border-color: #ffdb00;
+}
+
+.footer{
+  margin-top: 10px;
+  background-color: #f1f1f1;
+  padding: 2px;
+  text-align: center;
+  height: auto;
+}
+
+.add-margin{
+  margin-left: 5px;
+
+}

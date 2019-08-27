@@ -1,0 +1,14 @@
+.fileUpload-h2 {
+  margin: 0 10px;
+}
+
+.fileUpload-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.fileUpload-margin {
+  margin: 0 8px;
+}

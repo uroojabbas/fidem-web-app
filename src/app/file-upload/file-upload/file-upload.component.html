@@ -1,0 +1,103 @@
+<div style="align-content: center">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Upload File</ng-template>
+        <div>
+
+          <mat-grid-list cols="2" rowHeight="4:1">
+            <mat-grid-tile>
+              <div style="margin-left: 10%">
+                <div *ngIf="error">
+                  {{ error.message }}
+                </div>
+                <div *ngIf="uploadResponse.status === 'error'">
+                  {{ uploadResponse.message }}
+                </div>
+                <div style="margin-bottom: 5%">
+                </div>
+              </div>
+              <div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                  <div>
+                    <input type="file" name="avatar" (change)="onFileChange($event)" />
+
+                    <button mat-raised-button class="tool-bar-button" type="submit" style="color: darkgreen" matTooltip="Execute Process">
+                      Upload File
+                    </button>
+
+                  </div>
+
+
+
+                </form>
+              </div>
+
+
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div>
+              <h2 class="fileUpload-h2">{{fileUploadProgress}}</h2>
+              <mat-progress-spinner
+                class="fileUpload-margin"
+                [color]="color"
+                [mode]="mode"
+                [value]="value">
+              </mat-progress-spinner>
+
+            </div>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+        </div>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Execute Process</ng-template>
+
+        <mat-card>
+          <mat-card-content>
+            <section class="example-section">
+              <mat-progress-bar
+                class="example-margin"
+                [color]="color"
+                [mode]="mode"
+                [value]="executionBarValue"
+                [bufferValue]="bufferValue">
+              </mat-progress-bar>
+            </section>
+          </mat-card-content>
+
+
+          <div *ngIf="showExecutionButton" style="padding-right: 5px">
+            <button mat-raised-button class="tool-bar-button" (click)="executeProcess()" style="color: darkgreen" matTooltip="Execute Process">
+              Execute Process
+            </button>
+          </div>
+
+          <div *ngIf = "showSuccessMsg" style="padding-right: 5px">
+            <h5>Please click [Next] button to see the report.</h5>
+          </div>
+
+        </mat-card>
+        <div style="margin-top: 5%">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>View Report</ng-template>
+
+      <a href="https://app.powerbi.com/view?r=eyJrIjoiYzYyMTYxNzctNDBmZi00Njk4LWI2ZDQtZmY4MTE5ZjNkZTJhIiwidCI6ImMyZGU5YzIwLWRlNDMtNGE3Zi1hZWNkLTJjMzhjMzEyODE4YSIsImMiOjl9&fbclid=IwAR3eRqyKUR2WJeapR175yAIpnV7SUAY8VPCDZ_umWxALYw-JV95VSgT1rwM" target="_blank">Please click link to see the report</a>
+      <div  style="margin-top: 5%">
+        <button mat-button matStepperPrevious>Back</button>
+        </div>
+    </mat-step>
+    </mat-horizontal-stepper>
+</div>

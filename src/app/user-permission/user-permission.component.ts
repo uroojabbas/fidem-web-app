@@ -5,6 +5,8 @@ import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {UserPermissionService} from './user-permission.service';
 import {NotificationService} from '../common/notification.service';
 import {MatDialogRef} from '@angular/material';
+import {UserService} from '../user.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 
 
@@ -16,6 +18,7 @@ import {MatDialogRef} from '@angular/material';
 interface RoleNode {
   name: string;
   id: number;
+  roleAssignToUser: boolean;
   modulepermissionses?: RoleNode[];
 }
 
@@ -35,17 +38,21 @@ interface PermissionNode {
 
 export class UserPermissionComponent implements OnInit {
 
+  /** The selection for checklist */
+  private checklistSelection = new SelectionModel<RoleNode>(true /* multiple */);
+
   private _transformer = (node: RoleNode, level: number) => {
+    if (node.roleAssignToUser) {
+      this.checklistSelection.select(node);
+    }
     return {
       expandable: !!node.modulepermissionses && node.modulepermissionses.length > 0,
       name: node.name,
+      roleAssignToUser: node.roleAssignToUser,
       id: node.id,
       level: level,
     };
   }
-
-  /** The selection for checklist */
-  private checklistSelection = new SelectionModel<RoleNode>(true /* multiple */);
 
   private treeControl = new FlatTreeControl<PermissionNode>(
     node => node.level, node => node.expandable);
@@ -55,12 +62,13 @@ export class UserPermissionComponent implements OnInit {
 
   private dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor(private notificationService: NotificationService,
+  constructor(private user: UserService,
+              private notificationService: NotificationService,
               private userPermissionService: UserPermissionService,
               private userRoleDialogRef: MatDialogRef<UserPermissionComponent>) {
     // this.dataSource.data = USER_ROLE_DATA;
 
-    this.userPermissionService.getUserRoleList().subscribe(data => this.setUserRoleData(data),
+    this.userPermissionService.getUserRoleList(this.userPermissionService.getUserId()).subscribe(data => this.setUserRoleData(data),
       error => this.notificationService.showError(error));
   }
 
@@ -73,7 +81,6 @@ export class UserPermissionComponent implements OnInit {
   hasChild = (_: number, node: PermissionNode) => node.expandable;
 
   closeForm() {
-    alert(this.checklistSelection.selected.values());
     this.userRoleDialogRef.close();
   }
   selectRole(role: RoleNode) {
@@ -85,8 +92,33 @@ export class UserPermissionComponent implements OnInit {
    }
 
   onSubmit() {
-    let map = new Map();
 
-    this.checklistSelection.selected.forEach((role,index) => map.set(role.id,this.userPermissionService.getUserId()));
+    let userRoleList = []
+    if (this.checklistSelection.selected.length > 0) {
+
+    this.checklistSelection.selected.forEach((role, index) => {
+      userRoleList.push(role.id);
+    });
+
+    const userRoleObj = {
+      'fromUserId': this.user.getUserId(),
+      'forUserId': this.userPermissionService.getUserId(),
+      'userRoles': userRoleList
+    };
+    this.userPermissionService.addUpdateRole(userRoleObj).subscribe(data => this.showSuccessMessage(data),
+      error => this.handleError(error));
+  } else {
+      this.notificationService.showErrorMsg(':: Error: No Role Selected, Please select at least one Role');
+    }
+  }
+
+  showSuccessMessage(data: any) {
+
+    this.notificationService.showSuccess('User Role added Successfully Added');
+  }
+
+  handleError(httpErrorResponse: HttpErrorResponse) {
+    console.log('Error', httpErrorResponse.message);
+    this.notificationService.showErrorMsg(':: Error:' + httpErrorResponse.message);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {UserService} from '../user.service';
 import {HttpClient} from '@angular/common/http';
+import {User} from '../user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class UserPermissionService {
               private _http: HttpClient) { }
 
 
-  getUserRoleList(): Observable<any> {
-    const url = this.userService.getrestURL() + '/userRole';
+  getUserRoleList(userId: number): Observable<any> {
+    const url = this.userService.getrestURL() + '/userRole/' + userId;
     return this._http.get(url);
   }
 
@@ -24,5 +25,10 @@ export class UserPermissionService {
 
   public getUserId(): number {
     return this.userId;
+  }
+
+  addUpdateRole(userRole): Observable<any> {
+    const reqURL = '/userRoles/add_update';
+    return this._http.post(this.userService.getrestURL() + reqURL, userRole);
   }
 }

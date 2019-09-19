@@ -42,9 +42,6 @@ export class UserPermissionComponent implements OnInit {
   private checklistSelection = new SelectionModel<RoleNode>(true /* multiple */);
 
   private _transformer = (node: RoleNode, level: number) => {
-    if (node.roleAssignToUser) {
-      this.checklistSelection.select(node);
-    }
     return {
       expandable: !!node.modulepermissionses && node.modulepermissionses.length > 0,
       name: node.name,
@@ -83,13 +80,18 @@ export class UserPermissionComponent implements OnInit {
   closeForm() {
     this.userRoleDialogRef.close();
   }
-  selectRole(role: RoleNode) {
-    this.checklistSelection.select(role);
+
+  selectRole(role: RoleNode): boolean {
+    if (role.roleAssignToUser) {
+      this.checklistSelection.toggle(role);
+      return true;
+    }
+      return false;
   }
 
   changeRole(role: RoleNode) {
-    this.checklistSelection.isSelected(role) ? this.checklistSelection.deselect(role) : this.checklistSelection.select(role);
-   }
+    this.checklistSelection.toggle(role);
+    }
 
   onSubmit() {
 
@@ -97,9 +99,10 @@ export class UserPermissionComponent implements OnInit {
     if (this.checklistSelection.selected.length > 0) {
 
     this.checklistSelection.selected.forEach((role, index) => {
-      userRoleList.push(role.id);
+      if (this.checklistSelection.isSelected(role)) {
+        userRoleList.push(role.id);
+      }
     });
-
     const userRoleObj = {
       'fromUserId': this.user.getUserId(),
       'forUserId': this.userPermissionService.getUserId(),

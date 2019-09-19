@@ -22,7 +22,7 @@ export class UserService {
   constructor(private _http: HttpClient, private router: Router) {
     this.isUserLoggedIn = false;
     this._url = 'http://localhost:8080';
-    this._webURL = 'http://localhost:4200';
+    this._webURL = 'http://localhost:8080';
     // this._url = 'http://google.com'
     this.pageSize = 17;
   }

@@ -19,7 +19,7 @@
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
         </mat-icon>
       </button>
-      <mat-checkbox [checked]= "node.roleAssignToUser" (change)="changeRole(node)">{{node.name}}</mat-checkbox>
+      <mat-checkbox [checked]= "selectRole(node)" (change)="changeRole(node)">{{node.name}}</mat-checkbox>
       </mat-tree-node>
   </mat-tree>
       </mat-card-content>
